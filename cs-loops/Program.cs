@@ -27,6 +27,7 @@ namespace cs_loops
             Console.WriteLine("I'm the code that happens after the for loop");
 
             // Make a List of strings
+            //                      Index    0       1        2        3
             var names = new List<string>() { "Mark", "Paula", "Sandy", "Bill" };
 
             Console.WriteLine($"There are {names.Count()} names in our list");
@@ -50,6 +51,17 @@ namespace cs_loops
             // Go to the next index
             // If we haven't gotten to the end of the list, go back to the "get the name" step
 
+            //
+            //   STARTING
+            //
+            //                  KEEP GOING
+            //
+            //                                         AFTER
+            //
+            //
+            //     names     = { "Mark", "Paula", "Sandy", "Bill" }
+            //     index     = 4
+            //     currentName = "Bill"
             for (var index = 0; index < names.Count(); index++)
             {
                 // Get the name at the current index
@@ -69,6 +81,11 @@ namespace cs_loops
                 Console.WriteLine($"The person {currentName} is in our list");
             }
 
+            // Foreach is a simpler style if we are going through the entire list
+            foreach (var name in names)
+            {
+                Console.Write($"Using the simpler foreach method: name is {name}");
+            }
         }
     }
 }
