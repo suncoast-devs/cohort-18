@@ -58,25 +58,40 @@ namespace Methods
         }
 
 
+        class Employee
+        {
+            // public means "this can be seen outside of the class
+            // |
+            // |   Type
+            // |   |
+            // |   |      Name of property
+            // |   |      |
+            // |   |      |      We can get the data and set the data
+            // |   |      |      |
+            // v   v      v      v
+            public string Name { get; set; }
+            public int Department { get; set; }
+            public int Salary { get; set; }
+            public int MonthlySalary { get; set; }
+        }
+
         static void Main(string[] args)
         {
             // Ask DisplayGreeting method to do it's work
             DisplayGreeting();
 
-            // Console.Write("What is your name? ");
-            // var name = Console.ReadLine();
-            var name = PromptForString("What is your name? ");
+            var newEmployee = new Employee();
 
-            // Console.Write("What is your department number? ");
-            // var department = int.Parse(Console.ReadLine());
-            var department = PromptForInteger("What is your department number? ");
+            newEmployee.Name = PromptForString("What is your name? ");
 
-            // Console.Write("What is your yearly salary (in dollars)? ");
-            // var salary = int.Parse(Console.ReadLine());
-            var salary = PromptForInteger("What is your salary, yo, give it in dollars? ");
+            newEmployee.Department = PromptForInteger("What is your department number? ");
 
-            var salaryPerMonth = salary / 12;
-            Console.WriteLine($"Hello, {name} you make {salaryPerMonth} a month.");
+            // Uses the { set; } aspect of the Salary property to *set* it
+            newEmployee.Salary = PromptForInteger("What is your salary, yo, give it in dollars? ");
+
+            // Uses the { get; } aspect of the Salary property to read it back.
+            newEmployee.MonthlySalary = newEmployee.Salary / 12;
+            Console.WriteLine($"Hello, {newEmployee.Name} you make {newEmployee.MonthlySalary} a month.");
         }
     }
 }
