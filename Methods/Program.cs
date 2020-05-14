@@ -72,7 +72,10 @@ namespace Methods
             public string Name { get; set; }
             public int Department { get; set; }
             public int Salary { get; set; }
-            public int MonthlySalary { get; set; }
+            public int MonthlySalary()
+            {
+                return Salary / 12;
+            }
         }
 
         static void Main(string[] args)
@@ -90,8 +93,10 @@ namespace Methods
             newEmployee.Salary = PromptForInteger("What is your salary, yo, give it in dollars? ");
 
             // Uses the { get; } aspect of the Salary property to read it back.
-            newEmployee.MonthlySalary = newEmployee.Salary / 12;
-            Console.WriteLine($"Hello, {newEmployee.Name} you make {newEmployee.MonthlySalary} a month.");
+            Console.WriteLine($"Hello, {newEmployee.Name} you make {newEmployee.MonthlySalary()} a month.");
+
+            newEmployee.Salary = 100000000;
+            Console.WriteLine($"Hello, {newEmployee.Name} now you make {newEmployee.MonthlySalary()} a month.");
         }
     }
 }
