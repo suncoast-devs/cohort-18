@@ -18,6 +18,66 @@ namespace Blackjack
             // - Add it to the list of hards we hold.
             CardsBeingHeld.Add(cardWeAreGivenToHold);
         }
+
+        // Shows the cards to the console
+        public void ShowCards()
+        {
+            // PEDAC
+            //
+            // Problem: Have a lists cards, print their details one at a time to the console
+            //
+            // Example: 2 of Clubs, 10 of Hearts, and the Ace of Diamonds.
+            // Print:
+            // 2 of Clubs
+            // 10 of Hearts
+            // Ace of Diamonds
+            //
+            // Data: our CardsBeingHeld list, and the Console
+            //
+            // Algorithm:
+            // - For each card in the list of cards in CardsBeingHeld
+            foreach (var card in CardsBeingHeld)
+            {
+                //   - Print to the console, Face of Suit
+                Console.WriteLine($"{card.Face} of {card.Suit}");
+            }
+        }
+
+        // name: TotalValue
+        // input: none
+        // output: int (being the total value of all cards added up)
+        public int TotalValue()
+        {
+            // PEDAC
+            //
+            // Problem: Given a list cards go through each card, totalling up those card values.
+            //
+            // Example: 2 of Clubs, 10 of Hearts, and the Ace of Diamonds.
+            // Result: 23
+            //
+            // Example: empty
+            // Results: 0
+            //
+            // Data: List of cards, an integer to keep track of the total
+            //
+            // Algorithm:
+            // - Start with a total equal to 0
+            var total = 0;
+            // - For each card in our list
+            foreach (var card in CardsBeingHeld)
+            {
+                //   - get the value of that card
+                var cardValue = card.Value();
+
+                //   - Add that value to total, making a new total
+                // total += cardValue;
+                total = total + cardValue;
+            }
+
+            // - return total
+            return total;
+        }
+
     }
 
     class Card
@@ -26,6 +86,38 @@ namespace Blackjack
         // and we SET-them when we make a new card.
         public string Face { get; set; }
         public string Suit { get; set; }
+
+        // Name: Value
+        // input: none (void)
+        // output: int (the point value of this card)
+        public int Value()
+        {
+            // PEDAC
+            //
+            // Problem: given a Face, figure out the point value of this card.
+            //
+            // Examples:
+            // 2 => 2 points
+            // Jack => 10 points
+            // Ace => 11 points
+            //
+            // Data: strings (face) - int (value)
+
+            switch (Face)
+            {
+                case "10":
+                case "Jack":
+                case "Queen":
+                case "King":
+                    return 10;
+
+                case "Ace":
+                    return 11;
+
+                default:
+                    return int.Parse(Face);
+            }
+        }
     }
 
     class Deck
@@ -237,58 +329,133 @@ namespace Blackjack
 
             // # Algorithm
 
-            // 1. Create a new deck
-            var deck = new Deck();
+            var keepPlaying = true;
 
-            // 2. Ask the deck to make a new shuffled 52 cards
-            deck.MakeCards();
+            while (keepPlaying)
+            {
+                // 1. Create a new deck
+                var deck = new Deck();
 
-            // 3. Create a player hand
-            var playerHand = new Hand();
+                // 2. Ask the deck to make a new shuffled 52 cards
+                deck.MakeCards();
 
-            // 4. Create a dealer hand
-            var dealerHand = new Hand();
+                // 3. Create a player hand
+                var playerHand = new Hand();
 
-            // 5. Ask the deck for a card and place it in the player hand
-            var firstCard = deck.Deal();
-            Console.WriteLine($"Our first card is {firstCard.Face} of {firstCard.Suit}");
-            playerHand.Accept(firstCard);
+                // 4. Create a dealer hand
+                var dealerHand = new Hand();
 
-            // 6. Ask the deck for a card and place it in the player hand
-            var secondCard = deck.Deal();
-            playerHand.Accept(secondCard);
+                // 5. Ask the deck for a card and place it in the player hand
+                var firstCard = deck.Deal();
+                playerHand.Accept(firstCard);
 
-            // 7. Ask the deck for a card and place it in the dealer hand
-            var firstCardForDealer = deck.Deal();
-            dealerHand.Accept(firstCardForDealer);
+                // 6. Ask the deck for a card and place it in the player hand
+                var secondCard = deck.Deal();
+                playerHand.Accept(secondCard);
 
-            // 8. Ask the deck for a card and place it in the dealer hand
-            var secondCardForDealer = deck.Deal();
-            dealerHand.Accept(secondCardForDealer);
+                // 7. Ask the deck for a card and place it in the dealer hand
+                var firstCardForDealer = deck.Deal();
+                dealerHand.Accept(firstCardForDealer);
 
-            // 9. Show the player the TotalValue of their Hand
-            // 10. If they have BUSTED, then goto step 15
-            // 11. Ask the player if they want to HIT or STAND
-            // 12. If HIT
+                // 8. Ask the deck for a card and place it in the dealer hand
+                var secondCardForDealer = deck.Deal();
+                dealerHand.Accept(secondCardForDealer);
 
-            // - Ask the deck for a card and place it in the player hand
-            // - goto step 10
+                // 10. If they have BUSTED, then goto step 15
+                while (playerHand.TotalValue() <= 21)
+                {
+                    // 9. Show the player the cards in their hand and the TotalValue of their Hand
 
-            // 13. If STAND continue on
-            // 14. Show the dealer's hand TotalValue
-            // 15. If the dealer has busted then goto step 17
-            // 16. If the dealer has less than 17
-            //     - Ask the deck for a card and place it in the dealer hand
-            //     - goto step 14
-            // 17. If the player busted show "COMPUTER WINS"
-            // 18. If the dealer busted show "PLAYER WINS"
-            // 19. If the dealer's hand is more than the player's hand then show "DEALER WINS", else show "PLAYER WINS"
-            // 20. -- Hmm, what to do if they are even?
-            // 21. Ask the user if they want to play again.
+                    Console.WriteLine();
+                    playerHand.ShowCards();
+                    Console.WriteLine($"For a total value of {playerHand.TotalValue()}");
+                    Console.WriteLine();
 
-            // - If yes, goto step 1
+                    // 11. Ask the player if they want to HIT or STAND
+                    Console.Write("(H)it or (S)tand: ");
+                    var answer = Console.ReadLine();
+
+                    if (answer == "H")
+                    {
+                        // 12. If HIT
+                        // - Ask the deck for a card and place it in the player hand
+                        var extraCard = deck.Deal();
+                        playerHand.Accept(extraCard);
+                    }
+                    else
+                    {
+                        // Break us out of the most inner loop, in this case the `while < 21`
+                        // 13. If STAND continue on
+                        break;
+                    }
+                }
+
+                Console.WriteLine();
+                playerHand.ShowCards();
+                Console.WriteLine($"For a total value of {playerHand.TotalValue()}");
+                Console.WriteLine();
+
+                while (dealerHand.TotalValue() < 17)
+                {
+                    // 15. If the dealer has busted then goto step 17
+                    // 16. If the dealer has less than 17
+                    //     - Ask the deck for a card and place it in the dealer hand
+                    var extraCard = deck.Deal();
+                    dealerHand.Accept(extraCard);
+                }
+
+                // 14. Show the dealer's hand TotalValue
+                Console.WriteLine();
+                Console.WriteLine("Dealer has:");
+                dealerHand.ShowCards();
+                var computedTotalValueOfDealerHand = dealerHand.TotalValue();
+                Console.WriteLine($"For a total value of {computedTotalValueOfDealerHand}");
+
+
+                Console.WriteLine();
+
+                // 17. If the player busted show "DEALER WINS"
+                // 18. If the dealer busted show "PLAYER WINS"
+                // 19. If the dealer's hand is more than the player's hand then show "DEALER WINS", else show "PLAYER WINS"
+                // 20. -- Hmm, what to do if they are even?
+                if (playerHand.TotalValue() > 21)
+                {
+                    Console.WriteLine("Dealer Wins!");
+                }
+                else
+                if (dealerHand.TotalValue() > 21)
+                {
+                    Console.WriteLine("Player Wins!");
+                }
+                else if (dealerHand.TotalValue() >= playerHand.TotalValue())
+                {
+                    Console.WriteLine("Dealer Wins!");
+                }
+                else
+                {
+                    Console.WriteLine("Player Wins!");
+                }
+
+                // 21. Ask the user if they want to play again.
+                Console.Write("Play again? (Y/N): ");
+                var playAgainString = Console.ReadLine();
+
+                // if (playAgainString == "Y")
+                // {
+                //     keepPlaying = true;
+                // }
+                // else
+                // {
+                //     keepPlaying = false;
+                // }
+
+                // This one line is equivalent to the above lines
+                keepPlaying = (playAgainString == "Y");
+            }
 
             // 22. Show the user "Thanks for playing"
+            Console.WriteLine();
+            Console.WriteLine("Thanks for playing");
         }
     }
 }
