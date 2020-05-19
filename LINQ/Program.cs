@@ -314,6 +314,25 @@ namespace LINQ
             {
                 Console.WriteLine("No, there is at least one movie after 1965");
             }
+
+            var numberOfMoviesCostingMoreThanTenBucks = movies.Count(movie => movie.PricePerTicket > 10);
+            Console.WriteLine($"There are {numberOfMoviesCostingMoreThanTenBucks} that cost more than $10");
+
+            // This is kinda the same.
+            var anotherWayToCountMoviesCostingMoreThan10 = movies.Where(movie => movie.PricePerTicket > 10).Count();
+            Console.WriteLine($"There are {anotherWayToCountMoviesCostingMoreThan10} that cost more than $10");
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
