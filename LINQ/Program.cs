@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LINQ
 {
@@ -285,7 +286,34 @@ namespace LINQ
             };
 
             // Code here
+            Console.WriteLine($"There are {movies.Count()} total movies");
 
+            var popularMovies = movies.Where(movie => movie.Screenings >= 100);
+            Console.WriteLine($"There are {popularMovies.Count()} popular movies");
+
+            var unpopularMovies = movies.Where(movie => movie.Screenings < 100);
+            Console.WriteLine($"There are {unpopularMovies.Count()} unpopular movies");
+
+            var totalRevenue = movies.Aggregate(0.0, (currentTotalRevenue, movie) => currentTotalRevenue + movie.TotalRevenue);
+
+            Console.WriteLine($"The total box office is ${totalRevenue}");
+
+            var totalGross = movies.Aggregate(0.0, (currentGross, movie) => currentGross + movie.TotalRevenue - movie.Cost);
+            Console.WriteLine($"The total gross is ${totalGross}");
+
+            // The old movies themselves
+            var theOldMovies = movies.Where(movie => movie.ReleasedDate.Year < 1965);
+
+            // Just one true or false if they are ALLLLL old movies.
+            var areAllOldMovies = movies.All(movie => movie.ReleasedDate.Year < 1965);
+            if (areAllOldMovies)
+            {
+                Console.WriteLine("Yes, all movies before 1965");
+            }
+            else
+            {
+                Console.WriteLine("No, there is at least one movie after 1965");
+            }
         }
     }
 }
