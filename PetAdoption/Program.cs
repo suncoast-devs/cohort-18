@@ -16,6 +16,8 @@ namespace PetAdoption
             var frontEnd = new FrontEnd(petsController);
             frontEnd.Greeting();
             frontEnd.Menu();
+
+            petsController.PrintLog();
         }
     }
 }

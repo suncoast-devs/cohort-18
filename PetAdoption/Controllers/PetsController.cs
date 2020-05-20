@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,16 +7,19 @@ namespace PetAdoption
     class PetsController
     {
         private List<Pet> Pets = new List<Pet>();
+        private List<string> Log = new List<string>();
 
         // Give back the list of pets
         public IEnumerable<Pet> AllPets()
         {
+            Log.Add("Someone asked for a list of pets");
             return Pets.OrderBy(pet => pet.Name);
         }
 
         // Given a name of a pet, return the first pet with that name, or null if nothing found
         public Pet FindPetByName(string name)
         {
+            Log.Add($"Someone looked for a pet named {name}");
             var foundPet = Pets.FirstOrDefault(pet => pet.Name == name);
 
             return foundPet;
@@ -24,6 +28,8 @@ namespace PetAdoption
         // Given a pet, adopt it out
         public void AdoptOut(Pet petToAdoptOut)
         {
+            Log.Add($"Someone adopted a pet named {petToAdoptOut.Name}");
+
             // .. by removing it from our list.
             Pets.Remove(petToAdoptOut);
         }
@@ -31,6 +37,8 @@ namespace PetAdoption
         // Update the given Pet to the given size
         public void Update(Pet petToUpdate, string size)
         {
+            Log.Add($"Someone changed a pet named {petToUpdate.Name} to {size}");
+
             petToUpdate.Size = size;
         }
 
@@ -38,6 +46,8 @@ namespace PetAdoption
         // make a new pet and add it to the database
         public void AddNewPet(string name, string species, string gender, int age, string color, string size)
         {
+            Log.Add($"Someone addad a pet named {name}");
+
             var newPet = new Pet
             {
                 Age = age,
@@ -49,6 +59,14 @@ namespace PetAdoption
             };
 
             Pets.Add(newPet);
+        }
+
+        public void PrintLog()
+        {
+            foreach (var log in Log)
+            {
+                Console.WriteLine(log);
+            }
         }
 
         public void Seed()
