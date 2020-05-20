@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PetAdoption
 {
@@ -10,6 +11,27 @@ namespace PetAdoption
         public IEnumerable<Pet> AllPets()
         {
             return Pets.OrderBy(pet => pet.Name);
+        }
+
+        // Given a name of a pet, return the first pet with that name, or null if nothing found
+        public Pet FindPetByName(string name)
+        {
+            var foundPet = Pets.FirstOrDefault(pet => pet.Name == name);
+
+            return foundPet;
+        }
+
+        // Given a pet, adopt it out
+        public void AdoptOut(Pet petToAdoptOut)
+        {
+            // .. by removing it from our list.
+            Pets.Remove(petToAdoptOut);
+        }
+
+        // Update the given Pet to the given size
+        public void Update(Pet petToUpdate, string size)
+        {
+            petToUpdate.Size = size;
         }
 
         // Given arguments (6 of them) that represent all the data for a pet

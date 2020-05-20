@@ -94,9 +94,48 @@ namespace PetAdoption
                         break;
 
                     case "d":
+                        var nameOfPetToFind = PromptForString("Name of pet being adopted: ");
+
+                        var foundPet = OurPetsController.FindPetByName(nameOfPetToFind);
+                        if (foundPet == null)
+                        {
+                            Console.WriteLine($"There is no pet named {nameOfPetToFind}");
+                        }
+                        else
+                        {
+                            // - Show the found pet and confirm this is the right one
+                            var foundPetDescription = foundPet.Description();
+                            Console.WriteLine(foundPetDescription);
+
+                            var shouldWeAdoptOut = PromptForString("Sure you want to adopt this pet out? (Y/N): ");
+                            if (shouldWeAdoptOut == "Y")
+                            {
+                                OurPetsController.AdoptOut(foundPet);
+                            }
+                        }
+
                         break;
 
                     case "U":
+                        var nameOfPetToUpdate = PromptForString("Name of pet being adopted: ");
+
+                        var petToUpdate = OurPetsController.FindPetByName(nameOfPetToUpdate);
+                        if (petToUpdate == null)
+                        {
+                            Console.WriteLine($"There is no pet named {nameOfPetToUpdate}");
+                        }
+                        else
+                        {
+                            var foundPetDescription = petToUpdate.Description();
+                            Console.WriteLine(foundPetDescription);
+
+                            // - ask for a new size
+                            var newPetSize = PromptForString("New size: ");
+
+                            // - update the pet
+                            OurPetsController.Update(petToUpdate, newPetSize);
+                        }
+
                         break;
 
                     case "Q":
