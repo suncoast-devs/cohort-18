@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PetAdoption
 {
@@ -32,9 +33,53 @@ namespace PetAdoption
 
         static void Main(string[] args)
         {
+            // Add some pets to our database of pets
+
+            // | Species | Gender | Age | Name    | Color  | Size   |
+            // | ------- | ------ | --- | ------- | ------ | ------ |
+            // | Dog     | Female | 1   | Sadie   | Blonde | Medium |
+            var sadie = new Pet
+            {
+                Name = "Sadie",
+                Species = "Dog",
+                Gender = "Female",
+                Age = 1,
+                Color = "Blonde",
+                Size = "Medium",
+            };
+
+            // | Cat     | Male   | 3   | Russell | Black  | Small  |
+            var russell = new Pet
+            {
+                Name = "Russell",
+                Species = "Cat",
+                Gender = "Male",
+                Age = 3,
+                Color = "Black",
+                Size = "Small",
+            };
+
+            // | Dog     | Male   | 3   | Kodak   | White  | Large  
+            var kodak = new Pet
+            {
+                Name = "Kodak",
+                Species = "Dog",
+                Gender = "Male",
+                Age = 3,
+                Color = "White",
+                Size = "Large",
+            };
+
+            var listOfPets = new List<Pet>();
+
+            listOfPets.Add(sadie);
+            listOfPets.Add(russell);
+            listOfPets.Add(kodak);
+
+
             // Welcome the user to the application
             Console.WriteLine();
-            Console.WriteLine("Welcome to our Pet Adoption site, come on in and find a new friend.");
+            Console.WriteLine($"Welcome to our Pet Adoption site, come on in and find a new friend from our {listOfPets.Count} pets.");
             Console.WriteLine();
 
             var userHasChosenToQuit = false;
