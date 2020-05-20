@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PetAdoption
 {
@@ -107,6 +108,47 @@ namespace PetAdoption
                 if (choice == "Q")
                 {
                     userHasChosenToQuit = true;
+                }
+
+                if (choice == "d")
+                {
+                    // PEDAC
+                    //
+                    // Problem - Given a pet's name, find that pet in our list and remove it to indicate it has been adopted out.
+                    //
+                    // Example:
+                    // Sadie, Russell, Kodak
+                    // Name of pet being adopted: Kodak
+                    // -- find and remove --
+                    // Sadie, Russell
+                    //
+                    // Data
+                    // - Name of the pet, string
+                    // - List of pets
+                    // - Searching helper...
+                    //
+                    // Algorithm
+                    // - Prompt for the name of the pet
+                    var nameOfPetToFind = PromptForString("Name of pet being adopted: ");
+
+                    // - Use a searching function to find the pet
+                    // - Where
+                    // - Find
+                    // - First
+                    var foundPet = listOfPets.First(pet => pet.Name == nameOfPetToFind);
+
+                    // - If there is no pet found, inform the user and return
+                    // - Show the found pet and confirm this is the right one
+                    var foundPetDescription = foundPet.Description();
+                    Console.WriteLine(foundPetDescription);
+
+                    var shouldWeAdoptOut = PromptForString("Sure you want to adopt this pet out? (Y/N): ");
+
+                    if (shouldWeAdoptOut == "Y")
+                    {
+                        // - if yes Remove the found pet from the list
+                        listOfPets.Remove(foundPet);
+                    }
                 }
 
                 if (choice == "A")
