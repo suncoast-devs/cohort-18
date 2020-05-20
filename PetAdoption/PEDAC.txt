@@ -1,0 +1,49 @@
+# P - Problem is to make an application to track pets that are up for adoption.
+
+Create an application that allows us to:
+
+- Add (create) a new pet that is available for adoption
+- Update information about a pet that is available for adoption
+- Remove a pet once it is adopted
+- Get lists of pets that are available for adoption - perhaps by different attributes.
+
+# D - Data
+
+Lists (of pets)
+
+Pet
+
+- Species (Cat, Dog, Bird) - string
+- Gender - string
+- Age - int
+- Name - string
+- Color - string
+- Size - string
+
+# Examples
+
+| Species | Gender | Age | Name    | Color  | Size   |
+| ------- | ------ | --- | ------- | ------ | ------ |
+| Dog     | Female | 1   | Sadie   | Blonde | Medium |
+| Cat     | Male   | 3   | Russell | Black  | Small  |
+| Dog     | Male   | 3   | Kodak   | White  | Large  |
+
+# Algorithm
+
+Welcome the user to the application
+
+While the user hasn't quit the application
+
+Show them a menu of options they can do
+
+- Add a new pet
+- See all the pets up for adoption
+- Input a name of a pet that has been adopted to remove them from the list
+- Input a name of a pet and update their size
+- Quit the application
+
+Prompt them for their choice
+Based their choice, do that function
+
+- If the user entered quit, then mark that they have chosen to Quit
+  End ot the while
