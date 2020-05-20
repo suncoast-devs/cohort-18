@@ -109,6 +109,50 @@ namespace PetAdoption
                     userHasChosenToQuit = true;
                 }
 
+                if (choice == "A")
+                {
+                    // PEDAC
+                    //
+                    // Problem - Gather all the information about a pet, create a new pet and add them to the list.
+                    //
+                    // Example:
+                    // Name: ____
+                    // Species: ___
+                    // Gender: ____
+                    // Age: ____
+                    // Color: ___
+                    // Size: ___
+                    //
+                    // Data:
+                    //
+                    // Strings and int for our inputs, a new Pet, and our List
+                    //
+                    // Algorithm:
+                    //
+                    // Prompt for Name
+                    var newName = PromptForString("Name: ");
+                    // Prompt for Species
+                    var newSpecies = PromptForString("Species: ");
+                    var newGender = PromptForString("Gender: ");
+                    var newAge = PromptForInteger("Age: ");
+                    var newColor = PromptForString("Color: ");
+                    var newSize = PromptForString("Size: ");
+
+                    // ...
+                    // Use these bits of information to create a new pet
+                    var newPet = new Pet
+                    {
+                        Age = newAge,
+                        Color = newColor,
+                        Gender = newGender,
+                        Name = newName,
+                        Size = newSize,
+                        Species = newSpecies,
+                    };
+                    // append that new pet to the list
+                    listOfPets.Add(newPet);
+                }
+
                 if (choice == "S")
                 {
                     Console.WriteLine("Here are all the pets");
