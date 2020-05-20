@@ -135,19 +135,26 @@ namespace PetAdoption
                     // - Where
                     // - Find
                     // - First
-                    var foundPet = listOfPets.First(pet => pet.Name == nameOfPetToFind);
+                    var foundPet = listOfPets.FirstOrDefault(pet => pet.Name == nameOfPetToFind);
 
                     // - If there is no pet found, inform the user and return
-                    // - Show the found pet and confirm this is the right one
-                    var foundPetDescription = foundPet.Description();
-                    Console.WriteLine(foundPetDescription);
-
-                    var shouldWeAdoptOut = PromptForString("Sure you want to adopt this pet out? (Y/N): ");
-
-                    if (shouldWeAdoptOut == "Y")
+                    if (foundPet == null)
                     {
-                        // - if yes Remove the found pet from the list
-                        listOfPets.Remove(foundPet);
+                        Console.WriteLine($"There is no pet named {nameOfPetToFind}");
+                    }
+                    else
+                    {
+                        // - Show the found pet and confirm this is the right one
+                        var foundPetDescription = foundPet.Description();
+                        Console.WriteLine(foundPetDescription);
+
+                        var shouldWeAdoptOut = PromptForString("Sure you want to adopt this pet out? (Y/N): ");
+
+                        if (shouldWeAdoptOut == "Y")
+                        {
+                            // - if yes Remove the found pet from the list
+                            listOfPets.Remove(foundPet);
+                        }
                     }
                 }
 
