@@ -109,6 +109,35 @@ namespace PetAdoption
                     userHasChosenToQuit = true;
                 }
 
+                if (choice == "S")
+                {
+                    Console.WriteLine("Here are all the pets");
+                    // PEDAC
+                    //
+                    // p - Print out all the pets to the user
+                    //   - Is there an order? Maybe just in the list order?
+                    // E - is our list of three pets. Sadie, Russell, and Kodak
+                    //
+                    // Name is a Gender Size Color Species that is Age years old.
+                    // Sadie is a Female Medium Blonde Dog that is 1 years old.
+                    // Russell is a Male Small Black Cat that is 3 years old.
+                    //
+                    //  D - List of pets, and an individual pet.
+                    //
+                    //  A
+                    //    - For each pet in our list of pets
+                    //      - Print out the details of that pet according our example
+
+                    //    - For each pet in our list of pets
+                    foreach (var pet in listOfPets)
+                    {
+                        //      - Print out the details of that pet according our example
+                        var description = $"{pet.Name} is a {pet.Gender} {pet.Size} {pet.Color} {pet.Species} that is {pet.Age} years old.";
+                        Console.WriteLine(description);
+
+                    }
+
+                }
             }
         }
     }
