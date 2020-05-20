@@ -19,5 +19,20 @@ namespace PetAdoption
 
         // - Size - string
         public string Size { get; set; }
+
+        // Method
+        // Name -- Description
+        // Input from the outside world -- none
+        // Output -- string
+        // Work -- we know, build up the string
+
+        public string Description()
+        {
+            var myOwnDescription = $"{Name} is a {Gender} {Size} {Color} {Species} that is {Age} years old.";
+
+            return myOwnDescription;
+        }
+
+
     }
 }

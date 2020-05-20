@@ -132,7 +132,7 @@ namespace PetAdoption
                     foreach (var pet in listOfPets)
                     {
                         //      - Print out the details of that pet according our example
-                        var description = $"{pet.Name} is a {pet.Gender} {pet.Size} {pet.Color} {pet.Species} that is {pet.Age} years old.";
+                        var description = pet.Description();
                         Console.WriteLine(description);
 
                     }
