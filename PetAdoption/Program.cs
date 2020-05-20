@@ -110,6 +110,49 @@ namespace PetAdoption
                     userHasChosenToQuit = true;
                 }
 
+                if (choice == "U")
+                {
+                    // PEDAC
+                    //
+                    // Problem - Given a pet's name, find that pet in our list, if found
+                    //           ask for a new size and update the pet.
+                    //
+                    // Example:
+                    // Name of pet to update: Sadie
+                    // -- print out sadie's details
+                    // New size for Sadie: Large
+                    //
+                    // Data
+                    //
+                    // Pet name (string), List, finding helper, string (new size)
+                    //
+                    // Algorithm
+                    //
+                    // Prompt for the name of the pet
+                    var nameOfPetToFind = PromptForString("Name of pet being adopted: ");
+                    // Use a searching function to find the pet
+                    var foundPet = listOfPets.FirstOrDefault(pet => pet.Name == nameOfPetToFind);
+
+                    // If it is not found, say not found
+                    if (foundPet == null)
+                    {
+                        Console.WriteLine($"There is no pet named {nameOfPetToFind}");
+                    }
+                    else
+                    {
+                        // else
+                        // - print the details
+                        var foundPetDescription = foundPet.Description();
+                        Console.WriteLine(foundPetDescription);
+
+                        // - ask for a new size
+                        var newPetSize = PromptForString("New size: ");
+
+                        // - update the pet
+                        foundPet.Size = newPetSize;
+                    }
+                }
+
                 if (choice == "d")
                 {
                     // PEDAC
