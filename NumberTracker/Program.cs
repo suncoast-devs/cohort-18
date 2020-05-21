@@ -13,11 +13,22 @@ namespace NumberTracker
         {
             Console.WriteLine("Welcome to Number Tracker");
 
-            // This object knows how to read characters from a file
-            var fileReader = new StreamReader("numbers.csv");
+            // Generic reader (could be from a stream, could be from a string)
+            TextReader reader;
+
+            if (File.Exists("numbers.csv"))
+            {
+                // This object knows how to read characters from a file
+                reader = new StreamReader("numbers.csv");
+            }
+            else
+            {
+                // This object nows how to read characters from a string
+                reader = new StringReader("");
+            }
 
             // And we give that file reading object to the CSV reading object
-            var csvReader = new CsvReader(fileReader, CultureInfo.InvariantCulture);
+            var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
             // And tell it we have no headers
             csvReader.Configuration.HasHeaderRecord = false;
 
