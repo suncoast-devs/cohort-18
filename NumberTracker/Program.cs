@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using CsvHelper;
 
 namespace NumberTracker
 {
@@ -9,8 +13,17 @@ namespace NumberTracker
         {
             Console.WriteLine("Welcome to Number Tracker");
 
-            // Creates a list of numbers we will be tracking
-            var numbers = new List<int>();
+            // This object knows how to read characters from a file
+            var fileReader = new StreamReader("numbers.csv");
+
+            // And we give that file reading object to the CSV reading object
+            var csvReader = new CsvReader(fileReader, CultureInfo.InvariantCulture);
+            // And tell it we have no headers
+            csvReader.Configuration.HasHeaderRecord = false;
+
+            // Ask the csv reading object to get records that are `int`
+            // and give them back to us as a List.
+            var numbers = csvReader.GetRecords<int>().ToList();
 
             // Controls if we are still running our loop asking for more numbers
             var isRunning = true;
@@ -42,6 +55,21 @@ namespace NumberTracker
                     numbers.Add(number);
                 }
             }
+
+            // An object that knows how to write data to the file "numbers.csv"
+            var fileWriter = new StreamWriter("numbers.csv");
+
+            // An object that knows how to take a collection/enumerable and
+            // format it into CSV and send it to some kind of Stream.
+            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
+
+            // Send the numbers collection to the csv writer object who in turn
+            // will take each number, turn it into CSV format, and send it to
+            // the stream which in turn sends it to a file.
+            csvWriter.WriteRecords(numbers);
+
+            // Close the file so anything in the stream is completed
+            fileWriter.Close();
         }
     }
 }
