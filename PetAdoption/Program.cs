@@ -10,7 +10,7 @@ namespace PetAdoption
         {
             // Create a new object that manages our pets
             var petsController = new PetsController();
-            petsController.Seed();
+            petsController.LoadAllPets();
 
             // Creates a new object that represent interacting with our users
             var frontEnd = new FrontEnd(petsController);
@@ -18,6 +18,7 @@ namespace PetAdoption
             frontEnd.Menu();
 
             petsController.PrintLog();
+            petsController.SaveAllPets();
         }
     }
 }

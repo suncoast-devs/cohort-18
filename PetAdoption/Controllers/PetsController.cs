@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 
 namespace PetAdoption
 {
@@ -8,6 +11,29 @@ namespace PetAdoption
     {
         private List<Pet> Pets = new List<Pet>();
         private List<string> Log = new List<string>();
+
+        public void SaveAllPets()
+        {
+            var writer = new StreamWriter("pets.csv");
+
+            var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+
+            csvWriter.WriteRecords(Pets);
+
+            writer.Close();
+        }
+
+        public void LoadAllPets()
+        {
+            if (File.Exists("pets.csv"))
+            {
+                var reader = new StreamReader("pets.csv");
+
+                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+                Pets = csvReader.GetRecords<Pet>().ToList();
+            }
+        }
 
         // Give back the list of pets
         public IEnumerable<Pet> AllPets()
@@ -32,6 +58,8 @@ namespace PetAdoption
 
             // .. by removing it from our list.
             Pets.Remove(petToAdoptOut);
+
+            SaveAllPets();
         }
 
         // Update the given Pet to the given size
@@ -40,6 +68,8 @@ namespace PetAdoption
             Log.Add($"Someone changed a pet named {petToUpdate.Name} to {size}");
 
             petToUpdate.Size = size;
+
+            SaveAllPets();
         }
 
         // Given arguments (6 of them) that represent all the data for a pet
@@ -59,6 +89,8 @@ namespace PetAdoption
             };
 
             Pets.Add(newPet);
+
+            SaveAllPets();
         }
 
         public void PrintLog()
