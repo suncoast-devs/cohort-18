@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SuncoastMovies
 {
@@ -12,6 +13,8 @@ namespace SuncoastMovies
 
         public int RatingId { get; set; }
 
+        // Movie has many roles...
+        public List<Role> Roles { get; set; }
 
         // "Movie" has one "Rating"
 
