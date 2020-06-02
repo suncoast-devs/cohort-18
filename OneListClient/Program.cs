@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using ConsoleTables;
 
 namespace OneListClient
 {
@@ -60,13 +61,20 @@ namespace OneListClient
             // This is a list of Item
             var items = await JsonSerializer.DeserializeAsync<List<Item>>(responseAsStream);
 
+            var table = new ConsoleTable("Description", "Created At", "Completed");
+
             // Go through them one at a time
             foreach (var item in items)
             {
-                // Output some details on that item
-                Console.WriteLine($"The task {item.Text} was created on {item.CreatedAt} and has a completion of: {item.CompletedStatus}");
+                // Add one row to our table
+                table.AddRow(
+                  item.Text,
+                  item.CreatedAt,
+                  item.CompletedStatus);
             }
 
+            // Write the table
+            table.Write();
         }
     }
 }
