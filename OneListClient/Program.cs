@@ -2,17 +2,49 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace OneListClient
 {
     class Item
     {
-        public int id { get; set; }
-        public string text { get; set; }
-        public bool complete { get; set; }
-        public string created_at { get; set; }
-        public string updated_at { get; set; }
+        // The next property I declare no matter what *I* call it
+        // YOU should get it from the `id` JSON key.
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("text")]
+        public string Text { get; set; }
+
+        [JsonPropertyName("complete")]
+        public bool Complete { get; set; }
+
+        [JsonPropertyName("created_at")]
+        public DateTime CreatedAt { get; set; }
+
+        [JsonPropertyName("updated_at")]
+        public DateTime UpdatedAt { get; set; }
+
+        // This is a CUSTOM property
+        public string CompletedStatus
+        {
+            get
+            {
+                // Complete is either true -- or its false
+                // if (some boolean value)
+                // if (name.Length == 5)
+                // if (name == "Gavin")
+                if (Complete)
+                {
+                    return "completed";
+                }
+                else
+                {
+                    return "not completed";
+                }
+            }
+        }
     }
 
     class Program
@@ -32,7 +64,7 @@ namespace OneListClient
             foreach (var item in items)
             {
                 // Output some details on that item
-                Console.WriteLine($"The task {item.text} was created on {item.created_at} and has a completion of: {item.complete}");
+                Console.WriteLine($"The task {item.Text} was created on {item.CreatedAt} and has a completion of: {item.CompletedStatus}");
             }
 
         }
