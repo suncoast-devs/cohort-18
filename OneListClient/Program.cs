@@ -141,6 +141,52 @@ namespace OneListClient
             table.Write(Format.Minimal);
         }
 
+        static async Task UpdateOneItem(string token, int id, Item updatedItem)
+        {
+            var client = new HttpClient();
+
+            // Generate a URL specifically referencing the endpoint for getting a single
+            // todo item and provide the id we were supplied
+            var url = $"https://one-list-api.herokuapp.com/items/{id}?access_token={token}";
+
+            // Take the `newItem` and serialize it into JSON
+            var jsonBody = JsonSerializer.Serialize(updatedItem);
+
+            // We turn this into a StringContent object and indicate we are using JSON
+            // by ensuring there is a media type header of `application/json`
+            var jsonBodyAsContent = new StringContent(jsonBody);
+            jsonBodyAsContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            // Send the POST request to the URL and supply the JSON body
+            var response = await client.PutAsync(url, jsonBodyAsContent);
+
+            // Get the response as a stream.
+            var responseJson = await response.Content.ReadAsStreamAsync();
+
+            // Supply that *stream of data* to a Deserialize that will interpret it as a *SINGLE* `Item`
+            var item = await JsonSerializer.DeserializeAsync<Item>(responseJson);
+
+            // Make a table to output our new item.
+            var table = new ConsoleTable("ID", "Description", "Created At", "Updated At", "Completed");
+
+            // Add one row to our table
+            table.AddRow(item.Id, item.Text, item.CreatedAt, item.UpdatedAt, item.CompletedStatus);
+
+            // Write the table
+            table.Write(Format.Minimal);
+        }
+
+        static async Task DeleteOneItem(string token, int id)
+        {
+            var client = new HttpClient();
+
+            // Generate a URL specifically referencing the endpoint for getting a single
+            // todo item and provide the id we were supplied
+            var url = $"https://one-list-api.herokuapp.com/items/{id}?access_token={token}";
+
+            await client.DeleteAsync(url);
+        }
+
         static async Task Main(string[] args)
         {
             var accessToken = "";
@@ -158,7 +204,7 @@ namespace OneListClient
             var keepGoing = true;
             while (keepGoing)
             {
-                Console.Write("Get (A)ll todo, (O)ne item, (C)reate an item, or (Q)uit: ");
+                Console.Write("Get (A)ll todo, (O)ne item, (C)reate an item, (U)pdate an item, (D)elete an item, or (Q)uit: ");
                 var choice = Console.ReadLine().ToUpper();
 
                 switch (choice)
@@ -191,6 +237,38 @@ namespace OneListClient
                         };
 
                         await AddOneItem(accessToken, newItem);
+
+                        Console.WriteLine("Press ENTER to continue");
+                        Console.ReadLine();
+                        break;
+
+                    case "U":
+                        Console.Write("Enter the ID of the item to update: ");
+                        var existingId = int.Parse(Console.ReadLine());
+
+                        Console.Write("Enter the new description: ");
+                        var newText = Console.ReadLine();
+
+                        Console.Write("Enter yes or no to indicate if the item is complete: ");
+                        var newComplete = Console.ReadLine().ToLower() == "yes";
+
+                        var updatedItem = new Item
+                        {
+                            Text = newText,
+                            Complete = newComplete
+                        };
+
+                        await UpdateOneItem(accessToken, existingId, updatedItem);
+
+                        Console.WriteLine("Press ENTER to continue");
+                        Console.ReadLine();
+                        break;
+
+                    case "D":
+                        Console.Write("Enter the ID of the item to delete: ");
+                        var idToDelete = int.Parse(Console.ReadLine());
+
+                        await DeleteOneItem(accessToken, idToDelete);
 
                         Console.WriteLine("Press ENTER to continue");
                         Console.ReadLine();
