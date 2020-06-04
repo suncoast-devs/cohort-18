@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameDatabaseAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameDatabaseAPI.Controllers
 {
@@ -127,5 +128,40 @@ namespace GameDatabaseAPI.Controllers
             //     v                           v
             return CreatedAtAction(null, null, gameToCreate);
         }
+
+        // Updating a game
+        [HttpPut("{id}")]
+        //                               URL parameter
+        //                               |
+        //                               |       Body
+        //                               |       |
+        //                               v       v
+        public ActionResult<Game> Update(int id, Game gameThatCameFromTheClient)
+        {
+            var gameThatIsLiveInTheDatabase = _context.Games.FirstOrDefault(game => game.Id == id);
+
+            if (gameThatIsLiveInTheDatabase == null)
+            {
+                return NotFound();
+            }
+
+            // Copy all the attributes from the game we were given
+            // To the one we found from the database.
+            gameThatIsLiveInTheDatabase.Name = gameThatCameFromTheClient.Name;
+            gameThatIsLiveInTheDatabase.Host = gameThatCameFromTheClient.Host;
+            gameThatIsLiveInTheDatabase.Address = gameThatCameFromTheClient.Address;
+            gameThatIsLiveInTheDatabase.When = gameThatCameFromTheClient.When;
+            gameThatIsLiveInTheDatabase.MinimumPlayers = gameThatCameFromTheClient.MinimumPlayers;
+            gameThatIsLiveInTheDatabase.MaximumPlayers = gameThatCameFromTheClient.MaximumPlayers;
+
+            // Tell the context we updated this game.
+            _context.Entry(gameThatIsLiveInTheDatabase).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            // Give back a copy of the object
+            return Ok(gameThatIsLiveInTheDatabase);
+        }
+
+
     }
 }
