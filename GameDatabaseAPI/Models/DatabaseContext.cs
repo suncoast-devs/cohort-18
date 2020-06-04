@@ -7,6 +7,9 @@ namespace GameDatabaseAPI.Models
 {
     public partial class DatabaseContext : DbContext
     {
+        // Our database will have a Games table that relates to our Game model
+        public DbSet<Game> Games { get; set; }
+
         // Change this if you want to have a different database name in development
         private static string DEVELOPMENT_DATABASE_NAME = "GameDatabaseAPIDatabase";
 
