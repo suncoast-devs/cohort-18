@@ -140,7 +140,7 @@ namespace GameDatabaseAPI.Controllers
         {
             if (id != gameThatCameFromTheClient.Id)
             {
-                var errorMessage = new { message = $"The id in the URL ({id}) doesn't match the id in the body ({gameToUpdate.Id})" };
+                var errorMessage = new { message = $"The id in the URL ({id}) doesn't match the id in the body ({gameThatCameFromTheClient.Id})" };
                 return BadRequest(errorMessage);
             }
 
