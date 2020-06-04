@@ -34,7 +34,30 @@ namespace GameDatabaseAPI.Controllers
             return Ok(allTheGames);
         }
 
+        // Get one specific Game
+        // 1. Whats the input? -- a specific ID
+        // 2. Whats the format? -- in the URL parameters
+        //    /Games/25     /Games/42
+        // 3. What is it called /Games/{id}  -- call the method GetByID
+        // 4. What does it return? A single Game
+        // 5. Whats the format? JSON
+        [HttpGet("{id}")]
+        public ActionResult<Game> GetByID(int id)
+        {
+            // Use LINQ to go through the games finding a game with the specified ID
+            var game = _context.Games.FirstOrDefault(game => game.Id == id);
 
+            // If we don't find it... Return a 404 not found to the user
+            //
+            // This is a GUARD clause
+            if (game == null)
+            {
+                // Give back a 404 error
+                return NotFound();
+            }
 
+            // If we do find it, return the game itself.
+            return Ok(game);
+        }
     }
 }
