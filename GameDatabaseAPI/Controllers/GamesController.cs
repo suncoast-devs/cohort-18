@@ -162,6 +162,25 @@ namespace GameDatabaseAPI.Controllers
             return Ok(gameThatIsLiveInTheDatabase);
         }
 
+        // Delete a game
+        [HttpDelete("{id}")]
+        public ActionResult<Game> Delete(int id)
+        {
+            // Use LINQ to look through our game list to find a game
+            // with the specified ID.
+            var foundGame = _context.Games.FirstOrDefault(game => game.Id == id);
 
+            // If FirstOrDefault returned null it means nothing was
+            // found so return a 404 to the user
+            if (foundGame == null)
+            {
+                return NotFound();
+            }
+
+            _context.Games.Remove(foundGame);
+            _context.SaveChanges();
+
+            return Ok(foundGame);
+        }
     }
 }
