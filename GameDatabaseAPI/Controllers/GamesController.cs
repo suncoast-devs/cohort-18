@@ -3,6 +3,7 @@ using System.Linq;
 using GameDatabaseAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace GameDatabaseAPI.Controllers
 {
@@ -27,9 +28,9 @@ namespace GameDatabaseAPI.Controllers
 
         // Get all the games in our database
         [HttpGet]
-        public ActionResult<IEnumerable<Game>> GetAll()
+        public async Task<ActionResult<IEnumerable<Game>>> GetAllAsync()
         {
-            var allTheGames = _context.Games;
+            var allTheGames = await _context.Games.ToListAsync();
 
 
             return Ok(allTheGames);
@@ -43,10 +44,9 @@ namespace GameDatabaseAPI.Controllers
         // 4. What does it return? A single Game
         // 5. Whats the format? JSON
         [HttpGet("{id}")]
-        public ActionResult<Game> GetByID(int id)
+        public async Task<ActionResult<Game>> GetByIDAsync(int id)
         {
-            // Use LINQ to go through the games finding a game with the specified ID
-            var game = _context.Games.FirstOrDefault(game => game.Id == id);
+            var game = await FindGameAsync(id);
 
             // If we don't find it... Return a 404 not found to the user
             //
@@ -83,7 +83,7 @@ namespace GameDatabaseAPI.Controllers
         //     |                         Deserialized from the client BODY of the *REQUEST*
         //     |                         |
         //     v                         v
-        public ActionResult<Game> Create(Game gameToCreate)
+        public async Task<ActionResult<Game>> CreateAsync(Game gameToCreate)
         {
             if (gameToCreate.MinimumPlayers < 2)
             {
@@ -117,7 +117,7 @@ namespace GameDatabaseAPI.Controllers
 
             // Take this new game object and add it to the database
             _context.Games.Add(gameToCreate);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             // return the game object
             //
@@ -136,39 +136,29 @@ namespace GameDatabaseAPI.Controllers
         //                               |       Body
         //                               |       |
         //                               v       v
-        public ActionResult<Game> Update(int id, Game gameThatCameFromTheClient)
+        public async Task<ActionResult<Game>> UpdateAsync(int id, Game gameThatCameFromTheClient)
         {
-            var gameThatIsLiveInTheDatabase = _context.Games.FirstOrDefault(game => game.Id == id);
-
-            if (gameThatIsLiveInTheDatabase == null)
+            if (id != gameThatCameFromTheClient.Id)
             {
-                return NotFound();
+                var errorMessage = new { message = $"The id in the URL ({id}) doesn't match the id in the body ({gameToUpdate.Id})" };
+                return BadRequest(errorMessage);
             }
 
-            // Copy all the attributes from the game we were given
-            // To the one we found from the database.
-            gameThatIsLiveInTheDatabase.Name = gameThatCameFromTheClient.Name;
-            gameThatIsLiveInTheDatabase.Host = gameThatCameFromTheClient.Host;
-            gameThatIsLiveInTheDatabase.Address = gameThatCameFromTheClient.Address;
-            gameThatIsLiveInTheDatabase.When = gameThatCameFromTheClient.When;
-            gameThatIsLiveInTheDatabase.MinimumPlayers = gameThatCameFromTheClient.MinimumPlayers;
-            gameThatIsLiveInTheDatabase.MaximumPlayers = gameThatCameFromTheClient.MaximumPlayers;
-
             // Tell the context we updated this game.
-            _context.Entry(gameThatIsLiveInTheDatabase).State = EntityState.Modified;
-            _context.SaveChanges();
+            _context.Entry(gameThatCameFromTheClient).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
             // Give back a copy of the object
-            return Ok(gameThatIsLiveInTheDatabase);
+            return Ok(gameThatCameFromTheClient);
         }
 
         // Delete a game
         [HttpDelete("{id}")]
-        public ActionResult<Game> Delete(int id)
+        public async Task<ActionResult<Game>> DeleteAsync(int id)
         {
             // Use LINQ to look through our game list to find a game
             // with the specified ID.
-            var foundGame = _context.Games.FirstOrDefault(game => game.Id == id);
+            var foundGame = await FindGameAsync(id);
 
             // If FirstOrDefault returned null it means nothing was
             // found so return a 404 to the user
@@ -178,9 +168,17 @@ namespace GameDatabaseAPI.Controllers
             }
 
             _context.Games.Remove(foundGame);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok(foundGame);
+        }
+
+        // Given an ID, return a Game if found, otherwise null
+        private async Task<Game> FindGameAsync(int id)
+        {
+            var foundGame = await _context.Games.FirstOrDefaultAsync(game => game.Id == id);
+
+            return foundGame;
         }
     }
 }
