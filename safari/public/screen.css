@@ -17,9 +17,123 @@ body {
   color: #2b303a;
 }
 
+main {
+  padding: 0.5rem;
+}
+
 header,
 footer {
   background-color: #2b303a;
   color: #eee5e9;
   padding: 0.5rem;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #d64933;
+}
+
+a:focus,
+a:hover {
+  text-decoration: underline;
+}
+
+header a:link,
+header a:visited {
+  color: #92dce5;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+header li {
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Calistoga', serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+.feature figure {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+
+  background-color: #fffffd;
+  border-radius: 0.25rem;
+  box-shadow: 2px 2px 0.5rem #7c7c7c;
+}
+
+figure img {
+  width: 100%;
+}
+
+article {
+  background-color: #ffffffdd;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin: 0.5rem auto;
+  box-shadow: 2px 2px 0.5rem #7c7c7c;
+}
+
+article h3 {
+  margin: 0 auto 0.5rem;
+}
+
+article p {
+  font-size: 0.75rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.newsletter label {
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  letter-spacing: 0.05rem;
+  color: #7c7c7c;
+}
+
+.newsletter input {
+  color: #2b303a;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  border: none;
+}
+
+.newsletter input[type='submit'] {
+  width: auto;
+}
+
+input.button,
+.button:link,
+.button:visited {
+  font-family: 'Calistoga', serif;
+  background-color: #d64933;
+  color: #eee5e9;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+.hearts {
+  color: #d64933;
+  text-shadow: 0 0 0.5rem #d64933;
+  font-size: 1.2rem;
 }
