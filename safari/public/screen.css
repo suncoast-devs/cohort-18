@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Lato:wght@400;700&display=swap');
+@import url('https://necolas.github.io/normalize.css/latest/normalize.css');
+
 :root {
   font: 16px / 1 sans-serif;
 }
@@ -9,4 +12,14 @@ html {
 body {
   margin: 0;
   min-height: 100%;
+  font-family: 'Lato', sans-serif;
+  background-color: #eee5e9;
+  color: #2b303a;
+}
+
+header,
+footer {
+  background-color: #2b303a;
+  color: #eee5e9;
+  padding: 0.5rem;
 }
