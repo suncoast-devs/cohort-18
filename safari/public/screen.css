@@ -137,3 +137,22 @@ input.button,
   text-shadow: 0 0 0.5rem #d64933;
   font-size: 1.2rem;
 }
+
+header h1 {
+  text-align: center;
+}
+
+header ul {
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.02rem;
+}
+
+/* place 1rem of margin on the left
+   of any li that has a preceeding li.
+
+   This will true for every li except
+   for the very first one */
+header li + li {
+  margin-left: 1rem;
+}
