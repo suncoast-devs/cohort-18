@@ -156,3 +156,15 @@ header ul {
 header li + li {
   margin-left: 1rem;
 }
+
+/* Sets up a two column grid */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+/* Make the image's 100% the size of their parent */
+.gallery img {
+  width: 100%;
+}
