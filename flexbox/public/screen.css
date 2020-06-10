@@ -1,0 +1,32 @@
+:root {
+  font: 16px / 1 sans-serif;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #f7f0da88;
+}
+
+ul img {
+  display: block;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  /* Change this to flexbox or grid */
+  display: block;
+}
+
+li {
+  border: 5px solid orangered;
+}
