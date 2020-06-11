@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav class="container">
         <h1>Safari</h1>
         <ul>
           <li><a href="#">Home</a></li>
@@ -88,33 +88,42 @@
     </main>
 
     <footer>
-      <h3>Join our Newsletter</h3>
-      <form class="newsletter">
-        <p>
-          <label for="full-name">Name</label>
-          <input type="text" name="full-name" />
-        </p>
-        <p>
-          <label for="email-address">Email Address</label>
-          <input type="e-mail" name="email-address" />
-        </p>
-        <p>
-          <input class="button" type="submit" value="Sign Up" />
-        </p>
-      </form>
+      <div class="container">
+        <div class="call-to-action">
+          <div class="join">
+            <h3>Join our Newsletter</h3>
+            <form class="newsletter">
+              <p>
+                <label for="full-name">Name</label>
+                <input type="text" name="full-name" />
+              </p>
+              <p>
+                <label for="email-address">Email Address</label>
+                <input type="e-mail" name="email-address" />
+              </p>
+              <p>
+                <input class="button" type="submit" value="Sign Up" />
+              </p>
+            </form>
+          </div>
 
-      <h3>Make a Donation</h3>
-      <p>
-        Magna fringilla urna porttitor rhoncus dolor purus. Nullam non nisi est
-        sit amet. Tincidunt eget nullam non nisi est sit. Blandit cursus risus
-        at ultrices. Id venenatis a condimentum vitae sapien pellentesque
-        habitant morbi.
-      </p>
-      <a class="button" href="#">Donate</a>
-      <p>
-        Built with <span class="hearts">&hearts;</span> in St. Petersburg,
-        Florida.
-      </p>
+          <div class="donation">
+            <h3>Make a Donation</h3>
+            <p>
+              Magna fringilla urna porttitor rhoncus dolor purus. Nullam non
+              nisi est sit amet. Tincidunt eget nullam non nisi est sit. Blandit
+              cursus risus at ultrices. Id venenatis a condimentum vitae sapien
+              pellentesque habitant morbi.
+            </p>
+            <a class="button" href="#">Donate</a>
+          </div>
+        </div>
+
+        <p class="built-with-love">
+          Built with <span class="hearts">&hearts;</span> in St. Petersburg,
+          Florida.
+        </p>
+      </div>
     </footer>
   </body>
 </html>

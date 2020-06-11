@@ -61,7 +61,7 @@ h5,
 h6 {
   font-family: 'Calistoga', serif;
   font-weight: 400;
-  margin: 0;
+  margin: 1rem 0;
 }
 
 figure {
@@ -169,4 +169,48 @@ header li + li {
 /* Make the image's 100% the size of their parent */
 .gallery img {
   width: 100%;
+}
+
+header .container,
+main,
+footer .container {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+@media (min-width: 720px) {
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  footer {
+    margin-top: 2rem;
+  }
+
+  .call-to-action {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .call-to-action .join {
+    margin-right: 1rem;
+    min-width: 12rem;
+  }
+
+  .built-with-love {
+    text-align: center;
+  }
 }
