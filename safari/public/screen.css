@@ -114,6 +114,7 @@ article p {
   border-radius: 0.25rem;
   padding: 0.5rem;
   border: none;
+  box-sizing: border-box;
 }
 
 .newsletter input[type='submit'] {
@@ -145,6 +146,7 @@ header h1 {
 header ul {
   display: flex;
   justify-content: center;
+  align-items: center;
   letter-spacing: 0.02rem;
 }
 
