@@ -99,6 +99,7 @@ printIt(numbers, greet)
 // const userName = window.prompt('What is your name?')
 // console.log(`Nice to meet you ${userName}`)
 
+// C#:  var names = new string[] {'Gavin', 'Jason', 'Katherine', 'Paul', 'Mary', 'Sam', 'Lucy'}
 const names = ['Gavin', 'Jason', 'Katherine', 'Paul', 'Mary', 'Sam', 'Lucy']
 const lengthOfNames = names.length
 console.log(lengthOfNames)
@@ -118,3 +119,21 @@ for (let index = 0; index < names.length; index++) {
   const valueAtIndex = names[index]
   console.log(valueAtIndex)
 }
+
+// C#: var totalLengthOfAllNames = 0;
+let totalLengthOfAllNames = 0
+// C#: for (var index = 0; index < names.length; index++) {
+for (let index = 0; index < names.length; index++) {
+  // Get the item from the array at index equal
+  // to whatever `index` variable is right now
+  // C#: var valueAtIndex = names[index]
+  const valueAtIndex = names[index]
+
+  // Get the length of this name
+  // C#: var lengthOfName = valueAtIndex.length
+  const lengthOfName = valueAtIndex.length
+
+  // Add to the total length
+  totalLengthOfAllNames = totalLengthOfAllNames + lengthOfName
+}
+console.log(totalLengthOfAllNames)
