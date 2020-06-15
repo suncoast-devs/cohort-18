@@ -1,3 +1,4 @@
+/*
 const myName = 'Jason'
 const favoriteColor = 'blue'
 const favoriteNumber = 42
@@ -89,10 +90,31 @@ function printIt(array, functionToRunForEachValue) {
 // Make a new variable called numbers, and assign it an array of numbers
 const numbers = [42, 100, 1, 21, 15, 32]
 printIt(numbers, greet)
+*/
 
 // var result =  arrayOfNumbers.Select(number => number * 2)
 // var result =  arrayOfNumbers.Select(number => number * number)
 // var result =  arrayOfNumbers.Select(number => number / number)
 
-const userName = window.prompt('What is your name?')
-console.log(`Nice to meet you ${userName}`)
+// const userName = window.prompt('What is your name?')
+// console.log(`Nice to meet you ${userName}`)
+
+const names = ['Gavin', 'Jason', 'Katherine', 'Paul', 'Mary', 'Sam', 'Lucy']
+const lengthOfNames = names.length
+console.log(lengthOfNames)
+
+const firstName = names[0]
+console.log(firstName)
+const secondName = names[1]
+console.log(secondName)
+
+// for loop
+// Initializer
+// Condition
+// What-do-after-each-loop
+for (let index = 0; index < names.length; index++) {
+  // Get the item from the array at index equal
+  // to whatever `index` variable is right now
+  const valueAtIndex = names[index]
+  console.log(valueAtIndex)
+}
