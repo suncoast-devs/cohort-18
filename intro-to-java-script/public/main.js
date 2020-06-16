@@ -90,7 +90,6 @@ function printIt(array, functionToRunForEachValue) {
 // Make a new variable called numbers, and assign it an array of numbers
 const numbers = [42, 100, 1, 21, 15, 32]
 printIt(numbers, greet)
-*/
 
 // var result =  arrayOfNumbers.Select(number => number * 2)
 // var result =  arrayOfNumbers.Select(number => number * number)
@@ -137,3 +136,72 @@ for (let index = 0; index < names.length; index++) {
   totalLengthOfAllNames = totalLengthOfAllNames + lengthOfName
 }
 console.log(totalLengthOfAllNames)
+
+const numbers = [
+  1,
+  2,
+  3,
+  3,
+  4,
+  5,
+  6,
+  64,
+  345,
+  6435,
+  3456,
+  3456,
+  3456,
+  3456,
+  3456,
+  3456,
+  3456,
+  3456,
+  345,
+  6345,
+  634,
+  56,
+  3456,
+  346,
+  3456,
+  3456,
+  4,
+]
+*/
+
+// traditional function style
+function double(number) {
+  return number * 2
+}
+
+// function as variable declaration style
+const doubleAsVariable = function (number) {
+  return number * 2
+}
+
+// Arrow function style
+// - no function keyword
+// - after the arguments but before the body, add an arrow =>
+const doubleAsArrowFunction = (number) => {
+  return number * 2
+}
+
+// IF the arrow function only has ONE statement in it.
+// and if that statement is a RETURN statement, we can
+// shorten the code
+const doubleAsShorterArrowFunction = (number) => number * 2
+
+// Parens are required!
+const zeroArgumentArrowFunction = () => console.log('WOW')
+
+// Parens are required!
+const twoArgumentArrowFunction = (number1, number2) => number1 + number2
+
+// IF the arrow function has only ONE statement in it
+// and we don't care about the return, we can shorten it
+const logTheValue = (value) => console.log(value)
+
+console.log(double(4)) // 8
+console.log(doubleAsVariable(5)) // 10
+console.log(doubleAsArrowFunction(6)) // 12
+console.log(doubleAsShorterArrowFunction(7)) // 14
+logTheValue(42)
