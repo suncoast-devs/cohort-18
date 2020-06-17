@@ -19,3 +19,7 @@ textContent
 classList.add
 classList.toggle
 ternary for toggling current player
+
+Review:
+
+- One generic listener, but individual behavior

@@ -3,7 +3,6 @@
   --header-text-color: #fff9c2;
   --header-font-size: 2rem;
   --square-font-size: calc(8 * var(--header-font-size));
-  --square-text-color: #1c3d5a;
   --square-text-color: #5661b3;
   --square-background-color: #e6e8ff;
   --square-border: 3px solid var(--square-text-color);

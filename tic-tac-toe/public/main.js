@@ -2,21 +2,51 @@ let countOfMoves = 0
 let currentPlayer = 'X'
 
 function checkWin() {
-  // If X has all three top rows, X wins
-  const upperLeftSquareContent = document.querySelector('li:nth-child(1)')
-    .textContent
-  const upperMiddleSquareContent = document.querySelector('li:nth-child(2)')
-    .textContent
-  const upperRightSquareContent = document.querySelector('li:nth-child(3)')
-    .textContent
+  const winningCombinations = [
+    ['1', '2', '3'],
+    ['4', '5', '6'],
+    ['7', '8', '9'],
 
-  if (
-    upperLeftSquareContent === 'X' &&
-    upperMiddleSquareContent === 'X' &&
-    upperRightSquareContent === 'X'
-  ) {
-    const header = document.querySelector('h1')
-    header.textContent = 'The winner is X'
+    ['1', '4', '7'],
+    ['2', '5', '8'],
+    ['3', '6', '9'],
+
+    ['1', '5', '9'],
+    ['7', '5', '3'],
+  ]
+
+  // If we go through each of the arrays inside of winningCombinations
+  // is it true that ANY of them have all "X"s?
+  const didWeFindWinner = winningCombinations.some(
+    (combination) =>
+      document.querySelector(`li:nth-child(${combination[0]})`).textContent ===
+        'X' &&
+      document.querySelector(`li:nth-child(${combination[1]})`).textContent ===
+        'X' &&
+      document.querySelector(`li:nth-child(${combination[2]})`).textContent ===
+        'X'
+  )
+
+  if (didWeFindWinner) {
+    const h1 = document.querySelector('h1')
+    h1.textContent = 'X Wins!'
+  }
+
+  // If we go through each of the arrays inside of winningCombinations
+  // is it true that ANY of them have all "X"s?
+  const didWeFindWinnerForO = winningCombinations.some(
+    (combination) =>
+      document.querySelector(`li:nth-child(${combination[0]})`).textContent ===
+        'O' &&
+      document.querySelector(`li:nth-child(${combination[1]})`).textContent ===
+        'O' &&
+      document.querySelector(`li:nth-child(${combination[2]})`).textContent ===
+        'O'
+  )
+
+  if (didWeFindWinnerForO) {
+    const h1 = document.querySelector('h1')
+    h1.textContent = 'O Wins!'
   }
 }
 
