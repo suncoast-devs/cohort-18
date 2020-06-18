@@ -12,6 +12,7 @@ const state = {
     8: '',
     9: '',
   },
+  winner: '',
 }
 
 function checkWin() {
@@ -38,8 +39,9 @@ function checkWin() {
   )
 
   if (didWeFindWinner) {
-    const h1 = document.querySelector('h1')
-    h1.textContent = '⛄️ Wins!'
+    state.winner = '⛄️'
+
+    document.querySelector('h1').textContent = `${state.winner} Wins!`
   }
 
   // If we go through each of the arrays inside of winningCombinations
@@ -52,8 +54,8 @@ function checkWin() {
   )
 
   if (didWeFindWinnerForO) {
-    const h1 = document.querySelector('h1')
-    h1.textContent = '🔥 Wins!'
+    state.winner = '🔥'
+    document.querySelector('h1').textContent = `${state.winner} Wins!`
   }
 }
 
@@ -83,10 +85,9 @@ function handleClick(event) {
   state.countOfMoves++
 
   // Go get the header
-  const header = document.querySelector('h1')
-
-  // Update it's text
-  header.textContent = `Tic Tac Toe - Move # ${state.countOfMoves}`
+  document.querySelector(
+    'h1'
+  ).textContent = `Tic Tac Toe - Move # ${state.countOfMoves}`
 
   //
   //
