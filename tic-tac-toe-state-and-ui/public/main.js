@@ -1,5 +1,18 @@
-let countOfMoves = 0
-let currentPlayer = 'X'
+const state = {
+  countOfMoves: 0,
+  currentPlayer: '⛄️',
+  board: {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+    9: '',
+  },
+}
 
 function checkWin() {
   const winningCombinations = [
@@ -19,34 +32,28 @@ function checkWin() {
   // is it true that ANY of them have all "X"s?
   const didWeFindWinner = winningCombinations.some(
     (combination) =>
-      document.querySelector(`li:nth-child(${combination[0]})`).textContent ===
-        'X' &&
-      document.querySelector(`li:nth-child(${combination[1]})`).textContent ===
-        'X' &&
-      document.querySelector(`li:nth-child(${combination[2]})`).textContent ===
-        'X'
+      state.board[combination[0]] === '⛄️' &&
+      state.board[combination[1]] === '⛄️' &&
+      state.board[combination[2]] === '⛄️'
   )
 
   if (didWeFindWinner) {
     const h1 = document.querySelector('h1')
-    h1.textContent = 'X Wins!'
+    h1.textContent = '⛄️ Wins!'
   }
 
   // If we go through each of the arrays inside of winningCombinations
   // is it true that ANY of them have all "X"s?
   const didWeFindWinnerForO = winningCombinations.some(
     (combination) =>
-      document.querySelector(`li:nth-child(${combination[0]})`).textContent ===
-        'O' &&
-      document.querySelector(`li:nth-child(${combination[1]})`).textContent ===
-        'O' &&
-      document.querySelector(`li:nth-child(${combination[2]})`).textContent ===
-        'O'
+      state.board[combination[0]] === '🔥' &&
+      state.board[combination[1]] === '🔥' &&
+      state.board[combination[2]] === '🔥'
   )
 
   if (didWeFindWinnerForO) {
     const h1 = document.querySelector('h1')
-    h1.textContent = 'O Wins!'
+    h1.textContent = '🔥 Wins!'
   }
 }
 
@@ -55,58 +62,49 @@ function handleClick(event) {
   // We receive an event, from which we can get the target
   // The target of an event was the element that *caused* the event
   // In our case, what was clicked
-  const target = event.target
-
-  // // If someone has already taken this square
-  // if (target.textContent !== '') {
-  //   // -- then return and don't do the rest of this logic
-  //   return
-  // }
+  const square = event.target.dataset.square
 
   // If someone has already taken this square
-  if (target.classList.contains('taken')) {
+  if (state.board[square] !== '') {
     console.log('NOPES!')
     // -- then return and don't do the rest of this logic
     return
   }
 
   // Change the target's content
-  target.textContent = currentPlayer
-  target.classList.add('taken')
+  // Have the board learn that whoever the current player is
+  // takes the position of whatever the current square is
+  state.board[square] = state.currentPlayer
+
+  event.target.textContent = state.currentPlayer
+  event.target.classList.add('taken')
 
   // Increment our count of moves
-  countOfMoves++
+  state.countOfMoves++
 
   // Go get the header
   const header = document.querySelector('h1')
 
   // Update it's text
-  header.textContent = `Tic Tac Toe - Move # ${countOfMoves}`
+  header.textContent = `Tic Tac Toe - Move # ${state.countOfMoves}`
 
-  // // Update player
-  // // If the player currently X, the next player O
-  // if (currentPlayer === 'X') {
-  //   currentPlayer = 'O'
-  // } else {
-  //   // If the player currently O, the next player X
-  //   currentPlayer = 'X'
-  // }
-  // Toggle the player between X and O - same as above
-  currentPlayer = currentPlayer === 'X' ? 'O' : 'X'
+  //
+  //
+  // new value
+  //
+  //                    boolean condition
+  //                    |
+  //                    |                             value if true
+  //                    |                               |
+  //                    |                               |     value if false
+  //                    |                               |      |
+  //                    v                               v      v
+  state.currentPlayer = state.currentPlayer === '⛄️' ? '🔥' : '⛄️'
 
   checkWin()
 }
 
-// // For this item, add an eventListener when clicked
-// function setupItemListener(item) {
-//   item.addEventListener('click', handleClick)
-// }
-
 const main = () => {
-  // const allTheListItems = document.querySelectorAll('li')
-  // Go through all the found elements, and call setupItemListener for each
-  // allTheListItems.forEach(setupItemListener)
-
   const unorderedList = document.querySelector('ul')
 
   unorderedList.addEventListener('click', handleClick)
