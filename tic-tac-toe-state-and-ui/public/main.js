@@ -8,7 +8,7 @@ const state = {
     4: '',
     5: '',
     6: '',
-    7: '',
+    7: '️',
     8: '',
     9: '',
   },
@@ -78,19 +78,9 @@ function handleClick(event) {
   // takes the position of whatever the current square is
   state.board[square] = state.currentPlayer
 
-  event.target.textContent = state.currentPlayer
-  event.target.classList.add('taken')
-
   // Increment our count of moves
   state.countOfMoves++
 
-  // Go get the header
-  document.querySelector(
-    'h1'
-  ).textContent = `Tic Tac Toe - Move # ${state.countOfMoves}`
-
-  //
-  //
   // new value
   //
   //                    boolean condition
@@ -103,12 +93,42 @@ function handleClick(event) {
   state.currentPlayer = state.currentPlayer === '⛄️' ? '🔥' : '⛄️'
 
   checkWin()
+  render()
+}
+
+function render() {
+  // Turn a square number like '1' into   <li data-square="1"></li>
+  function makeTheCorrectLiForAnyGivenSquareNumber(squareNumber) {
+    return `<li data-square="${squareNumber}">${state.board[squareNumber]}</li>`
+  }
+  const possibleSquares = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+  const listOfLi = possibleSquares
+    // ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    // For a square turn it into an LI
+    .map((square) => makeTheCorrectLiForAnyGivenSquareNumber(square))
+    // Then we still have an array, but an array that looks like:
+    // ['<li></li>', '<li></li>', ..., '<li></li>']
+    // BUT we a string.
+    // So join that array by concatenating them all but put a return in between
+    // '<li></li>\n<li></li>'
+    .join('\n')
+
+  const html = `
+    <h1>Tic Tac Toe - ${state.countOfMoves} Moves</h1>
+    <ul>
+    ${listOfLi}
+    </ul>
+  `
+
+  document.querySelector('body').innerHTML = html
+
+  const unorderedList = document.querySelector('ul')
+  unorderedList.addEventListener('click', handleClick)
 }
 
 const main = () => {
-  const unorderedList = document.querySelector('ul')
-
-  unorderedList.addEventListener('click', handleClick)
+  render()
 }
 
 document.addEventListener('DOMContentLoaded', main)
