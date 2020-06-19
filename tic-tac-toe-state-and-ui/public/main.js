@@ -1,18 +1,22 @@
+const BLANK = ''
+const SNOWMAN = '⛄️'
+const FIRE = '🔥'
+
 const state = {
   countOfMoves: 0,
-  currentPlayer: '⛄️',
+  currentPlayer: SNOWMAN,
   board: {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-    5: '',
-    6: '',
-    7: '',
-    8: '',
-    9: '',
+    1: BLANK,
+    2: BLANK,
+    3: BLANK,
+    4: BLANK,
+    5: BLANK,
+    6: BLANK,
+    7: BLANK,
+    8: BLANK,
+    9: BLANK,
   },
-  winner: '',
+  winner: BLANK,
 }
 
 function checkWin() {
@@ -30,29 +34,16 @@ function checkWin() {
   ]
 
   // If we go through each of the arrays inside of winningCombinations
-  // is it true that ANY of them have all "X"s?
-  const didWeFindWinner = winningCombinations.some(
+  // is it true the first square is taken (not blank) and that square is equal to the second and third squares
+  const winner = winningCombinations.find(
     (combination) =>
-      state.board[combination[0]] === '⛄️' &&
-      state.board[combination[1]] === '⛄️' &&
-      state.board[combination[2]] === '⛄️'
+      state.board[combination[0]] !== BLANK &&
+      state.board[combination[0]] === state.board[combination[1]] &&
+      state.board[combination[0]] === state.board[combination[2]]
   )
 
-  if (didWeFindWinner) {
-    state.winner = '⛄️'
-  }
-
-  // If we go through each of the arrays inside of winningCombinations
-  // is it true that ANY of them have all "X"s?
-  const didWeFindWinnerForO = winningCombinations.some(
-    (combination) =>
-      state.board[combination[0]] === '🔥' &&
-      state.board[combination[1]] === '🔥' &&
-      state.board[combination[2]] === '🔥'
-  )
-
-  if (didWeFindWinnerForO) {
-    state.winner = '🔥'
+  if (winner) {
+    state.winner = state.board[winner[0]]
   }
 }
 
@@ -64,7 +55,7 @@ function handleClick(event) {
   const square = event.target.dataset.square
 
   // If someone has already taken this square
-  if (state.board[square] !== '') {
+  if (state.board[square] !== BLANK) {
     console.log('NOPES!')
     // -- then return and don't do the rest of this logic
     return
@@ -87,7 +78,7 @@ function handleClick(event) {
   //                    |                               |     value if false
   //                    |                               |      |
   //                    v                               v      v
-  state.currentPlayer = state.currentPlayer === '⛄️' ? '🔥' : '⛄️'
+  state.currentPlayer = state.currentPlayer === SNOWMAN ? FIRE : SNOWMAN
 
   checkWin()
   render()
@@ -112,7 +103,7 @@ function render() {
     .join('\n')
 
   const headerMessage =
-    state.winner === ''
+    state.winner === BLANK
       ? `Tic Tac Toe - ${state.countOfMoves} Moves`
       : `${state.winner} Wins!`
 
@@ -125,8 +116,7 @@ function render() {
 
   document.querySelector('body').innerHTML = html
 
-  const unorderedList = document.querySelector('ul')
-  unorderedList.addEventListener('click', handleClick)
+  document.querySelector('ul').addEventListener('click', handleClick)
 }
 
 const main = () => {
