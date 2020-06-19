@@ -8,7 +8,7 @@ const state = {
     4: '',
     5: '',
     6: '',
-    7: '️',
+    7: '',
     8: '',
     9: '',
   },
@@ -40,8 +40,6 @@ function checkWin() {
 
   if (didWeFindWinner) {
     state.winner = '⛄️'
-
-    document.querySelector('h1').textContent = `${state.winner} Wins!`
   }
 
   // If we go through each of the arrays inside of winningCombinations
@@ -55,7 +53,6 @@ function checkWin() {
 
   if (didWeFindWinnerForO) {
     state.winner = '🔥'
-    document.querySelector('h1').textContent = `${state.winner} Wins!`
   }
 }
 
@@ -114,8 +111,13 @@ function render() {
     // '<li></li>\n<li></li>'
     .join('\n')
 
+  const headerMessage =
+    state.winner === ''
+      ? `Tic Tac Toe - ${state.countOfMoves} Moves`
+      : `${state.winner} Wins!`
+
   const html = `
-    <h1>Tic Tac Toe - ${state.countOfMoves} Moves</h1>
+    <h1>${headerMessage}</h1>
     <ul>
     ${listOfLi}
     </ul>
