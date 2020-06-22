@@ -1,27 +1,32 @@
 [
   {
-    "id": 100,
-    "title": "SDG Standardizes on React",
-    "body": "React is the best library for learning front end Web"
-  },
-  {
     "id": 42,
     "title": "SDG Announces Hackathon!",
-    "body": "SDG announces the 2020 Summer Hackathon. Join us for an exciting weekend"
+    "body": "SDG announces the 2020 Summer Hackathon. Join us for an exciting weekend",
+    "draft": true
+  },
+  {
+    "id": 100,
+    "title": "SDG Standardizes on React",
+    "body": "React is the best library for learning front end Web",
+    "draft": false
   },
   {
     "id": 99,
     "title": "Student Graduation is Right Around the Corner",
-    "body": "Our next cohort of students will be graduating in just over a week."
+    "body": "Our next cohort of students will be graduating in just over a week.",
+    "draft": false
   },
   {
     "id": 101,
     "title": "This data comes from JSON!",
-    "body": "React works with data using tools we already know!"
+    "body": "React works with data using tools we already know!",
+    "draft": false
   },
   {
     "id": 102,
     "title": "Campus Re-opens",
-    "body": "Campus reopens for students on a case by case basis"
+    "body": "Campus reopens for students on a case by case basis",
+    "draft": false
   }
 ]
