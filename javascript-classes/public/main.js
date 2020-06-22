@@ -30,7 +30,11 @@ function DogFromPrototype() {
 }
 
 class Dog {
-  name = 'Not Named'
+  name = ''
+
+  constructor(newDogName) {
+    this.name = newDogName
+  }
 
   bark() {
     console.log(`${this.name} barks from a class`)
@@ -42,12 +46,22 @@ class Dog {
 }
 
 function main() {
-  const riley = new Dog()
+  const riley = new Dog('Riley')
+  const fluffy = new Dog('Fluffy')
+  const bruno = new Dog('Bruno')
 
   riley.bark()
   console.log(riley.name)
-  riley.name = 'Riley'
-  riley.bark()
+
+  fluffy.bark()
+  console.log(fluffy.name)
+
+  bruno.bark()
+  console.log(bruno.name)
+
+  console.log(riley)
+  console.log(fluffy)
+  console.log(bruno)
 }
 
 document.addEventListener('DOMContentLoaded', main)
