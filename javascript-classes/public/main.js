@@ -45,10 +45,24 @@ class Dog {
   }
 }
 
+class LoudDog extends Dog {
+  bark() {
+    console.log(`${this.name.toUpperCase()} SAYS BARK!!!!!`)
+  }
+
+  yell() {
+    console.log('I am a loud dog, so I yell!')
+  }
+}
+
 function main() {
   const riley = new Dog('Riley')
   const fluffy = new Dog('Fluffy')
   const bruno = new Dog('Bruno')
+
+  const jack = new LoudDog('Jack')
+  jack.bark()
+  jack.yell()
 
   riley.bark()
   console.log(riley.name)
