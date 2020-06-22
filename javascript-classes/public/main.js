@@ -46,6 +46,10 @@ class Dog {
 }
 
 class LoudDog extends Dog {
+  constructor(newDogName) {
+    super(newDogName.toUpperCase())
+  }
+
   bark() {
     console.log(`${this.name.toUpperCase()} SAYS BARK!!!!!`)
   }
@@ -61,6 +65,7 @@ function main() {
   const bruno = new Dog('Bruno')
 
   const jack = new LoudDog('Jack')
+  console.log(jack.name)
   jack.bark()
   jack.yell()
 
