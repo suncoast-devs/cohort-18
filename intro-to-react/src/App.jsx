@@ -1,25 +1,18 @@
 import React, { Component } from 'react'
 import { NewsArticle } from './components/NewsArticle'
+import articles from './articles'
 
 class App extends Component {
   render() {
+    // map each object in the articles array into a NewsArticle Component
+    // assign the title to that article's title and the body to that article's body
+    const newsArticlesFromData = articles.map(article => (
+      <NewsArticle title={article.title} body={article.body} />
+    ))
+
     return (
       <div className="all-main-content">
-        <main>
-          <NewsArticle
-            title="SDG Announces Hackathon!"
-            body="SDG announces the 2020 Summer Hackathon. Join us for an exciting weekend"
-          />
-          <NewsArticle
-            title="Student Graduation is Right Around the Corner"
-            body="Our next cohort of students will be graduating in just over a week."
-          />
-          <NewsArticle
-            title="SDG Standardizes on React"
-            body="React is the best library for learning front end Web"
-          />
-          <NewsArticle title="It is lunch time!" body="... and I'm hungry" />
-        </main>
+        <main>{newsArticlesFromData}</main>
       </div>
     )
   }
