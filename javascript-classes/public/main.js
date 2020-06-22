@@ -36,6 +36,10 @@ class Dog {
     this.name = newDogName
   }
 
+  greet = () => {
+    console.log(`Hello I am ${this.name}`)
+  }
+
   bark() {
     console.log(`${this.name} barks from a class`)
   }
@@ -63,6 +67,8 @@ function main() {
   const riley = new Dog('Riley')
   const fluffy = new Dog('Fluffy')
   const bruno = new Dog('Bruno')
+
+  riley.greet()
 
   const jack = new LoudDog('Jack')
   console.log(jack.name)
