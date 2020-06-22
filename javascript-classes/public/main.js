@@ -2,8 +2,10 @@
 
 class Dog
 {
+  public string Name { get; set; }
+
   public void bark() {
-    Console.WriteLine("bark");
+    Console.WriteLine($"{Name} bark");
   }
 
   public void eat() {
@@ -28,8 +30,10 @@ function DogFromPrototype() {
 }
 
 class Dog {
+  name = 'Not Named'
+
   bark() {
-    console.log('Bark from a class')
+    console.log(`${this.name} barks from a class`)
   }
 
   eat() {
@@ -40,6 +44,9 @@ class Dog {
 function main() {
   const riley = new Dog()
 
+  riley.bark()
+  console.log(riley.name)
+  riley.name = 'Riley'
   riley.bark()
 }
 
