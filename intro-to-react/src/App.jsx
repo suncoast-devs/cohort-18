@@ -5,7 +5,13 @@ import articles from './articles'
 class App extends Component {
   convertArticleObjectToComponent(article) {
     return (
-      <NewsArticle key={article.id} title={article.title} body={article.body} />
+      <NewsArticle
+        key={article.id}
+        picture={article.picture}
+        pictureWidth={article.pictureWidth}
+        title={article.title}
+        body={article.body}
+      />
     )
   }
 

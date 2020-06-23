@@ -3,30 +3,35 @@
     "id": 42,
     "title": "SDG Announces Hackathon!",
     "body": "SDG announces the 2020 Summer Hackathon. Join us for an exciting weekend",
-    "draft": true
+    "draft": false,
+    "picture": "https://images.unsplash.com/photo-1592849421868-be1e63b49182?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80"
   },
   {
     "id": 100,
     "title": "SDG Standardizes on React",
     "body": "React is the best library for learning front end Web",
-    "draft": false
+    "draft": false,
+    "picture": "https://images.unsplash.com/photo-1592825534458-9513692e5f23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80"
   },
   {
     "id": 99,
     "title": "Student Graduation is Right Around the Corner",
     "body": "Our next cohort of students will be graduating in just over a week.",
-    "draft": false
+    "draft": false,
+    "picture": "https://images.unsplash.com/photo-1592886299773-586fa6459837?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
   },
   {
     "id": 101,
     "title": "This data comes from JSON!",
     "body": "React works with data using tools we already know!",
-    "draft": false
+    "draft": false,
+    "picture": "https://images.unsplash.com/photo-1592849421868-be1e63b49182?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80"
   },
   {
     "id": 102,
     "title": "Campus Re-opens",
     "body": "Campus reopens for students on a case by case basis",
-    "draft": false
+    "draft": false,
+    "picture": "https://images.unsplash.com/photo-1592849421868-be1e63b49182?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80"
   }
 ]
