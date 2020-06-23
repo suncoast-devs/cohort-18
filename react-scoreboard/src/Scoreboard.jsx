@@ -12,6 +12,7 @@ export class Scoreboard extends Component {
   // Initialize our state
   state = {
     score: 0,
+    name: this.props.teamName,
   }
 
   handleClickAddToScore = () => {
@@ -30,6 +31,11 @@ export class Scoreboard extends Component {
   handleClickSubtractFromScore = () => {
     const newScore = this.state.score - 1
 
+    if (newScore < 0) {
+      // Don't update the state
+      return
+    }
+
     // OOops, cant directly assign to state
     // this.state.score = newScore
 
@@ -40,13 +46,25 @@ export class Scoreboard extends Component {
     this.setState({ score: newScore })
   }
 
+  handleChangingName = event => {
+    const inputFieldThatIsChanging = event.target
+    const valueOfThatInputField = inputFieldThatIsChanging.value
+
+    this.setState({ name: valueOfThatInputField })
+  }
+
   render() {
     return (
       <section className="team1">
-        <h2>{this.props.teamName}</h2>
+        <h2>{this.state.name}</h2>
         <h3>{this.state.score}</h3>
         <fieldset>
-          <input type="text" placeholder="Name" />
+          <input
+            type="text"
+            placeholder="Name"
+            value={this.state.name}
+            onChange={this.handleChangingName}
+          />
         </fieldset>
 
         <fieldset>
