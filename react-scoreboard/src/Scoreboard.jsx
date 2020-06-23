@@ -53,6 +53,17 @@ export class Scoreboard extends Component {
     this.setState({ name: valueOfThatInputField })
   }
 
+  handleUpdateSliderLongForm = event => {
+    const sliderThatChanged = event.target
+    const valueOfTheSlider = parseInt(sliderThatChanged.value)
+
+    this.setState({ score: valueOfTheSlider })
+  }
+
+  handleUpdateSlider = event => {
+    this.setState({ score: event.target.value })
+  }
+
   render() {
     return (
       <section className="team1">
@@ -66,6 +77,17 @@ export class Scoreboard extends Component {
             onChange={this.handleChangingName}
           />
         </fieldset>
+
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={this.state.score}
+          // onChange={event =>
+          //   this.setState({ score: parseInt(event.target.value) })
+          // }
+          onChange={this.handleUpdateSlider}
+        />
 
         <fieldset>
           <i
