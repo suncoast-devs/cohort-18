@@ -7,13 +7,7 @@ class App extends Component {
     filterText: '',
   }
 
-  handleDeletePet = async id => {
-    // Given a pet ID, delete that pet from the API
-    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}`, {
-      method: 'DELETE',
-    })
-
-    // RELOAD ALL THE PETS!
+  fetchAllThePets = async () => {
     const response = await fetch('https://sdg-tamagotchi.herokuapp.com/Pets', {
       method: 'GET',
     })
@@ -23,16 +17,20 @@ class App extends Component {
     this.setState({ pets: petsFromTheApi })
   }
 
+  handleDeletePet = async id => {
+    // Given a pet ID, delete that pet from the API
+    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}`, {
+      method: 'DELETE',
+    })
+
+    // RELOAD ALL THE PETS!
+    this.fetchAllThePets()
+  }
+
   // This is run ONCE when the component first
   // is put on the page. Perfect spot to fetch some pets
   async componentDidMount() {
-    const response = await fetch('https://sdg-tamagotchi.herokuapp.com/Pets', {
-      method: 'GET',
-    })
-
-    const petsFromTheApi = await response.json()
-
-    this.setState({ pets: petsFromTheApi })
+    this.fetchAllThePets()
   }
 
   handleFilterTextChange = event => {
