@@ -14,7 +14,7 @@ class App extends Component {
         return response.json()
       })
       .then(petsFromTheApi => {
-        console.log(petsFromTheApi)
+        this.setState({ pets: petsFromTheApi })
       })
   }
 
