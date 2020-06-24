@@ -36,8 +36,11 @@ class App extends Component {
   }
 
   render() {
-    const filteredListOfPetsToRender = this.state.pets.filter(pet =>
-      pet.name.includes(this.state.filterText)
+    // Destructure state to a few local variables
+    const { pets, filterText } = this.state
+
+    const filteredListOfPetsToRender = pets.filter(pet =>
+      pet.name.includes(filterText)
     )
 
     const petsToRender = filteredListOfPetsToRender.map(pet => (
@@ -61,7 +64,7 @@ class App extends Component {
               type="text"
               className="form-control"
               placeholder="Search"
-              value={this.state.filterText}
+              value={filterText}
               onChange={this.handleFilterTextChange}
             />
           </li>
