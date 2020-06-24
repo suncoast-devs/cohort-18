@@ -2,15 +2,19 @@ import React, { Component } from 'react'
 
 class Pet extends Component {
   render() {
+    // Destructure the properties into local variables
+    // so we can `name` instead of `this.props.name`
+    const { name, happinessLevel, hungerLevel } = this.props
+
     return (
       <li className="list-group-item">
-        {this.props.name}
+        {name}
         <span className="hover-buttons float-right">
           <span className="ml-2 badge badge-pill badge-primary">
-            {this.props.happinessLevel}
+            {happinessLevel}
           </span>
           <span className="ml-2 badge badge-pill badge-primary">
-            {this.props.hungerLevel}
+            {hungerLevel}
           </span>
           <button type="button" className="ml-2 close text-danger">
             &times;
