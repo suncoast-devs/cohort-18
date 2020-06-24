@@ -6,6 +6,18 @@ class App extends Component {
     pets: [],
   }
 
+  // This is run ONCE when the component first
+  // is put on the page. Perfect spot to fetch some pets
+  componentDidMount() {
+    fetch('https://sdg-tamagotchi.herokuapp.com/Pets')
+      .then(response => {
+        return response.json()
+      })
+      .then(petsFromTheApi => {
+        console.log(petsFromTheApi)
+      })
+  }
+
   render() {
     const petsToRender = this.state.pets.map(pet => (
       <Pet
