@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 
 export class Pet extends Component {
   handleClickOnDelete = async event => {
-    console.log(`Clicked on delete for ${this.props.id}`)
+    const idOfPetToDelete = this.props.id
 
-    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${this.props.id}`, {
-      method: 'DELETE',
-    })
+    this.props.handleDeletePet(idOfPetToDelete)
   }
 
   render() {

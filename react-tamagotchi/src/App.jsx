@@ -7,17 +7,21 @@ class App extends Component {
     filterText: '',
   }
 
-  // This is run ONCE when the component first
-  // is put on the page. Perfect spot to fetch some pets
-  // componentDidMount() {
-  //   fetch('https://sdg-tamagotchi.herokuapp.com/Pets')
-  //     .then(response => {
-  //       return response.json()
-  //     })
-  //     .then(petsFromTheApi => {
-  //       this.setState({ pets: petsFromTheApi })
-  //     })
-  // }
+  handleDeletePet = async id => {
+    // Given a pet ID, delete that pet from the API
+    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}`, {
+      method: 'DELETE',
+    })
+
+    // RELOAD ALL THE PETS!
+    const response = await fetch('https://sdg-tamagotchi.herokuapp.com/Pets', {
+      method: 'GET',
+    })
+
+    const petsFromTheApi = await response.json()
+
+    this.setState({ pets: petsFromTheApi })
+  }
 
   // This is run ONCE when the component first
   // is put on the page. Perfect spot to fetch some pets
@@ -52,6 +56,7 @@ class App extends Component {
         name={pet.name}
         hungerLevel={pet.hungerLevel}
         happinessLevel={pet.happinessLevel}
+        handleDeletePet={this.handleDeletePet}
       />
     ))
 
