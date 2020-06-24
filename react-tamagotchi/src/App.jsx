@@ -72,10 +72,8 @@ class App extends Component {
     const newPetReceived = await response.json()
 
     // Append this pet to the list of existing pets
-    const newPetsArray = this.state.pets.concat(newPetReceived)
-
     // Reset our list of pets
-    this.setState({ pets: newPetsArray })
+    this.setState({ pets: [...this.state.pets, newPetReceived] })
 
     // Clear the input
     this.setState({ newPetName: '' })
