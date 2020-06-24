@@ -1,40 +1,5 @@
 import React, { Component } from 'react'
-
-class Pet extends Component {
-  render() {
-    // Destructure the properties into local variables
-    // so we can `name` instead of `this.props.name`
-    const { name, happinessLevel, hungerLevel } = this.props
-
-    return (
-      <li className="list-group-item">
-        {name}
-        <span className="hover-buttons float-right">
-          <span className="ml-2 badge badge-pill badge-primary">
-            {happinessLevel}
-          </span>
-          <span className="ml-2 badge badge-pill badge-primary">
-            {hungerLevel}
-          </span>
-          <button type="button" className="ml-2 close text-danger">
-            &times;
-          </button>
-        </span>
-        <p className="hover-buttons">
-          <button type="button" className="mr-2 btn btn-sm btn-primary">
-            Feed
-          </button>
-          <button type="button" className="mr-2 btn btn-sm btn-primary">
-            Scold
-          </button>
-          <button type="button" className="mr-2 btn btn-sm btn-primary">
-            Play
-          </button>
-        </p>
-      </li>
-    )
-  }
-}
+import { Pet } from './components/Pet'
 
 class App extends Component {
   render() {
