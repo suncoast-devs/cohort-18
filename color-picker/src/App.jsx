@@ -3,9 +3,9 @@ import HelloWorld from './components/HelloWorld'
 
 class App extends Component {
   state = {
-    hue: 3,
-    saturation: 99,
-    lightness: 16,
+    hue: 100,
+    saturation: 26,
+    lightness: 76,
   }
 
   render() {
@@ -15,7 +15,14 @@ class App extends Component {
       <main>
         <h1>Color Picker</h1>
         <section>
-          <div className="color"></div>
+          {/* The outer brackets on the next line are for JSX!
+          The inner brackets make an object. */}
+          <div
+            className="color"
+            style={{
+              backgroundColor: hslColorStyle,
+            }}
+          ></div>
           <fieldset>
             <input type="range" min="0" max="360" />
             <input type="range" min="0" max="100" />
