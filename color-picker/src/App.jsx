@@ -14,35 +14,17 @@ class App extends Component {
     this.randomizeColor()
   }
 
-  handleChangingHue = event => {
-    const hue = event.target.value
+  handleChangingSlider = event => {
+    // const value = event.target.value
+    // const name = event.target.name
 
-    // Object that is
-    //
-    //    { keyName: keyName }
-    //
-    // Where the variable name on right is the same as
-    // the keyname on the left
-    //
-    // We a shortcut!
-    //
-    //      { keyName }
-    //
-    // This is the same!
-    //
-    this.setState({ hue })
-  }
+    // This line is the same as the two above
+    // HERE: I am *destructuring* an object
+    const { value, name } = event.target
 
-  handleChangingSaturation = event => {
-    const saturation = event.target.value
-
-    this.setState({ saturation })
-  }
-
-  handleChangingLightness = event => {
-    const lightness = event.target.value
-
-    this.setState({ lightness })
+    // This syntax means take the *CONTENTS* of the variable
+    // name and use the *CONTENTS* as the key to change in state.
+    this.setState({ [name]: value })
   }
 
   getRandomInt(max) {
@@ -78,25 +60,28 @@ class App extends Component {
           ></div>
           <fieldset>
             <input
+              name="hue"
               type="range"
               min="0"
               max="360"
               value={this.state.hue}
-              onChange={this.handleChangingHue}
+              onChange={this.handleChangingSlider}
             />
             <input
+              name="saturation"
               type="range"
               min="0"
               max="100"
               value={this.state.saturation}
-              onChange={this.handleChangingSaturation}
+              onChange={this.handleChangingSlider}
             />
             <input
+              name="lightness"
               type="range"
               min="0"
               max="100"
               value={this.state.lightness}
-              onChange={this.handleChangingLightness}
+              onChange={this.handleChangingSlider}
             />
           </fieldset>
         </section>
