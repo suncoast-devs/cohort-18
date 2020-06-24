@@ -27,31 +27,14 @@ class App extends Component {
     this.fetchAllThePets()
   }
 
-  handleFeedPet = async id => {
+  handleInteractWithPet = async (id, interaction) => {
     // Given a pet ID, feed that pet from the API
-    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}/Feed`, {
-      method: 'POST',
-    })
-
-    // RELOAD ALL THE PETS!
-    this.fetchAllThePets()
-  }
-
-  handleScoldPet = async id => {
-    // Given a pet ID, scold that pet from the API
-    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}/Scold`, {
-      method: 'POST',
-    })
-
-    // RELOAD ALL THE PETS!
-    this.fetchAllThePets()
-  }
-
-  handlePlayPet = async id => {
-    // Given a pet ID, scold that pet from the API
-    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}/Play`, {
-      method: 'POST',
-    })
+    await fetch(
+      `https://sdg-tamagotchi.herokuapp.com/Pets/${id}/${interaction}`,
+      {
+        method: 'POST',
+      }
+    )
 
     // RELOAD ALL THE PETS!
     this.fetchAllThePets()
@@ -96,9 +79,9 @@ class App extends Component {
         hungerLevel={pet.hungerLevel}
         happinessLevel={pet.happinessLevel}
         handleDeletePet={() => this.handleDeletePet(pet.id)}
-        handleFeedPet={() => this.handleFeedPet(pet.id)}
-        handleScoldPet={() => this.handleScoldPet(pet.id)}
-        handlePlayPet={() => this.handlePlayPet(pet.id)}
+        handleFeedPet={() => this.handleInteractWithPet(pet.id, 'Feed')}
+        handleScoldPet={() => this.handleInteractWithPet(pet.id, 'Scold')}
+        handlePlayPet={() => this.handleInteractWithPet(pet.id, 'Play')}
       />
     ))
 
