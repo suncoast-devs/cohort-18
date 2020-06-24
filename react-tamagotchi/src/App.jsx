@@ -60,7 +60,7 @@ class App extends Component {
       name: this.state.newPetName,
     }
 
-    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets`, {
+    const response = await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -68,8 +68,14 @@ class App extends Component {
       body: JSON.stringify(newPetToSend),
     })
 
-    // Reload all the pets
-    this.fetchAllThePets()
+    // Get the newly created pet from the API response
+    const newPetReceived = await response.json()
+
+    // Append this pet to the list of existing pets
+    const newPetsArray = this.state.pets.concat(newPetReceived)
+
+    // Reset our list of pets
+    this.setState({ pets: newPetsArray })
 
     // Clear the input
     this.setState({ newPetName: '' })
