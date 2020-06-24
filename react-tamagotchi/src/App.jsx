@@ -4,10 +4,14 @@ class Pet extends Component {
   render() {
     return (
       <li className="list-group-item">
-        Pet 1
+        {this.props.name}
         <span className="hover-buttons float-right">
-          <span className="ml-2 badge badge-pill badge-primary">0</span>
-          <span className="ml-2 badge badge-pill badge-primary">0</span>
+          <span className="ml-2 badge badge-pill badge-primary">
+            {this.props.happinessLevel}
+          </span>
+          <span className="ml-2 badge badge-pill badge-primary">
+            {this.props.hungerLevel}
+          </span>
           <button type="button" className="ml-2 close text-danger">
             &times;
           </button>
@@ -37,17 +41,14 @@ class App extends Component {
           <p className="lead">These are all my pets</p>
         </div>
         <ul className="list-group">
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
-          <Pet />
+          <Pet name="Something 1" hungerLevel="0" happinessLevel={2} />
+          <Pet name="Something 2" hungerLevel="2" happinessLevel={0} />
+          <Pet name="Something 3" hungerLevel="0" happinessLevel={0} />
+          <Pet name="Something 4" hungerLevel="4" happinessLevel={1} />
+          <Pet name="Something 5" hungerLevel="3" happinessLevel={0} />
+          <Pet name="Something 6" hungerLevel="0" happinessLevel={0} />
+          <Pet name="Something 7" hungerLevel="0" happinessLevel={8} />
+          <Pet name="Something 8" hungerLevel="5" happinessLevel={0} />
         </ul>
       </main>
     )
