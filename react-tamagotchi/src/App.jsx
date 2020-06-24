@@ -4,6 +4,7 @@ import { Pet } from './components/Pet'
 class App extends Component {
   state = {
     pets: [],
+    filterText: '',
   }
 
   // This is run ONCE when the component first
@@ -28,8 +29,18 @@ class App extends Component {
     this.setState({ pets: petsFromTheApi })
   }
 
+  handleFilterTextChange = event => {
+    const value = event.target.value
+
+    this.setState({ filterText: value })
+  }
+
   render() {
-    const petsToRender = this.state.pets.map(pet => (
+    const filteredListOfPetsToRender = this.state.pets.filter(pet =>
+      pet.name.includes(this.state.filterText)
+    )
+
+    const petsToRender = filteredListOfPetsToRender.map(pet => (
       <Pet
         key={pet.id}
         name={pet.name}
@@ -44,7 +55,18 @@ class App extends Component {
           <h1 className="display-4">Tamagotchi</h1>
           <p className="lead">These are all my pets</p>
         </div>
-        <ul className="list-group">{petsToRender}</ul>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              value={this.state.filterText}
+              onChange={this.handleFilterTextChange}
+            />
+          </li>
+          {petsToRender}
+        </ul>
       </main>
     )
   }
