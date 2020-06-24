@@ -27,6 +27,16 @@ class App extends Component {
     this.fetchAllThePets()
   }
 
+  handleFeedPet = async id => {
+    // Given a pet ID, feed that pet from the API
+    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets/${id}/Feed`, {
+      method: 'POST',
+    })
+
+    // RELOAD ALL THE PETS!
+    this.fetchAllThePets()
+  }
+
   // This is run ONCE when the component first
   // is put on the page. Perfect spot to fetch some pets
   async componentDidMount() {
@@ -55,6 +65,7 @@ class App extends Component {
         hungerLevel={pet.hungerLevel}
         happinessLevel={pet.happinessLevel}
         handleDeletePet={this.handleDeletePet}
+        handleFeedPet={this.handleFeedPet}
       />
     ))
 

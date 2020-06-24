@@ -31,7 +31,11 @@ export class Pet extends Component {
           </button>
         </span>
         <p className="hover-buttons">
-          <button type="button" className="mr-2 btn btn-sm btn-primary">
+          <button
+            type="button"
+            className="mr-2 btn btn-sm btn-primary"
+            onClick={() => this.props.handleFeedPet(this.props.id)}
+          >
             Feed
           </button>
           <button type="button" className="mr-2 btn btn-sm btn-primary">
