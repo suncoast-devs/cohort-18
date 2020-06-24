@@ -39,6 +39,11 @@ class App extends Component {
   render() {
     const hslColorStyle = `hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`
 
+    let textColor = 'black'
+    if (this.state.lightness < 33) {
+      textColor = 'white'
+    }
+
     return (
       <main>
         <h1>Color Picker</h1>
@@ -48,9 +53,12 @@ class App extends Component {
           <div
             className="color"
             style={{
+              color: textColor,
               backgroundColor: hslColorStyle,
             }}
-          ></div>
+          >
+            &times;
+          </div>
           <fieldset>
             <input
               name="hue"
