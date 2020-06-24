@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
+
 export class Pet extends Component {
+  handleClickOnDelete = event => {
+    console.log(`Clicked on delete for ${this.props.id}`)
+  }
+
   render() {
     // Destructure the properties into local variables
     // so we can `name` instead of `this.props.name`
@@ -15,7 +20,11 @@ export class Pet extends Component {
           <span className="ml-2 badge badge-pill badge-primary">
             {hungerLevel}
           </span>
-          <button type="button" className="ml-2 close text-danger">
+          <button
+            type="button"
+            className="ml-2 close text-danger"
+            onClick={this.handleClickOnDelete}
+          >
             &times;
           </button>
         </span>

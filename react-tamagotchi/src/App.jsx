@@ -46,6 +46,7 @@ class App extends Component {
     const petsToRender = filteredListOfPetsToRender.map(pet => (
       <Pet
         key={pet.id}
+        id={pet.id}
         name={pet.name}
         hungerLevel={pet.hungerLevel}
         happinessLevel={pet.happinessLevel}
