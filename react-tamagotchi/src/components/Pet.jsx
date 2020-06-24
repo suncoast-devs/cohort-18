@@ -38,10 +38,18 @@ export class Pet extends Component {
           >
             Feed
           </button>
-          <button type="button" className="mr-2 btn btn-sm btn-primary">
+          <button
+            type="button"
+            className="mr-2 btn btn-sm btn-primary"
+            onClick={() => this.props.handleScoldPet(this.props.id)}
+          >
             Scold
           </button>
-          <button type="button" className="mr-2 btn btn-sm btn-primary">
+          <button
+            type="button"
+            className="mr-2 btn btn-sm btn-primary"
+            onClick={() => this.props.handlePlayPet(this.props.id)}
+          >
             Play
           </button>
         </p>
