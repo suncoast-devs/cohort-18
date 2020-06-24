@@ -37,12 +37,7 @@ class App extends Component {
   }
 
   render() {
-    const hslColorStyle = `hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`
-
-    let textColor = 'black'
-    if (this.state.lightness < 33) {
-      textColor = 'white'
-    }
+    const backgroundColor = `hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`
 
     return (
       <main>
@@ -53,8 +48,8 @@ class App extends Component {
           <div
             className="color"
             style={{
-              color: textColor,
-              backgroundColor: hslColorStyle,
+              color: this.state.lightness < 33 ? 'white' : 'black',
+              backgroundColor,
             }}
           >
             &times;
@@ -86,7 +81,7 @@ class App extends Component {
             />
           </fieldset>
         </section>
-        <code>{hslColorStyle}</code>
+        <code>{backgroundColor}</code>
         <button onClick={this.randomizeColor}>Randomizer!</button>
       </main>
     )
