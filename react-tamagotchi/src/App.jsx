@@ -5,6 +5,7 @@ class App extends Component {
   state = {
     pets: [],
     filterText: '',
+    newPetName: '',
   }
 
   fetchAllThePets = async () => {
@@ -52,9 +53,31 @@ class App extends Component {
     this.setState({ filterText: value })
   }
 
+  handleAddNewPet = async event => {
+    // Call the API to add a pet
+
+    const newPetToSend = {
+      name: this.state.newPetName,
+    }
+
+    await fetch(`https://sdg-tamagotchi.herokuapp.com/Pets`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(newPetToSend),
+    })
+
+    // Reload all the pets
+    this.fetchAllThePets()
+
+    // Clear the input
+    this.setState({ newPetName: '' })
+  }
+
   render() {
     // Destructure state to a few local variables
-    const { pets, filterText } = this.state
+    const { pets, filterText, newPetName } = this.state
 
     const filteredListOfPetsToRender = pets.filter(pet =>
       pet.name.includes(filterText)
@@ -102,6 +125,24 @@ class App extends Component {
             />
           </li>
           {petsToRender}
+          <li className="list-group-item">
+            <input
+              className="form-control form-control-lg"
+              type="text"
+              value={newPetName}
+              placeholder="Enter a new pet"
+              onChange={event =>
+                this.setState({ newPetName: event.target.value })
+              }
+            />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={this.handleAddNewPet}
+            >
+              Add
+            </button>
+          </li>
         </ul>
       </main>
     )
