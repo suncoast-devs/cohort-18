@@ -3,9 +3,15 @@ import HelloWorld from './components/HelloWorld'
 
 class App extends Component {
   state = {
-    hue: 255,
-    saturation: 26,
-    lightness: 76,
+    hue: 0,
+    saturation: 0,
+    lightness: 0,
+  }
+
+  // This method is called the first time our
+  // component is placed ("MOUNTED") onto the page
+  componentDidMount() {
+    this.randomizeColor()
   }
 
   handleChangingHue = event => {
@@ -37,6 +43,22 @@ class App extends Component {
     const lightness = event.target.value
 
     this.setState({ lightness })
+  }
+
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max))
+  }
+
+  randomizeColor = event => {
+    const hue = this.getRandomInt(361)
+    const saturation = this.getRandomInt(101)
+    const lightness = this.getRandomInt(101)
+
+    this.setState({
+      hue,
+      saturation,
+      lightness,
+    })
   }
 
   render() {
@@ -79,6 +101,7 @@ class App extends Component {
           </fieldset>
         </section>
         <code>{hslColorStyle}</code>
+        <button onClick={this.randomizeColor}>Randomizer!</button>
       </main>
     )
   }
