@@ -4,7 +4,7 @@
     "name": "Mametchi",
     "birthday": "2020-06-24T06:13:01.642052",
     "deathday": null,
-    "hungerLevel": 0,
+    "hungerLevel": 55,
     "happinessLevel": 0,
     "isDead": false,
     "lastInteracted": "2020-06-24T06:13:01.64209"

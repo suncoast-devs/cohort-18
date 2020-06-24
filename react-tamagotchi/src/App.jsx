@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Pet } from './components/Pet'
-import samplePetsArray from './data/sample-pets-api'
 
 class App extends Component {
   state = {
-    pets: samplePetsArray,
+    pets: [],
   }
 
   render() {
