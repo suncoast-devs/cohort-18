@@ -14,14 +14,7 @@ class App extends Component {
     this.randomizeColor()
   }
 
-  handleChangingSlider = event => {
-    // const value = event.target.value
-    // const name = event.target.name
-
-    // This line is the same as the two above
-    // HERE: I am *destructuring* an object
-    const { value, name } = event.target
-
+  handleChangingSlider = ({ target: { value, name } }) => {
     // This syntax means take the *CONTENTS* of the variable
     // name and use the *CONTENTS* as the key to change in state.
     this.setState({ [name]: value })
