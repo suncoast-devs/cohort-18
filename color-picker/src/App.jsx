@@ -2,7 +2,15 @@ import React, { Component } from 'react'
 import HelloWorld from './components/HelloWorld'
 
 class App extends Component {
+  state = {
+    hue: 3,
+    saturation: 99,
+    lightness: 16,
+  }
+
   render() {
+    const hslColorStyle = `hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`
+
     return (
       <main>
         <h1>Color Picker</h1>
@@ -14,7 +22,7 @@ class App extends Component {
             <input type="range" min="0" max="100" />
           </fieldset>
         </section>
-        <code>hsl(80, 12%, 14%)</code>
+        <code>{hslColorStyle}</code>
       </main>
     )
   }
