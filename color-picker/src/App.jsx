@@ -3,7 +3,7 @@ import HelloWorld from './components/HelloWorld'
 
 class App extends Component {
   state = {
-    hue: 100,
+    hue: 255,
     saturation: 26,
     lightness: 76,
   }
@@ -24,9 +24,19 @@ class App extends Component {
             }}
           ></div>
           <fieldset>
-            <input type="range" min="0" max="360" />
-            <input type="range" min="0" max="100" />
-            <input type="range" min="0" max="100" />
+            <input type="range" min="0" max="360" value={this.state.hue} />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={this.state.saturation}
+            />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={this.state.lightness}
+            />
           </fieldset>
         </section>
         <code>{hslColorStyle}</code>
