@@ -8,14 +8,24 @@ class App extends Component {
 
   // This is run ONCE when the component first
   // is put on the page. Perfect spot to fetch some pets
-  componentDidMount() {
-    fetch('https://sdg-tamagotchi.herokuapp.com/Pets')
-      .then(response => {
-        return response.json()
-      })
-      .then(petsFromTheApi => {
-        this.setState({ pets: petsFromTheApi })
-      })
+  // componentDidMount() {
+  //   fetch('https://sdg-tamagotchi.herokuapp.com/Pets')
+  //     .then(response => {
+  //       return response.json()
+  //     })
+  //     .then(petsFromTheApi => {
+  //       this.setState({ pets: petsFromTheApi })
+  //     })
+  // }
+
+  // This is run ONCE when the component first
+  // is put on the page. Perfect spot to fetch some pets
+  async componentDidMount() {
+    const response = await fetch('https://sdg-tamagotchi.herokuapp.com/Pets')
+
+    const petsFromTheApi = await response.json()
+
+    this.setState({ pets: petsFromTheApi })
   }
 
   render() {
