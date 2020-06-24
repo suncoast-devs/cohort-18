@@ -57,7 +57,18 @@ class App extends Component {
       pet.name.includes(filterText)
     )
 
-    const petsToRender = filteredListOfPetsToRender.map(pet => (
+    // Sorting by alphabetical name
+    //
+    const sortedAndFilteredListOfPetsToRender = filteredListOfPetsToRender.sort(
+      (pet1, pet2) => pet1.name.localeCompare(pet2.name)
+    )
+
+    // Sorting by ID
+    // const sortedAndFilteredListOfPetsToRender = filteredListOfPetsToRender.sort(
+    //   (pet1, pet2) => pet1.id - pet2.id
+    // )
+
+    const petsToRender = sortedAndFilteredListOfPetsToRender.map(pet => (
       <Pet
         key={pet.id}
         id={pet.id}
