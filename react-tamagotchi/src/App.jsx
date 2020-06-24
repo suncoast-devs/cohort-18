@@ -95,10 +95,10 @@ class App extends Component {
         name={pet.name}
         hungerLevel={pet.hungerLevel}
         happinessLevel={pet.happinessLevel}
-        handleDeletePet={this.handleDeletePet}
-        handleFeedPet={this.handleFeedPet}
-        handleScoldPet={this.handleScoldPet}
-        handlePlayPet={this.handlePlayPet}
+        handleDeletePet={() => this.handleDeletePet(pet.id)}
+        handleFeedPet={() => this.handleFeedPet(pet.id)}
+        handleScoldPet={() => this.handleScoldPet(pet.id)}
+        handlePlayPet={() => this.handlePlayPet(pet.id)}
       />
     ))
 

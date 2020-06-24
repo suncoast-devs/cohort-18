@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 
 export class Pet extends Component {
-  handleClickOnDelete = async event => {
-    const idOfPetToDelete = this.props.id
-
-    this.props.handleDeletePet(idOfPetToDelete)
-  }
-
   render() {
     // Destructure the properties into local variables
     // so we can `name` instead of `this.props.name`
@@ -25,7 +19,7 @@ export class Pet extends Component {
           <button
             type="button"
             className="ml-2 close text-danger"
-            onClick={this.handleClickOnDelete}
+            onClick={this.props.handleDeletePet}
           >
             &times;
           </button>
@@ -34,21 +28,21 @@ export class Pet extends Component {
           <button
             type="button"
             className="mr-2 btn btn-sm btn-primary"
-            onClick={() => this.props.handleFeedPet(this.props.id)}
+            onClick={this.props.handleFeedPet}
           >
             Feed
           </button>
           <button
             type="button"
             className="mr-2 btn btn-sm btn-primary"
-            onClick={() => this.props.handleScoldPet(this.props.id)}
+            onClick={this.props.handleScoldPet}
           >
             Scold
           </button>
           <button
             type="button"
             className="mr-2 btn btn-sm btn-primary"
-            onClick={() => this.props.handlePlayPet(this.props.id)}
+            onClick={this.props.handlePlayPet}
           >
             Play
           </button>
