@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 export class ShowPet extends Component {
   state = {
     pet: {},
+    loaded: false,
   }
 
   async componentDidMount() {
@@ -20,9 +21,14 @@ export class ShowPet extends Component {
 
     console.log(petFromApi)
     this.setState({ pet: petFromApi })
+    this.setState({ loaded: true })
   }
 
   render() {
+    if (this.state.loaded === false) {
+      return <></>
+    }
+
     return (
       <ul className="list-group">
         <li className="list-group-item">{this.state.pet.name}</li>
