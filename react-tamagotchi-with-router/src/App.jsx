@@ -145,7 +145,12 @@ class App extends Component {
           <Route path="/newpet">
             <NewPet handleAddNewPet={this.handleAddNewPet} />
           </Route>
-          <Route path="/pets/42">
+          {/*          /pets/1
+           *           /pets/2
+           *           /pets/42
+           *           /pets/gavin
+           *           /pets/jason      */}
+          <Route path="/pets/:petid">
             <ShowPet />
           </Route>
         </Switch>
