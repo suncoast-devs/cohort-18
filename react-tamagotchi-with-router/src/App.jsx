@@ -2,22 +2,8 @@ import React, { Component } from 'react'
 import { Pet } from './components/Pet'
 import { NewPet } from './components/NewPet'
 import { PetList } from './components/PetList'
+import { ShowPet } from './components/ShowPet'
 import { Route, Link, Switch } from 'react-router-dom'
-
-class ShowPet extends Component {
-  render() {
-    return (
-      <ul className="list-group">
-        <li className="list-group-item">Pet Name</li>
-        <li className="list-group-item">Birthday</li>
-        <li className="list-group-item">Deathday</li>
-        <li className="list-group-item">Happiness</li>
-        <li className="list-group-item">HungerLevel</li>
-        <li className="list-group-item">Last Interacted</li>
-      </ul>
-    )
-  }
-}
 
 class App extends Component {
   state = {
@@ -157,8 +143,10 @@ class App extends Component {
             />
           </Route>
           <Route path="/newpet">
-            Wow, this renders too!
             <NewPet handleAddNewPet={this.handleAddNewPet} />
+          </Route>
+          <Route path="/pets/42">
+            <ShowPet />
           </Route>
         </Switch>
       </main>

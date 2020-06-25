@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export class Pet extends Component {
   render() {
     // Destructure the properties into local variables
     // so we can `name` instead of `this.props.name`
-    const { name, happinessLevel, hungerLevel } = this.props
+    const { id, name, happinessLevel, hungerLevel } = this.props
+
+    const urlPathForPet = `/pets/${id}`
 
     return (
       <li className="list-group-item">
-        <a href="/pets/42">{name}</a>
+        <Link to={urlPathForPet}>{name}</Link>
         <span className="hover-buttons float-right">
           <span className="ml-2 badge badge-pill badge-primary">
             {happinessLevel}
