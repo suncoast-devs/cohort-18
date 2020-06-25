@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Pet } from './components/Pet'
 import { NewPet } from './components/NewPet'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { PetList } from './components/PetList'
 
 class ShowPet extends Component {
@@ -141,8 +141,13 @@ class App extends Component {
       <Router>
         <main className="container p-4">
           <div className="jumbotron bg-info text-white-50">
-            <h1 className="display-4">Tamagotchi</h1>
+            <h1 className="display-4">
+              <Link to="/">Tamagotchi</Link>
+            </h1>
             <p className="lead">These are all my pets</p>
+            <Link to="/newpet" className="btn btn-secondary">
+              Add a pet (link)
+            </Link>
           </div>
           <Route exact path="/">
             <PetList

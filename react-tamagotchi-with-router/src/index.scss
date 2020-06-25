@@ -20,3 +20,8 @@ li .hover-buttons {
 li:hover .hover-buttons {
   visibility: visible;
 }
+
+h1 a:link,
+h1 a:visited {
+  color: rgba(255, 255, 255, 0.5);
+}
