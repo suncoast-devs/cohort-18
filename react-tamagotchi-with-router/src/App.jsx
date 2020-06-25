@@ -135,16 +135,21 @@ class App extends Component {
           </Link>
         </div>
         <Switch>
-          <Route exact path="/">
-            <PetList
-              petsToRender={petsToRender}
-              filterText={filterText}
-              handleFilterTextChange={this.handleFilterTextChange}
-            />
-          </Route>
-          <Route path="/newpet">
-            <NewPet handleAddNewPet={this.handleAddNewPet} />
-          </Route>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <PetList
+                petsToRender={petsToRender}
+                filterText={filterText}
+                handleFilterTextChange={this.handleFilterTextChange}
+              />
+            )}
+          />
+          <Route
+            path="/newpet"
+            render={() => <NewPet handleAddNewPet={this.handleAddNewPet} />}
+          />
           {/*          /pets/1
            *           /pets/2
            *           /pets/42
