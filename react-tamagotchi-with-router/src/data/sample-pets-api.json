@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Mametchi",
+    "birthday": "2020-06-24T06:13:01.642052",
+    "deathday": null,
+    "hungerLevel": 55,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:01.64209"
+  },
+  {
+    "id": 2,
+    "name": "Mimitchi",
+    "birthday": "2020-06-24T06:13:10.729159",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:10.729179"
+  },
+  {
+    "id": 3,
+    "name": "Memetchi",
+    "birthday": "2020-06-24T06:13:16.443691",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:16.443721"
+  },
+  {
+    "id": 4,
+    "name": "Kuchipatchi",
+    "birthday": "2020-06-24T06:13:23.583128",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:23.583155"
+  },
+  {
+    "id": 5,
+    "name": "Princess Tamako",
+    "birthday": "2020-06-24T06:13:29.612644",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:29.612666"
+  },
+  {
+    "id": 6,
+    "name": "Lovetchi",
+    "birthday": "2020-06-24T06:13:41.796892",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:41.796906"
+  },
+  {
+    "id": 7,
+    "name": "Spacytchi",
+    "birthday": "2020-06-24T06:13:47.520987",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:47.520998"
+  },
+  {
+    "id": 8,
+    "name": "Babytchi",
+    "birthday": "2020-06-24T06:13:53.392098",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:53.392114"
+  },
+  {
+    "id": 9,
+    "name": "Princess Tamakoko",
+    "birthday": "2020-06-24T06:13:59.062775",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:13:59.062786"
+  },
+  {
+    "id": 10,
+    "name": "Butterflytchi",
+    "birthday": "2020-06-24T06:14:06.436069",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:14:06.436101"
+  },
+  {
+    "id": 11,
+    "name": "Kikitchi",
+    "birthday": "2020-06-24T06:14:11.735061",
+    "deathday": null,
+    "hungerLevel": 0,
+    "happinessLevel": 0,
+    "isDead": false,
+    "lastInteracted": "2020-06-24T06:14:11.735069"
+  }
+]
