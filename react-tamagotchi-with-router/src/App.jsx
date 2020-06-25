@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Pet } from './components/Pet'
 import { NewPet } from './components/NewPet'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { PetList } from './components/PetList'
 
 class ShowPet extends Component {
   render() {
@@ -95,20 +97,6 @@ class App extends Component {
   }
 
   render() {
-    if (window.location.pathname === '/') {
-      return this.renderShowList()
-    }
-
-    if (window.location.pathname === '/pets/42') {
-      return this.renderShowPet()
-    }
-  }
-
-  renderShowPet() {
-    return <ShowPet />
-  }
-
-  renderShowList() {
     // const pets = this.state.pets
     // const filterText = this.state.filterText
 
@@ -150,27 +138,24 @@ class App extends Component {
     ))
 
     return (
-      <main className="container p-4">
-        <div className="jumbotron bg-info text-white-50">
-          <h1 className="display-4">Tamagotchi</h1>
-          <p className="lead">These are all my pets</p>
-        </div>
-        <ul className="list-group">
-          <li className="list-group-item">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              value={filterText}
-              onChange={this.handleFilterTextChange}
+      <Router>
+        <main className="container p-4">
+          <div className="jumbotron bg-info text-white-50">
+            <h1 className="display-4">Tamagotchi</h1>
+            <p className="lead">These are all my pets</p>
+          </div>
+          <Route exact path="/">
+            <PetList
+              petsToRender={petsToRender}
+              filterText={filterText}
+              handleFilterTextChange={this.handleFilterTextChange}
             />
-          </li>
-          {petsToRender}
-          <li className="list-group-item">
+          </Route>
+          <Route path="/newpet">
             <NewPet handleAddNewPet={this.handleAddNewPet} />
-          </li>
-        </ul>
-      </main>
+          </Route>
+        </main>
+      </Router>
     )
   }
 }
