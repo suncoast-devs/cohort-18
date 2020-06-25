@@ -2,31 +2,34 @@ import React, { Component } from 'react'
 
 export class ShowPet extends Component {
   state = {
-    pet: {
-      id: 0,
-      name: 'string',
-      birthday: '2020-06-25T14:58:05.208Z',
-      deathday: '2020-06-25T14:58:05.208Z',
-      hungerLevel: 0,
-      happinessLevel: 0,
-      isDead: true,
-      lastInteracted: '2020-06-25T14:58:05.208Z',
-    },
+    pet: {},
   }
 
-  render() {
+  async componentDidMount() {
     // Uses the properties passed to us to
     // get at the :petid part of
     //
     // path="/pets/:petid"
     const petId = this.props.match.params.petid
 
+    // fetch based on the pet ID
+    const response = await fetch(
+      `https://sdg-tamagotchi.herokuapp.com/Pets/${petId}`
+    )
+    const petFromApi = await response.json()
+
+    console.log(petFromApi)
+    this.setState({ pet: petFromApi })
+  }
+
+  render() {
     return (
       <ul className="list-group">
-        <li className="list-group-item">{petId}</li>
         <li className="list-group-item">{this.state.pet.name}</li>
         <li className="list-group-item">{this.state.pet.birthday}</li>
-        <li className="list-group-item">{this.state.pet.deathday}</li>
+        {this.state.pet.deathday && (
+          <li className="list-group-item">{this.state.pet.deathday}</li>
+        )}
         <li className="list-group-item">{this.state.pet.happinessLevel}</li>
         <li className="list-group-item">{this.state.pet.hungerLevel}</li>
         <li className="list-group-item">{this.state.pet.lastInteracted}</li>
