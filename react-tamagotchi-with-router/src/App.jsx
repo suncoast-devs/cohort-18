@@ -150,9 +150,7 @@ class App extends Component {
            *           /pets/42
            *           /pets/gavin
            *           /pets/jason      */}
-          <Route path="/pets/:petid">
-            <ShowPet />
-          </Route>
+          <Route path="/pets/:petid" component={ShowPet} />
         </Switch>
       </main>
     )
