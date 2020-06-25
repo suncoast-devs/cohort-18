@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Pet } from './components/Pet'
 import { NewPet } from './components/NewPet'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { PetList } from './components/PetList'
+import { Route, Link, Switch } from 'react-router-dom'
 
 class ShowPet extends Component {
   render() {
@@ -138,17 +138,17 @@ class App extends Component {
     ))
 
     return (
-      <Router>
-        <main className="container p-4">
-          <div className="jumbotron bg-info text-white-50">
-            <h1 className="display-4">
-              <Link to="/">Tamagotchi</Link>
-            </h1>
-            <p className="lead">These are all my pets</p>
-            <Link to="/newpet" className="btn btn-secondary">
-              Add a pet (link)
-            </Link>
-          </div>
+      <main className="container p-4">
+        <div className="jumbotron bg-info text-white-50">
+          <h1 className="display-4">
+            <Link to="/">Tamagotchi</Link>
+          </h1>
+          <p className="lead">These are all my pets</p>
+          <Link to="/newpet" className="btn btn-secondary">
+            Add a pet (link)
+          </Link>
+        </div>
+        <Switch>
           <Route exact path="/">
             <PetList
               petsToRender={petsToRender}
@@ -157,10 +157,11 @@ class App extends Component {
             />
           </Route>
           <Route path="/newpet">
+            Wow, this renders too!
             <NewPet handleAddNewPet={this.handleAddNewPet} />
           </Route>
-        </main>
-      </Router>
+        </Switch>
+      </main>
     )
   }
 }
