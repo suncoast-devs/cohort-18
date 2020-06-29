@@ -2,6 +2,39 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import photos from '../photos.json'
 
+class PhotoListPhoto extends Component {
+  render() {
+    return (
+      <div key={this.props.index} className="column is-one-third">
+        <div className="card">
+          <div className="card-content">
+            <div className="card-image">
+              <figure className="image">
+                <Link
+                  to={`/${this.props.theNameOfTheCategoryWeWantToLookAt}/${this.props.index}`}
+                >
+                  <img
+                    src={this.props.photo.imageURL}
+                    alt={this.props.photo.title}
+                  />
+                </Link>
+                <figcaption>
+                  <Link
+                    to={`/${this.props.theNameOfTheCategoryWeWantToLookAt}/${this.props.index}`}
+                  >
+                    {this.props.photo.title}
+                  </Link>
+                </figcaption>
+              </figure>
+            </div>
+            <div className="content" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 export class PhotoList extends Component {
   render() {
     // Lets look at the properties of this component
@@ -39,8 +72,6 @@ export class PhotoList extends Component {
 
     const categoryPhotos = category.photos
 
-    console.log(categoryPhotos)
-
     return (
       <div className="container">
         <nav className="breadcrumb" aria-label="breadcrumbs">
@@ -64,29 +95,14 @@ export class PhotoList extends Component {
         <h4 className="subtitle">{category.description}</h4>
         <div className="columns is-multiline">
           {categoryPhotos.map((photo, index) => (
-            <div key={index} className="column is-one-third">
-              <div className="card">
-                <div className="card-content">
-                  <div className="card-image">
-                    <figure className="image">
-                      <Link
-                        to={`/${theNameOfTheCategoryWeWantToLookAt}/${index}`}
-                      >
-                        <img src={photo.imageURL} alt={photo.title} />
-                      </Link>
-                      <figcaption>
-                        <Link
-                          to={`/${theNameOfTheCategoryWeWantToLookAt}/${index}`}
-                        >
-                          {photo.title}
-                        </Link>
-                      </figcaption>
-                    </figure>
-                  </div>
-                  <div className="content" />
-                </div>
-              </div>
-            </div>
+            <PhotoListPhoto
+              key={index}
+              index={index}
+              photo={photo}
+              theNameOfTheCategoryWeWantToLookAt={
+                theNameOfTheCategoryWeWantToLookAt
+              }
+            />
           ))}
         </div>
       </div>
