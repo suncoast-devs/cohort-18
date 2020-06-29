@@ -3,6 +3,16 @@ import { Link } from 'react-router-dom'
 
 export class PhotoList extends Component {
   render() {
+    // Lets look at the properties of this component
+    console.log(this.props)
+
+    const theNameOfTheCategoryWeWantToLookAt = this.props.match.params
+      .theNameOfTheCategoryWeWantToLookAt
+
+    console.log(
+      'The name of the category is ' + theNameOfTheCategoryWeWantToLookAt
+    )
+
     return (
       <div className="container">
         <nav className="breadcrumb" aria-label="breadcrumbs">
