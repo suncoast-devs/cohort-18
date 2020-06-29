@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import photos from '../photos.json'
 
 export class PhotoList extends Component {
   render() {
@@ -9,9 +10,34 @@ export class PhotoList extends Component {
     const theNameOfTheCategoryWeWantToLookAt = this.props.match.params
       .theNameOfTheCategoryWeWantToLookAt
 
+    // What is the category
     console.log(
       'The name of the category is ' + theNameOfTheCategoryWeWantToLookAt
     )
+
+    // Use the value of theNameOfTheCategoryWeWantToLookAt
+    // to lookup the details of a category in our JSON
+    //
+    // {
+    //   "pandas": {
+    //     "title": "Panda Bears",
+    //   }
+    //   "miniatures": {
+    //     "title": "Miniature Painting",
+    //   }
+    // }
+    //
+    // So iftheNameOfTheCategoryWeWantToLookAt equals "panda"
+    // then category = { "title": "Panda Bears" }
+    //
+    // So iftheNameOfTheCategoryWeWantToLookAt equals "miniatures"
+    // then category = { "title": "Miniature Painting" }
+    //
+    // Of course from the real JSON there is more data
+
+    const category = photos[theNameOfTheCategoryWeWantToLookAt]
+
+    console.log(category)
 
     return (
       <div className="container">
