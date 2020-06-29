@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom'
 import photos from '../photos.json'
 
 export class PhotoDetail extends Component {
+  handleClickHeart = event => {
+    // We have access to the state changing component our parent gave
+    // us in our properties as    `this.props.________`
+    this.props.functionToCallToIncrementTheFavoriteCount()
+  }
+
   render() {
     const theNameOfTheCategoryWeWantToLookAt = this.props.match.params
       .theNameOfTheCategoryWeWantToLookAt
@@ -45,7 +51,10 @@ export class PhotoDetail extends Component {
             </li>
           </ul>
         </nav>
-        <h3 className="title">{photo.title}</h3>
+        <h3 className="title" onClick={this.handleClickHeart}>
+          <i className="far fa-heart"></i>
+          {photo.title}
+        </h3>
         <figure className="image">
           <img src={photo.imageURL} alt={photo.title} />
         </figure>
