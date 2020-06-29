@@ -1,4 +1,20 @@
 {
+  "LEGO": {
+    "title": "LEGO",
+    "LEGO": "Endless fun, even for AFOL",
+    "photos": [
+      {
+        "title": "Death Star",
+        "imageURL": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fjaysbrickblog.com%2Fwp-content%2Fuploads%2F2016%2F08%2FLEGO-75159-UCS-Death-Star-Front-View.jpg&f=1&nofb=1",
+        "sourceURL": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fjaysbrickblog.com%2Fwp-content%2Fuploads%2F2016%2F08%2FLEGO-75159-UCS-Death-Star-Front-View.jpg&f=1&nofb=1"
+      },
+      {
+        "title": "Back to the Future",
+        "imageURL": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.gearfuse.com%2Fwp-content%2Fuploads%2F2013%2F09%2FBack-to-the-Future-LEGO.jpg&f=1&nofb=1",
+        "sourceURL": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.gearfuse.com%2Fwp-content%2Fuploads%2F2013%2F09%2FBack-to-the-Future-LEGO.jpg&f=1&nofb=1"
+      }
+    ]
+  },
   "pandas": {
     "title": "Panda Bears",
     "description": "Pandas are bears native to south-central China, and are objectively the cutest animals on earth.",
