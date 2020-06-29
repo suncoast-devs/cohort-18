@@ -24,7 +24,11 @@ class App extends Component {
                    home page, put the Category List
                    right here */}
               <Route exact path="/" component={CategoryList} />
-              <Route exact path="/pandas" component={PhotoList} />
+              <Route
+                exact
+                path="/:theNameOfTheCategoryWeWantToLookAt"
+                component={PhotoList}
+              />
               <Route path="/pandas/0" component={PhotoDetail} />
             </Switch>
           </section>
