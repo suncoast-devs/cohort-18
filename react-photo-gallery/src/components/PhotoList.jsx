@@ -37,7 +37,9 @@ export class PhotoList extends Component {
 
     const category = photos[theNameOfTheCategoryWeWantToLookAt]
 
-    console.log(category)
+    const categoryPhotos = category.photos
+
+    console.log(categoryPhotos)
 
     return (
       <div className="container">
@@ -61,96 +63,31 @@ export class PhotoList extends Component {
         <h3 className="title">{category.title}</h3>
         <h4 className="subtitle">{category.description}</h4>
         <div className="columns is-multiline">
-          <div className="column is-one-third">
-            <div className="card">
-              <div className="card-content">
-                <div className="card-image">
-                  <figure className="image">
-                    <Link to="/pandas/0">
-                      <img
-                        src="https://things-i-like.netlify.app/images/baby_panda.jpg"
-                        alt="Panda Waving"
-                      />
-                    </Link>
-                    <figcaption>
-                      <Link to="/pandas/0">Panda Waving</Link>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div className="content" />
-              </div>
-            </div>
-          </div>
-
-          <div className="column is-one-third">
-            <div className="card">
-              <div className="card-content">
-                <div className="card-image">
-                  <figure className="image">
-                    <Link to="/pandas/1">
-                      <img
-                        src="https://things-i-like.netlify.app/images/grosser_panda.jpg"
-                        alt="Großer Panda im Ocean Park, Hongkong"
-                      />
-                    </Link>
-                    <figcaption>
-                      <Link to="/pandas/1">
-                        Großer Panda im Ocean Park, Hongkong
+          {categoryPhotos.map((photo, index) => (
+            <div key={index} className="column is-one-third">
+              <div className="card">
+                <div className="card-content">
+                  <div className="card-image">
+                    <figure className="image">
+                      <Link
+                        to={`/${theNameOfTheCategoryWeWantToLookAt}/${index}`}
+                      >
+                        <img src={photo.imageURL} alt={photo.title} />
                       </Link>
-                    </figcaption>
-                  </figure>
+                      <figcaption>
+                        <Link
+                          to={`/${theNameOfTheCategoryWeWantToLookAt}/${index}`}
+                        >
+                          {photo.title}
+                        </Link>
+                      </figcaption>
+                    </figure>
+                  </div>
+                  <div className="content" />
                 </div>
-                <div className="content" />
               </div>
             </div>
-          </div>
-
-          <div className="column is-one-third">
-            <div className="card">
-              <div className="card-content">
-                <div className="card-image">
-                  <figure className="image">
-                    <Link to="/pandas/2">
-                      <img
-                        src="https://things-i-like.netlify.app/images/tree_panda.png"
-                        alt="Wild pandas get a boost; the iconic species has been upgraded from 'endangered' to 'vulnerable.'"
-                      />
-                    </Link>
-                    <figcaption>
-                      <Link to="/pandas/2">
-                        Wild pandas get a boost; the iconic species has been
-                        upgraded from 'endangered' to 'vulnerable.'
-                      </Link>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div className="content" />
-              </div>
-            </div>
-          </div>
-
-          <div className="column is-one-third">
-            <div className="card">
-              <div className="card-content">
-                <div className="card-image">
-                  <figure className="image">
-                    <Link to="/pandas/3">
-                      <img
-                        src="https://things-i-like.netlify.app/images/rising_sun.png"
-                        alt="Sacred Warrior, by Adrian Smith"
-                      />
-                    </Link>
-                    <figcaption>
-                      <Link to="/pandas/3">
-                        Sacred Warrior, by Adrian Smith
-                      </Link>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div className="content" />
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     )
