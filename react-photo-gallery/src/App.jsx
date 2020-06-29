@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { CategoryList } from './components/CategoryList'
 import { Header } from './components/Header'
 
@@ -17,7 +17,12 @@ class App extends Component {
           <Header />
 
           <section className="section">
-            <CategoryList />
+            <Switch>
+              {/*  IF we are on the "/" page, the
+                   home page, put the Category List
+                   right here */}
+              <Route exact path="/" component={CategoryList} />
+            </Switch>
           </section>
         </main>
       </Router>
