@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { CategoryList } from './components/CategoryList'
+import { PhotoList } from './components/PhotoList'
 import { Header } from './components/Header'
 
 //
@@ -22,6 +23,7 @@ class App extends Component {
                    home page, put the Category List
                    right here */}
               <Route exact path="/" component={CategoryList} />
+              <Route path="/pandas" component={PhotoList} />
             </Switch>
           </section>
         </main>
