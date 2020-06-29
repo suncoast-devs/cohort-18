@@ -1,8 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import photos from '../photos.json'
 
 export class PhotoDetail extends Component {
   render() {
+    const theNameOfTheCategoryWeWantToLookAt = this.props.match.params
+      .theNameOfTheCategoryWeWantToLookAt
+
+    const arrayIndexOfThePhoto = this.props.match.params.arrayIndexOfThePhoto
+
+    console.log(
+      `I would love to see the photo with index ${arrayIndexOfThePhoto} from the category ${theNameOfTheCategoryWeWantToLookAt}`
+    )
+
+    const category = photos[theNameOfTheCategoryWeWantToLookAt]
+
+    const categoryPhotos = category.photos
+
+    const photo = categoryPhotos[arrayIndexOfThePhoto]
+
     return (
       <div className="container">
         <nav className="breadcrumb" aria-label="breadcrumbs">
@@ -16,24 +32,25 @@ export class PhotoDetail extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/pandas">Panda Bears</Link>
+              <Link to={`/${theNameOfTheCategoryWeWantToLookAt}`}>
+                {category.title}
+              </Link>
             </li>
             <li className="is-active">
-              <Link to="/pandas/0">Panda Waving</Link>
+              <Link
+                to={`/${theNameOfTheCategoryWeWantToLookAt}/${arrayIndexOfThePhoto}`}
+              >
+                {photo.title}
+              </Link>
             </li>
           </ul>
         </nav>
-        <h3 className="title">Panda Waving</h3>
+        <h3 className="title">{photo.title}</h3>
         <figure className="image">
-          <img
-            src="https://things-i-like.netlify.app/images/baby_panda.jpg"
-            alt="Panda Waving"
-          />
+          <img src={photo.imageURL} alt={photo.title} />
         </figure>
         <p className="is-small">
-          <a href="https://codeburst.io/pandas-for-data-stuff-code-challenge-7972207a8294">
-            Source
-          </a>
+          <a href={photo.sourceURL}>Source</a>
         </p>
       </div>
     )

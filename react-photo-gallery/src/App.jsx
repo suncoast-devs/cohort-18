@@ -29,7 +29,10 @@ class App extends Component {
                 path="/:theNameOfTheCategoryWeWantToLookAt"
                 component={PhotoList}
               />
-              <Route path="/pandas/0" component={PhotoDetail} />
+              <Route
+                path="/:theNameOfTheCategoryWeWantToLookAt/:arrayIndexOfThePhoto"
+                component={PhotoDetail}
+              />
             </Switch>
           </section>
         </main>
