@@ -51,16 +51,15 @@ export class PhotoList extends Component {
                 <span>Home</span>
               </Link>
             </li>
-            <li className="is-active">
-              <Link to={'/pandas'}>Panda Bears</Link>
+            <li>
+              <Link to={`/${theNameOfTheCategoryWeWantToLookAt}`}>
+                {category.title}
+              </Link>
             </li>
           </ul>
         </nav>
-        <h3 className="title">Panda Bears</h3>
-        <h4 className="subtitle">
-          Pandas are bears native to south-central China, and are objectively
-          the cutest animals on earth.
-        </h4>
+        <h3 className="title">{category.title}</h3>
+        <h4 className="subtitle">{category.description}</h4>
         <div className="columns is-multiline">
           <div className="column is-one-third">
             <div className="card">
