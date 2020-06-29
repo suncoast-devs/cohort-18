@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-class PhotoDetail extends Component {
+export class PhotoDetail extends Component {
   render() {
     return (
       <div className="container">
