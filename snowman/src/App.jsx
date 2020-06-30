@@ -1,11 +1,33 @@
-import React from 'react'
-import snowman_7 from './images/snowman/step_7.png'
+import React, { useState } from 'react'
+import snowman0 from './images/snowman/step_0.png'
+import snowman1 from './images/snowman/step_1.png'
+import snowman2 from './images/snowman/step_2.png'
+import snowman3 from './images/snowman/step_3.png'
+import snowman4 from './images/snowman/step_4.png'
+import snowman5 from './images/snowman/step_5.png'
+import snowman6 from './images/snowman/step_6.png'
+import snowman7 from './images/snowman/step_7.png'
+
+const snowmen = [
+  snowman0,
+  snowman1,
+  snowman2,
+  snowman3,
+  snowman4,
+  snowman5,
+  snowman6,
+  snowman7,
+]
 
 function App() {
+  const [correctlyGuessedLetters, setCorrectlyGuessedLetters] = useState(0)
+
+  const snowman = snowmen[correctlyGuessedLetters]
+
   return (
     <section>
       <h1>Snowman</h1>
-      <img alt="snowman" src={snowman_7} />
+      <img alt="snowman" src={snowman} />
       <ul>
         <li>_</li>
         <li>_</li>
@@ -16,7 +38,7 @@ function App() {
         <li>_</li>
       </ul>
       <ul className="alphabet">
-        <li className="used">A</li>
+        <li>A</li>
         <li>B</li>
         <li>C</li>
         <li>D</li>
