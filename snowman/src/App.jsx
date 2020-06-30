@@ -97,7 +97,11 @@ function App() {
   return (
     <section>
       <h1>Snowman</h1>
-      <img alt="snowman" src={snowman} />
+      <img
+        alt="snowman"
+        src={snowman}
+        className={numberOfCorrectlyGuessedLetters === 7 ? 'winner' : 'playing'}
+      />
       <ul>
         {[...revealedWord].map((letter, index) => (
           <li key={index}>{letter}</li>

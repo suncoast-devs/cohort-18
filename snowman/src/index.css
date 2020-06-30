@@ -27,6 +27,11 @@ img {
   display: block;
   margin: 1rem auto;
   width: 400px;
+  transition: transform 1s ease-in-out;
+}
+
+img.winner {
+  transform: scale(1.4);
 }
 
 ul {
