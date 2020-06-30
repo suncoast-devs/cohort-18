@@ -24,14 +24,12 @@ const snowmen = [
 ]
 
 function AlphabetLetter(props) {
-  const handleClickOnLetter = () => {
-    props.onClickLetter(props.letter)
-  }
-
   if (props.used) {
     return <li className="used">{props.letter}</li>
   } else {
-    return <li onClick={handleClickOnLetter}>{props.letter}</li>
+    return (
+      <li onClick={() => props.onClickLetter(props.letter)}>{props.letter}</li>
+    )
   }
 }
 
