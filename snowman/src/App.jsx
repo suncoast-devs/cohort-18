@@ -24,7 +24,11 @@ const snowmen = [
 ]
 
 function AlphabetLetter(props) {
-  return <li>{props.letter}</li>
+  if (props.used) {
+    return <li className="used">{props.letter}</li>
+  } else {
+    return <li>{props.letter}</li>
+  }
 }
 
 function App() {
@@ -33,6 +37,9 @@ function App() {
     numberOfCorrectlyGuessedLetters,
     setNumberOfCorrectlyGuessedLetters,
   ] = useState(0)
+
+  // An array of the letters we have guessed so far!
+  const [lettersGuessedSoFar, setLettersGuessedSoFar] = useState([])
 
   // Use that variable to figure out which index of our snowman in the array
   const snowman = snowmen[numberOfCorrectlyGuessedLetters]
@@ -52,7 +59,11 @@ function App() {
       </ul>
       <ul className="alphabet">
         {allLetters.map((letter) => (
-          <AlphabetLetter key={letter} letter={letter} />
+          <AlphabetLetter
+            key={letter}
+            letter={letter}
+            used={lettersGuessedSoFar.includes(letter)}
+          />
         ))}
       </ul>
     </section>
