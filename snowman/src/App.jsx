@@ -7,6 +7,7 @@ import snowman4 from './images/snowman/step_4.png'
 import snowman5 from './images/snowman/step_5.png'
 import snowman6 from './images/snowman/step_6.png'
 import snowman7 from './images/snowman/step_7.png'
+import words from './data/words'
 
 const allLetters = [...Array(26).keys()].map((index) =>
   String.fromCharCode(97 + index)
@@ -33,6 +34,10 @@ function AlphabetLetter(props) {
   }
 }
 
+function randomInteger(max) {
+  return Math.floor(Math.random() * Math.floor(max))
+}
+
 function App() {
   // const correctlyGuessedLetters = 0
   const [
@@ -43,8 +48,12 @@ function App() {
   // An array of the letters we have guessed so far!
   const [lettersGuessedSoFar, setLettersGuessedSoFar] = useState([])
 
-  const [secretWord, setSecretWord] = useState('fuchsia')
+  const [secretWord, setSecretWord] = useState(
+    words[randomInteger(words.length)]
+  )
   const [revealedWord, setRevealedWord] = useState('_______')
+
+  console.log(secretWord)
 
   // Use that variable to figure out which index of our snowman in the array
   const snowman = snowmen[numberOfCorrectlyGuessedLetters]
