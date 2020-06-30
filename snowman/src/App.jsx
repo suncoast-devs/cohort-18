@@ -9,7 +9,7 @@ import snowman6 from './images/snowman/step_6.png'
 import snowman7 from './images/snowman/step_7.png'
 
 const allLetters = [...Array(26).keys()].map((index) =>
-  String.fromCharCode(65 + index)
+  String.fromCharCode(97 + index)
 )
 
 const snowmen = [
@@ -43,6 +43,9 @@ function App() {
   // An array of the letters we have guessed so far!
   const [lettersGuessedSoFar, setLettersGuessedSoFar] = useState([])
 
+  const [secretWord, setSecretWord] = useState('fuchsia')
+  const [revealedWord, setRevealedWord] = useState('_______')
+
   // Use that variable to figure out which index of our snowman in the array
   const snowman = snowmen[numberOfCorrectlyGuessedLetters]
 
@@ -66,6 +69,20 @@ function App() {
     ]
 
     setLettersGuessedSoFar(newArrayOfLettersGuessedSoFar)
+
+    const indexOfLetter = secretWord.indexOf(letter)
+    if (indexOfLetter !== -1) {
+      // We found the letter
+
+      setNumberOfCorrectlyGuessedLetters(numberOfCorrectlyGuessedLetters + 1)
+
+      const revealedWordAsArray = [...revealedWord]
+      revealedWordAsArray[indexOfLetter] = letter
+
+      const newRevealedWord = revealedWordAsArray.join('')
+
+      setRevealedWord(newRevealedWord)
+    }
   }
 
   return (
@@ -73,13 +90,9 @@ function App() {
       <h1>Snowman</h1>
       <img alt="snowman" src={snowman} />
       <ul>
-        <li>_</li>
-        <li>_</li>
-        <li>_</li>
-        <li>_</li>
-        <li>_</li>
-        <li>_</li>
-        <li>_</li>
+        {[...revealedWord].map((letter, index) => (
+          <li key={index}>{letter}</li>
+        ))}
       </ul>
       <ul className="alphabet">
         {allLetters.map((letter) => (
