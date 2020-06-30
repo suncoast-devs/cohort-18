@@ -25,22 +25,7 @@ const snowmen = [
 
 function AlphabetLetter(props) {
   const handleClickOnLetter = () => {
-    // Make a new array of the letters guessed so far and pass that in.
-
-    // you might be inclined to try this.
-    //
-    // But do not! We shouldn't modify a prop or *DIRECTLY* modify a state
-    //props.lettersGuessedSoFar.push(props.letter)
-
-    const newArrayOfLettersGuessedSoFar = [
-      // These are all the elements from the array, spread out
-      ...props.lettersGuessedSoFar,
-
-      // then tack on this new letter to the end
-      props.letter,
-    ]
-
-    props.setLettersGuessedSoFar(newArrayOfLettersGuessedSoFar)
+    props.onClickLetter(props.letter)
   }
 
   if (props.used) {
@@ -63,6 +48,28 @@ function App() {
   // Use that variable to figure out which index of our snowman in the array
   const snowman = snowmen[numberOfCorrectlyGuessedLetters]
 
+  // Handle whenever a letter is clicked as a guess
+  //
+  // Helper function to be called any time a letter has been clicked/guessed
+  const onClickLetter = (letter) => {
+    // Make a new array of the letters guessed so far and pass that in.
+
+    // you might be inclined to try this.
+    //
+    // But do not! We shouldn't modify a prop or *DIRECTLY* modify a state
+    //props.lettersGuessedSoFar.push(props.letter)
+
+    const newArrayOfLettersGuessedSoFar = [
+      // These are all the elements from the array, spread out
+      ...lettersGuessedSoFar,
+
+      // then tack on this new letter to the end
+      letter,
+    ]
+
+    setLettersGuessedSoFar(newArrayOfLettersGuessedSoFar)
+  }
+
   return (
     <section>
       <h1>Snowman</h1>
@@ -82,8 +89,7 @@ function App() {
             key={letter}
             letter={letter}
             used={lettersGuessedSoFar.includes(letter)}
-            lettersGuessedSoFar={lettersGuessedSoFar}
-            setLettersGuessedSoFar={setLettersGuessedSoFar}
+            onClickLetter={onClickLetter}
           />
         ))}
       </ul>
