@@ -14,4 +14,6 @@
 - https://www.codewars.com/kata/56453a12fcee9a6c4700009c/train/csharp
 - https://www.codewars.com/kata/59342039eb450e39970000a6
 - https://www.codewars.com/kata/5b4e779c578c6a898e0005c5/train/csharp
+- https://www.codewars.com/kata/55ecd718f46fba02e5000029/train/javascript
+- https://www.codewars.com/kata/582afcadac2d9baa0900054c
 
