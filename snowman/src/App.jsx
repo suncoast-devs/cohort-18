@@ -24,10 +24,29 @@ const snowmen = [
 ]
 
 function AlphabetLetter(props) {
+  const handleClickOnLetter = () => {
+    // Make a new array of the letters guessed so far and pass that in.
+
+    // you might be inclined to try this.
+    //
+    // But do not! We shouldn't modify a prop or *DIRECTLY* modify a state
+    //props.lettersGuessedSoFar.push(props.letter)
+
+    const newArrayOfLettersGuessedSoFar = [
+      // These are all the elements from the array, spread out
+      ...props.lettersGuessedSoFar,
+
+      // then tack on this new letter to the end
+      props.letter,
+    ]
+
+    props.setLettersGuessedSoFar(newArrayOfLettersGuessedSoFar)
+  }
+
   if (props.used) {
     return <li className="used">{props.letter}</li>
   } else {
-    return <li>{props.letter}</li>
+    return <li onClick={handleClickOnLetter}>{props.letter}</li>
   }
 }
 
@@ -63,6 +82,8 @@ function App() {
             key={letter}
             letter={letter}
             used={lettersGuessedSoFar.includes(letter)}
+            lettersGuessedSoFar={lettersGuessedSoFar}
+            setLettersGuessedSoFar={setLettersGuessedSoFar}
           />
         ))}
       </ul>
