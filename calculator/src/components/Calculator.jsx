@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+// What state does this component keep track of?
+// How do I show that on the page?
+// What events happen to cause state to change and the UI to redraw?
+//
+//
+//  STATE =>  UI
+//  UI => EVENTS
+//  EVENTS => UPDATE STATE
+//  UPDATED STATE => REDRAWS UI (start at the top)
 
 export function Calculator() {
+  const [currentDisplay, setCurrentDisplay] = useState(0)
+
   return (
     <main>
       <div className="calculator">
-        <div className="display">0</div>
+        <div className="display">{currentDisplay}</div>
         <div className="buttons">
           <button className="button fn">AC</button>
           <button className="button fn">&#177;</button>
