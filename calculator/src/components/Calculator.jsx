@@ -16,6 +16,7 @@ import React, { useState } from 'react'
 export function Calculator() {
   const [currentDisplay, setCurrentDisplay] = useState(0)
   const [leftOperand, setLeftOperand] = useState()
+  const [operator, setOperator] = useState()
 
   // Handle the user clicking on a digit
   const handleClickDigit = (event) => {
@@ -23,6 +24,10 @@ export function Calculator() {
 
     setCurrentDisplay(text)
     setLeftOperand(text)
+  }
+
+  const handleClickOperator = (operator) => {
+    setOperator(operator)
   }
 
   return (
@@ -33,7 +38,12 @@ export function Calculator() {
           <button className="button fn">AC</button>
           <button className="button fn">&#177;</button>
           <button className="button fn">&#37;</button>
-          <button className="button op">&#247;</button>
+          <button
+            onClick={() => handleClickOperator('/')}
+            className="button op"
+          >
+            &#247;
+          </button>
           <button onClick={handleClickDigit} className="button">
             7
           </button>
@@ -43,7 +53,12 @@ export function Calculator() {
           <button onClick={handleClickDigit} className="button">
             9
           </button>
-          <button className="button op">&#215;</button>
+          <button
+            onClick={() => handleClickOperator('*')}
+            className="button op"
+          >
+            &#215;
+          </button>
           <button onClick={handleClickDigit} className="button">
             4
           </button>
@@ -53,7 +68,12 @@ export function Calculator() {
           <button onClick={handleClickDigit} className="button">
             6
           </button>
-          <button className="button op">&#8722;</button>
+          <button
+            onClick={() => handleClickOperator('-')}
+            className="button op"
+          >
+            &#8722;
+          </button>
           <button onClick={handleClickDigit} className="button">
             1
           </button>
@@ -63,7 +83,12 @@ export function Calculator() {
           <button onClick={handleClickDigit} className="button">
             3
           </button>
-          <button className="button op">&#43;</button>
+          <button
+            onClick={() => handleClickOperator('+')}
+            className="button op"
+          >
+            &#43;
+          </button>
           <button onClick={handleClickDigit} className="button x2">
             0
           </button>
