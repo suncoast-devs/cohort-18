@@ -65,12 +65,21 @@ export function Calculator() {
     setCurrentDisplay(answer)
   }
 
+  const handleClickClear = () => {
+    setCurrentDisplay(0)
+    setLeftOperand(undefined)
+    setRightOperand(undefined)
+    setOperator(undefined)
+  }
+
   return (
     <main>
       <div className="calculator">
         <div className="display">{currentDisplay}</div>
         <div className="buttons">
-          <button className="button fn">AC</button>
+          <button onClick={handleClickClear} className="button fn">
+            AC
+          </button>
           <button className="button fn">&#177;</button>
           <button className="button fn">&#37;</button>
           <button
