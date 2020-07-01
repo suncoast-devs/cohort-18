@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import HelloWorld from './components/HelloWorld'
 
 function App() {
   const [photoDetails, setPhotoDetails] = useState({})
+  const [currentDate, setCurrentDate] = useState('2020-07-01')
 
   // Use a *ternary* that says:
   //
@@ -11,8 +11,8 @@ function App() {
   const byLine = photoDetails.copyright ? `by ${photoDetails.copyright}` : ''
 
   const loadPhotoFromApi = () => {
-    const url =
-      'https://apodapi.herokuapp.com/api?image_thumbnail_size=300&absolute_thumbnail_url=true&thumbs=true'
+    const url = `https://apodapi.herokuapp.com/api?image_thumbnail_size=300&absolute_thumbnail_url=true&thumbs=true&date=${currentDate}`
+    console.log(`Loading from ${url}`)
 
     // Fetch the URL (get)
     fetch(url)
@@ -36,7 +36,7 @@ function App() {
   // and thus will never change
   // so we'll never see loadPhotoFromApi
   // called again.
-  useEffect(loadPhotoFromApi, [])
+  useEffect(loadPhotoFromApi, [currentDate])
 
   // useEffect(function, arrayToWatch)
   // The function is the work to do
@@ -52,6 +52,23 @@ function App() {
         <h1 className="display-4">Astronomy Pictures</h1>
         <p className="lead">{photoDetails.date}</p>
       </div>
+      <p>
+        <input
+          type="date"
+          value={currentDate}
+          onChange={(event) => {
+            setCurrentDate(event.target.value)
+          }}
+        />
+      </p>
+      <p>
+        <button
+          onClick={() => setCurrentDate('2020-07-01')}
+          className="btn btn-primary"
+        >
+          Today
+        </button>
+      </p>
       <div className="media">
         <img
           src={photoDetails.thumbnail_url}
