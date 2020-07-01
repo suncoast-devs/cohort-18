@@ -22,6 +22,7 @@ export function Calculator() {
     const text = event.target.innerText
 
     setCurrentDisplay(text)
+    setLeftOperand(text)
   }
 
   return (
