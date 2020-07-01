@@ -25,13 +25,13 @@ export function Calculator() {
 
     setCurrentDisplay(text)
 
-    // If we already have a left operand
-    if (leftOperand !== undefined) {
-      // we *must* be setting the *right* operand
-      setRightOperand(text)
-    } else {
-      // otherwise we are still tracking the left operand
+    // If don't we already have a left operand
+    if (leftOperand === undefined) {
+      // otherwise we are setting the right
       setLeftOperand(text)
+    } else {
+      // we *must* be setting the *left* operand
+      setRightOperand(text)
     }
   }
 
