@@ -10,8 +10,19 @@ import React, { useState } from 'react'
 //  EVENTS => UPDATE STATE
 //  UPDATED STATE => REDRAWS UI (start at the top)
 
+//   4           +        5
+//
+//  operand   operator   operand
 export function Calculator() {
   const [currentDisplay, setCurrentDisplay] = useState(0)
+  const [leftOperand, setLeftOperand] = useState()
+
+  // Handle the user clicking on a digit
+  const handleClickDigit = (event) => {
+    const text = event.target.innerText
+
+    setCurrentDisplay(text)
+  }
 
   return (
     <main>
@@ -22,19 +33,39 @@ export function Calculator() {
           <button className="button fn">&#177;</button>
           <button className="button fn">&#37;</button>
           <button className="button op">&#247;</button>
-          <button className="button">7</button>
-          <button className="button">8</button>
-          <button className="button">9</button>
+          <button onClick={handleClickDigit} className="button">
+            7
+          </button>
+          <button onClick={handleClickDigit} className="button">
+            8
+          </button>
+          <button onClick={handleClickDigit} className="button">
+            9
+          </button>
           <button className="button op">&#215;</button>
-          <button className="button">4</button>
-          <button className="button">5</button>
-          <button className="button">6</button>
+          <button onClick={handleClickDigit} className="button">
+            4
+          </button>
+          <button onClick={handleClickDigit} className="button">
+            5
+          </button>
+          <button onClick={handleClickDigit} className="button">
+            6
+          </button>
           <button className="button op">&#8722;</button>
-          <button className="button">1</button>
-          <button className="button">2</button>
-          <button className="button">3</button>
+          <button onClick={handleClickDigit} className="button">
+            1
+          </button>
+          <button onClick={handleClickDigit} className="button">
+            2
+          </button>
+          <button onClick={handleClickDigit} className="button">
+            3
+          </button>
           <button className="button op">&#43;</button>
-          <button className="button x2">0</button>
+          <button onClick={handleClickDigit} className="button x2">
+            0
+          </button>
           <button className="button">.</button>
           <button className="button op">&#61;</button>
         </div>
