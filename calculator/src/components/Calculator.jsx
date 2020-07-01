@@ -17,13 +17,22 @@ export function Calculator() {
   const [currentDisplay, setCurrentDisplay] = useState(0)
   const [leftOperand, setLeftOperand] = useState()
   const [operator, setOperator] = useState()
+  const [rightOperand, setRightOperand] = useState()
 
   // Handle the user clicking on a digit
   const handleClickDigit = (event) => {
     const text = event.target.innerText
 
     setCurrentDisplay(text)
-    setLeftOperand(text)
+
+    // If we already have a left operand
+    if (leftOperand !== undefined) {
+      // we *must* be setting the *right* operand
+      setRightOperand(text)
+    } else {
+      // otherwise we are still tracking the left operand
+      setLeftOperand(text)
+    }
   }
 
   const handleClickOperator = (operator) => {
