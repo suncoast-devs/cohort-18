@@ -21,22 +21,48 @@ export function Calculator() {
 
   // Handle the user clicking on a digit
   const handleClickDigit = (event) => {
-    const text = event.target.innerText
+    const digitText = event.target.innerText
 
-    setCurrentDisplay(text)
+    setCurrentDisplay(digitText)
+
+    const digitAsNumber = parseInt(digitText)
 
     // If don't we already have a left operand
     if (leftOperand === undefined) {
       // otherwise we are setting the right
-      setLeftOperand(text)
+      setLeftOperand(digitAsNumber)
     } else {
       // we *must* be setting the *left* operand
-      setRightOperand(text)
+      setRightOperand(digitAsNumber)
     }
   }
 
   const handleClickOperator = (operator) => {
     setOperator(operator)
+  }
+
+  const handleClickEquals = () => {
+    let answer
+
+    switch (operator) {
+      case '/':
+        answer = leftOperand / rightOperand
+        break
+
+      case '*':
+        answer = leftOperand * rightOperand
+        break
+
+      case '-':
+        answer = leftOperand - rightOperand
+        break
+
+      case '+':
+        answer = leftOperand + rightOperand
+        break
+    }
+
+    setCurrentDisplay(answer)
   }
 
   return (
@@ -102,7 +128,9 @@ export function Calculator() {
             0
           </button>
           <button className="button">.</button>
-          <button className="button op">&#61;</button>
+          <button onClick={handleClickEquals} className="button op">
+            &#61;
+          </button>
         </div>
       </div>
     </main>
