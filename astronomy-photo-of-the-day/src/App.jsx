@@ -8,14 +8,10 @@ function App() {
       <div className="jumbotron">
         <h1 className="display-4">Astronomy Pictures</h1>
       </div>
-      <Switch>
-        <Route exact path="/">
-          <PhotoDetails />
-        </Route>
-        <Route path="/:date">
-          <PhotoDetails />
-        </Route>
-      </Switch>
+      {/* Putting a question mark after a path component makes it OPTIONAL */}
+      <Route path="/:date?">
+        <PhotoDetails />
+      </Route>
     </div>
   )
 }
