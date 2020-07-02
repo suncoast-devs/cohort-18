@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { today } from '../today'
+import { useParams } from 'react-router'
 
 export function PhotoDetails() {
+  // Get the matching params on whatever
+  // route caused US to be rendered.
+  const params = useParams()
+
+  const date = params.date
+
   const [photoDetails, setPhotoDetails] = useState({
     thumbnail_url: undefined,
     hdurl: undefined,
@@ -12,7 +19,7 @@ export function PhotoDetails() {
     description: undefined,
   })
 
-  const [currentDate, setCurrentDate] = useState(today())
+  const [currentDate, setCurrentDate] = useState(date)
 
   const [inputDate, setInputDate] = useState(currentDate)
 
