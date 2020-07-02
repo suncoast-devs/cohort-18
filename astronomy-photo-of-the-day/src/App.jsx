@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
+function today() {
+  const isoDate = new Date().toISOString()
+
+  return isoDate.slice(0, 10)
+}
+
 function App() {
   const [photoDetails, setPhotoDetails] = useState({})
-  const [currentDate, setCurrentDate] = useState('2020-07-01')
+  const [currentDate, setCurrentDate] = useState(today())
 
   // Use a *ternary* that says:
   //
@@ -63,7 +69,7 @@ function App() {
       </p>
       <p>
         <button
-          onClick={() => setCurrentDate('2020-07-01')}
+          onClick={() => setCurrentDate(today())}
           className="btn btn-primary"
         >
           Today
