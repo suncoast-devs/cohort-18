@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { today } from '../today'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
 export function PhotoDetails() {
+  // An object that lets us SEE and MANIPULATE the history part of the browser
+  const history = useHistory()
+
   // Get the matching params on whatever
   // route caused US to be rendered.
   const params = useParams()
@@ -89,7 +92,10 @@ export function PhotoDetails() {
         <button
           className="btn btn-primary btn-sm"
           onClick={() => {
-            // setCurrentDate(inputDate)
+            // Need a JavaScript code way of doing navigation
+            // How do we force the user to navigate
+
+            history.push(`/${inputDate}`)
           }}
         >
           Go
