@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
-function today() {
-  const isoDate = new Date().toISOString()
-
-  return isoDate.slice(0, 10)
-}
+import { today } from './today'
 
 function App() {
   const [photoDetails, setPhotoDetails] = useState({})
