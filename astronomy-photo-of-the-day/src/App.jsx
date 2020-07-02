@@ -47,6 +47,12 @@ function App() {
   // those values *CHANGE* the function
   // is called!
 
+  const imageURLToShow =
+    photoDetails.thumbnail_url ||
+    photoDetails.hdurl ||
+    photoDetails.image_thumbnail ||
+    'http://flickr.com/foo.jpg'
+
   return (
     <div className="container">
       <div className="jumbotron">
@@ -72,7 +78,8 @@ function App() {
       </p>
       <div className="media">
         <img
-          src={photoDetails.thumbnail_url}
+          width={300}
+          src={imageURLToShow}
           className="mr-3"
           alt={photoDetails.title}
         />
