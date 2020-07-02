@@ -48,6 +48,12 @@ function App() {
   // called again.
   useEffect(loadPhotoFromApi, [currentDate])
 
+  // Whenever the currentDate changes also refresh
+  // the inputDate
+  useEffect(() => {
+    setInputDate(currentDate)
+  }, [currentDate])
+
   // useEffect(function, arrayToWatch)
   // The function is the work to do
   //
