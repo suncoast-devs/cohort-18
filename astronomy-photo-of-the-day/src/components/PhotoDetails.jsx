@@ -11,7 +11,9 @@ export function PhotoDetails() {
   // route caused US to be rendered.
   const params = useParams()
 
-  const date = params.date
+  // If we have a "date" from the router params, use that
+  // ... otherwise use today's date
+  const date = params.date || today()
 
   const [photoDetails, setPhotoDetails] = useState({
     thumbnail_url: undefined,
@@ -102,7 +104,7 @@ export function PhotoDetails() {
         </button>
       </p>
       <p>
-        <Link className="btn btn-primary" to={`/${today()}`}>
+        <Link className="btn btn-primary" to="/">
           Today
         </Link>
         {/* <button
