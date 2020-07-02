@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { today } from './today'
 
 function App() {
-  const [photoDetails, setPhotoDetails] = useState({})
+  const [photoDetails, setPhotoDetails] = useState({
+    thumbnail_url: undefined,
+    hdurl: undefined,
+    image_thumbnail: undefined,
+    copyright: undefined,
+    date: undefined,
+    title: undefined,
+    description: undefined,
+  })
   const [currentDate, setCurrentDate] = useState(today())
 
   // Use a *ternary* that says:
