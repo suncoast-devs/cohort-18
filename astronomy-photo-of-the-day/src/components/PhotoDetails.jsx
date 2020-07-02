@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { today } from '../today'
 import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export function PhotoDetails() {
   // Get the matching params on whatever
@@ -19,9 +20,7 @@ export function PhotoDetails() {
     description: undefined,
   })
 
-  const [currentDate, setCurrentDate] = useState(date)
-
-  const [inputDate, setInputDate] = useState(currentDate)
+  const [inputDate, setInputDate] = useState(date)
 
   // Use a *ternary* that says:
   //
@@ -30,7 +29,7 @@ export function PhotoDetails() {
   const byLine = photoDetails.copyright ? `by ${photoDetails.copyright}` : ''
 
   const loadPhotoFromApi = () => {
-    const url = `https://apodapi.herokuapp.com/api?image_thumbnail_size=300&absolute_thumbnail_url=true&thumbs=true&date=${currentDate}`
+    const url = `https://apodapi.herokuapp.com/api?image_thumbnail_size=300&absolute_thumbnail_url=true&thumbs=true&date=${date}`
     console.log(`Loading from ${url}`)
 
     // Fetch the URL (get)
@@ -55,13 +54,13 @@ export function PhotoDetails() {
   // and thus will never change
   // so we'll never see loadPhotoFromApi
   // called again.
-  useEffect(loadPhotoFromApi, [currentDate])
+  useEffect(loadPhotoFromApi, [date])
 
   // Whenever the currentDate changes also refresh
   // the inputDate
   useEffect(() => {
-    setInputDate(currentDate)
-  }, [currentDate])
+    setInputDate(date)
+  }, [date])
 
   // useEffect(function, arrayToWatch)
   // The function is the work to do
@@ -89,18 +88,25 @@ export function PhotoDetails() {
         />
         <button
           className="btn btn-primary btn-sm"
-          onClick={() => setCurrentDate(inputDate)}
+          onClick={() => {
+            // setCurrentDate(inputDate)
+          }}
         >
           Go
         </button>
       </p>
       <p>
-        <button
-          onClick={() => setCurrentDate(today())}
+        <Link className="btn btn-primary" to={`/${today()}`}>
+          Today
+        </Link>
+        {/* <button
+          onClick={() => {
+            // setCurrentDate(today())
+          }}
           className="btn btn-primary"
         >
           Today
-        </button>
+        </button> */}
       </p>
       <div className="media">
         <img
