@@ -12,6 +12,7 @@ function App() {
     description: undefined,
   })
   const [currentDate, setCurrentDate] = useState(today())
+  const [inputDate, setInputDate] = useState(currentDate)
 
   // Use a *ternary* that says:
   //
@@ -70,11 +71,18 @@ function App() {
       <p>
         <input
           type="date"
-          value={currentDate}
+          className="mr-2"
+          value={inputDate}
           onChange={(event) => {
-            setCurrentDate(event.target.value)
+            setInputDate(event.target.value)
           }}
         />
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={() => setCurrentDate(inputDate)}
+        >
+          Go
+        </button>
       </p>
       <p>
         <button
