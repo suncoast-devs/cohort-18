@@ -1,14 +1,60 @@
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+@import 'bootstrap';
+
+:root {
+  font: 16px / 1 sans-serif;
 }
 
-code {
-  color: #e01a76;
+html {
+  height: 100%;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+.taco-listing {
+}
+
+ul.timeline {
+  $timeline-circle-diameter: 20px;
+  $timeline-line-width: 2px;
+  $timeline-circle-color: #22c0e8;
+  $timeline-line-color: #d4d9df;
+  $timeline-line-offset: $timeline-circle-diameter * 1.5 - $timeline-line-width /
+    2;
+
+  list-style-type: none;
+  position: relative;
+
+  &:before {
+    content: ' ';
+    background: $timeline-line-color;
+    display: inline-block;
+    position: absolute;
+    left: $timeline-line-offset;
+    width: $timeline-line-width;
+    height: 100%;
+  }
+
+  > li {
+    margin: $timeline-circle-diameter 0;
+    padding-left: $timeline-circle-diameter;
+
+    &:hover:before {
+      background: $timeline-circle-color;
+    }
+
+    &:before {
+      content: ' ';
+      background: white;
+      border-radius: 50%;
+      display: inline-block;
+      position: absolute;
+      border: $timeline-line-width solid $timeline-circle-color;
+      left: $timeline-circle-diameter;
+      width: $timeline-circle-diameter;
+      height: $timeline-circle-diameter;
+    }
+  }
 }
