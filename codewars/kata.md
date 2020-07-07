@@ -20,3 +20,9 @@
 - https://www.codewars.com/kata/50654ddff44f800200000007
 - https://www.codewars.com/kata/5933a1f8552bc2750a0000ed
 - https://www.codewars.com/kata/56b7f2f3f18876033f000307/train/javascript
+
+- https://www.codewars.com/kata/56598d8076ee7a0759000087/train/javascript
+- https://www.codewars.com/kata/56747fd5cb988479af000028/train/javascript
+- https://www.codewars.com/kata/52755006cc238fcae70000ed/train/javascript
+
+
