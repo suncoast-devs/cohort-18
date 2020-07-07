@@ -15,5 +15,18 @@ namespace TacoTuesday.Models
         public string Address { get; set; }
 
         public string Telephone { get; set; }
+
+
+        public int UpvoteCount { get; private set; } = 0;
+        public void IncrementUpvoteCount()
+        {
+            this.UpvoteCount++;
+        }
+
+        public int DownvoteCount { get; private set; } = 0;
+        public void IncrementDownvoteCount()
+        {
+            this.DownvoteCount++;
+        }
     }
 }
