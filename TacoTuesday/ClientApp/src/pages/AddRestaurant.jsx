@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 
 export function AddRestaurant() {
+  const history = useHistory()
+
   const [newRestaurant, setNewRestaurant] = useState({
     name: '',
     description: '',
@@ -22,11 +25,31 @@ export function AddRestaurant() {
     })
   }
 
+  const handleFormSubmit = event => {
+    event.preventDefault()
+
+    console.log(newRestaurant)
+
+    // Use fetch to POST a new restaurant
+    fetch('/api/Restaurants', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newRestaurant),
+    })
+      .then(response => response.json())
+      .then(apiData => {
+        console.log(apiData)
+
+        // Go back to the home page
+        history.push('/')
+      })
+  }
+
   return (
     <div className="card">
       <div className="card-header">Add a Restaurant</div>
       <div className="card-body">
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
