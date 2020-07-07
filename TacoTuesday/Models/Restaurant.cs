@@ -16,7 +16,12 @@ namespace TacoTuesday.Models
 
         public string Telephone { get; set; }
 
-
+        // This won't be allowed from another class (say a controller)
+        // someRestaurantObject.UpvoteCount = 5
+        //
+        // This is allowed
+        // Console.WriteLine(someRestaurantObject.UpvoteCount)
+        //
         public int UpvoteCount { get; private set; } = 0;
         public void IncrementUpvoteCount()
         {
