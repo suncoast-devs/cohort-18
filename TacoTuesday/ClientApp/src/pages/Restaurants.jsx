@@ -13,19 +13,29 @@ function SingleRestaurantForList(props) {
       </div>
       <p className="mb-1">{props.restaurant.address}</p>
       <small className="mr-3">
-        <button className="btn btn-success btn-sm">
+        <button
+          className="btn btn-success btn-sm"
+          onClick={event =>
+            props.handleVote(event, props.restaurant.id, 'upvote')
+          }
+        >
           <span className="mr-2" role="img" aria-label="upvote">
             👍🏻
           </span>
-          5
+          {props.restaurant.upvoteCount}
         </button>
       </small>
       <small className="mr-3">
-        <button className="btn btn-danger btn-sm">
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={event =>
+            props.handleVote(event, props.restaurant.id, 'downvote')
+          }
+        >
           <span className="mr-2" role="img" aria-label="downvote">
             👎🏻
           </span>{' '}
-          3
+          {props.restaurant.downvoteCount}
         </button>
       </small>
     </Link>
@@ -37,13 +47,7 @@ export function Restaurants(props) {
 
   console.log(props)
 
-  useEffect(() => {
-    // let url = '/api/Restaurants'
-
-    // if (props.activeFilter !== "") {
-    //   url = `/api/Restaurants?filter=${props.activeFilter}`
-    // }
-
+  function loadRestaurants() {
     const url =
       props.activeFilter.length === 0
         ? `/api/Restaurants`
@@ -60,6 +64,23 @@ export function Restaurants(props) {
         console.log(apiData)
         setRestaurants(apiData)
       })
+  }
+
+  const handleVote = (event, id, type) => {
+    event.preventDefault()
+
+    const url = `/api/RestaurantVotes/${id}/${type}`
+
+    fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+    }).then(() => {
+      loadRestaurants()
+    })
+  }
+
+  useEffect(() => {
+    loadRestaurants()
   }, [props.activeFilter]) // <== [props.activeFilter] is the list of dependencies, so this runs when the component is first used **AND** when props.activeFilter _changes_
 
   return (
@@ -79,6 +100,7 @@ export function Restaurants(props) {
           <SingleRestaurantForList
             key={restaurant.id}
             restaurant={restaurant}
+            handleVote={handleVote}
           />
         ))}
       </div>
