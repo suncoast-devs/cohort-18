@@ -4,6 +4,8 @@ import { useHistory } from 'react-router'
 export function AddRestaurant() {
   const history = useHistory()
 
+  const [errorMessage, setErrorMessage] = useState()
+
   const [newRestaurant, setNewRestaurant] = useState({
     name: '',
     description: '',
@@ -40,8 +42,13 @@ export function AddRestaurant() {
       .then(apiData => {
         console.log(apiData)
 
-        // Go back to the home page
-        history.push('/')
+        if (apiData.status === 400) {
+          const newMessage = Object.values(apiData.errors).join(' ')
+          setErrorMessage(newMessage)
+        } else {
+          // Go back to the home page
+          history.push('/')
+        }
       })
   }
 
@@ -49,6 +56,11 @@ export function AddRestaurant() {
     <div className="card">
       <div className="card-header">Add a Restaurant</div>
       <div className="card-body">
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleFormSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
