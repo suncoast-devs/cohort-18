@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import './custom.scss'
@@ -10,14 +10,16 @@ import { ShowRestaurant } from './pages/ShowRestaurant'
 import { NavBar } from './components/NavBar'
 
 export function App() {
+  const [activeFilter, setActiveFilter] = useState('')
+
   return (
     <>
-      <NavBar />
+      <NavBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       <main className="container-fluid p-4">
         <Header />
         <Switch>
           <Route exact path="/">
-            <Restaurants />
+            <Restaurants activeFilter={activeFilter} />
           </Route>
           <Route path="/restaurants/add">
             <AddRestaurant />

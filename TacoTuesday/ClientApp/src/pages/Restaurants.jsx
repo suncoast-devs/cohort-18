@@ -32,12 +32,27 @@ function SingleRestaurantForList(props) {
   )
 }
 
-export function Restaurants() {
+export function Restaurants(props) {
   const [restaurants, setRestaurants] = useState([])
 
+  console.log(props)
+
   useEffect(() => {
+    // let url = '/api/Restaurants'
+
+    // if (props.activeFilter !== "") {
+    //   url = `/api/Restaurants?filter=${props.activeFilter}`
+    // }
+
+    const url =
+      props.activeFilter.length === 0
+        ? `/api/Restaurants`
+        : `/api/Restaurants?filter=${props.activeFilter}`
+
+    console.log(`The URL for fetching restaurants is ${url}`)
+
     // code to do when the dependencies change
-    fetch('/api/Restaurants')
+    fetch(url)
       .then(response => response.json())
       .then(apiData => {
         // Finally have data from the API
@@ -45,7 +60,7 @@ export function Restaurants() {
         console.log(apiData)
         setRestaurants(apiData)
       })
-  }, []) // <== [] is the list of dependencies, right now there are none, so only runs code at start
+  }, [props.activeFilter]) // <== [props.activeFilter] is the list of dependencies, so this runs when the component is first used **AND** when props.activeFilter _changes_
 
   return (
     <>

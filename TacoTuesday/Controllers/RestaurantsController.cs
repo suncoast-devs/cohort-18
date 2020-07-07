@@ -26,16 +26,24 @@ namespace TacoTuesday.Controllers
             _context = context;
         }
 
-        // GET: api/Restaurants
+        // GET: api/Restaurants?filter=Best
         //
         // Returns a list of all your Restaurants
         //
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants()
+        public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants(string filter)
         {
-            // Uses the database context in `_context` to request all of the Restaurants and
-            // return them as a JSON array.
-            return await _context.Restaurants.ToListAsync();
+            if (filter == null)
+            {
+                return await _context.Restaurants.ToListAsync();
+            }
+            else
+            {
+                // Only return the restaurants that have the contents of the filter variable within their Name
+                return await _context.Restaurants.
+                                 Where(restaurant => restaurant.Name.Contains(filter)).
+                                 ToListAsync();
+            }
         }
 
         // GET: api/Restaurants/5
