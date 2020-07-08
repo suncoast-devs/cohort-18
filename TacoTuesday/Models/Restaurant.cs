@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TacoTuesday.Models
@@ -15,6 +16,9 @@ namespace TacoTuesday.Models
         public string Address { get; set; }
 
         public string Telephone { get; set; }
+
+        // Add a property that is the list of associated reviews
+        public List<Review> Reviews { get; set; }
 
         // This won't be allowed from another class (say a controller)
         // someRestaurantObject.UpvoteCount = 5

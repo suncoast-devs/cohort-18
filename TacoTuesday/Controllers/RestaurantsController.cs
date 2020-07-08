@@ -35,7 +35,10 @@ namespace TacoTuesday.Controllers
         {
             if (filter == null)
             {
-                return await _context.Restaurants.OrderBy(restaurant => restaurant.Name).ToListAsync();
+                return await _context.Restaurants.
+                                  OrderBy(restaurant => restaurant.Name).
+                                  Include(restaurant => restaurant.Reviews).
+                                  ToListAsync();
             }
             else
             {
@@ -43,6 +46,7 @@ namespace TacoTuesday.Controllers
                 return await _context.Restaurants.
                                  Where(restaurant => restaurant.Name.Contains(filter)).
                                  OrderBy(restaurant => restaurant.Name).
+                                 Include(restaurant => restaurant.Reviews).
                                  ToListAsync();
             }
         }
@@ -57,7 +61,10 @@ namespace TacoTuesday.Controllers
         public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
         {
             // Find the restaurant in the database using `FindAsync` to look it up by id
-            var restaurant = await _context.Restaurants.FindAsync(id);
+            var restaurant = await _context.Restaurants.
+                               Where(restaurant => restaurant.Id == id).
+                               Include(restaurant => restaurant.Reviews).
+                               FirstOrDefaultAsync();
 
             // If we didn't find anything, we receive a `null` in return
             if (restaurant == null)
