@@ -9,7 +9,7 @@ function SingleRestaurantForList(props) {
     >
       <div className="d-flex w-100 justify-content-between">
         <h5 className="mb-1">{props.restaurant.name}</h5>
-        <small>5 Reviews</small>
+        <small>{props.restaurant.reviews.length} Reviews</small>
       </div>
       <p className="mb-1">{props.restaurant.address}</p>
       <small className="mr-3">

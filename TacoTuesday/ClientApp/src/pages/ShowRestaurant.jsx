@@ -13,6 +13,7 @@ export function ShowRestaurant() {
     description: '',
     address: '',
     telephone: '',
+    reviews: [],
   })
 
   useEffect(() => {
@@ -43,35 +44,22 @@ export function ShowRestaurant() {
       </div>
 
       <div className="row mb-5">
-        <div className="col-12">
-          <h3>Reviews</h3>
-          <ul className="timeline">
-            <li>
-              <p className="mb-2">
-                Wow, great food
-                <span className="float-right">21 March, 2014</span>
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                scelerisque diam non nisi semper, et elementum lorem ornare.
-                Maecenas placerat facilisis mollis. Duis sagittis ligula in
-                sodales vehicula....
-              </p>
-            </li>
-            <li>
-              <p className="mb-2">
-                Wow, great food
-                <span className="float-right">21 March, 2014</span>
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                scelerisque diam non nisi semper, et elementum lorem ornare.
-                Maecenas placerat facilisis mollis. Duis sagittis ligula in
-                sodales vehicula....
-              </p>
-            </li>
-          </ul>
-        </div>
+        {restaurant.reviews.length > 0 && (
+          <div className="col-12">
+            <h3>Reviews</h3>
+            <ul className="timeline">
+              {restaurant.reviews.map(review => (
+                <li key={review.id}>
+                  <p className="mb-2">
+                    {review.summary}
+                    <span className="float-right">{review.createdAt}</span>
+                  </p>
+                  <p>{review.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="card">
