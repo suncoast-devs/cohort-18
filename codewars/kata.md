@@ -25,4 +25,6 @@
 - https://www.codewars.com/kata/56747fd5cb988479af000028/train/javascript
 - https://www.codewars.com/kata/52755006cc238fcae70000ed/train/javascript
 
-
+- https://www.codewars.com/kata/5545f109004975ea66000086
+- https://www.codewars.com/kata/tip-calculator
+- https://www.codewars.com/kata/5a4ea304b3bfa89a9900008e/train/javascript
