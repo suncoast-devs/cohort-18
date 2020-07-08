@@ -6,7 +6,13 @@ export function ShowRestaurant() {
   const params = useParams()
   // If we were using Class components, we would have to
   // use this code:  this.props.match.params.id
-  const id = params.id
+  const id = parseInt(params.id)
+
+  const [newReview, setNewReview] = useState({
+    body: '',
+    summary: '',
+    restaurantId: id,
+  })
 
   const [restaurant, setRestaurant] = useState({
     name: '',
@@ -16,16 +22,38 @@ export function ShowRestaurant() {
     reviews: [],
   })
 
+  const fetchRestaurant = async () => {
+    const response = await fetch(`/api/Restaurants/${id}`)
+    const apiData = await response.json()
+
+    setRestaurant(apiData)
+  }
+
   useEffect(() => {
-    const fetchRestaurant = async () => {
-      const response = await fetch(`/api/Restaurants/${id}`)
-      const apiData = await response.json()
-
-      setRestaurant(apiData)
-    }
-
     fetchRestaurant()
   }, [])
+
+  const handleNewReviewFieldChange = event => {
+    const whichFieldChanged = event.target.id
+    const value = event.target.value
+
+    setNewReview({ ...newReview, [whichFieldChanged]: value })
+  }
+
+  const handleNewReviewSubmit = event => {
+    event.preventDefault()
+
+    fetch(`/api/Reviews`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newReview),
+    })
+      .then(response => response.json)
+      .then(apiResponse => {
+        fetchRestaurant()
+        setNewReview({ ...newReview, body: '', summary: '' })
+      })
+  }
 
   return (
     <div className="taco-listing">
@@ -65,7 +93,7 @@ export function ShowRestaurant() {
       <div className="card">
         <div className="card-header">Enter your own review</div>
         <div className="card-body">
-          <form>
+          <form onSubmit={handleNewReviewSubmit}>
             <div className="form-group">
               <label htmlFor="summary">Summary</label>
               <input
@@ -73,6 +101,8 @@ export function ShowRestaurant() {
                 className="form-control"
                 id="summary"
                 aria-describedby="summaryHelp"
+                value={newReview.summary}
+                onChange={handleNewReviewFieldChange}
               />
               <small id="summaryHelp" className="form-text text-muted">
                 Enter a brief summary of your review. Example:{' '}
@@ -81,7 +111,13 @@ export function ShowRestaurant() {
             </div>
             <div className="form-group">
               <label for="review">Review</label>
-              <textarea type="text" className="form-control" id="review" />
+              <textarea
+                type="text"
+                className="form-control"
+                id="body"
+                value={newReview.body}
+                onChange={handleNewReviewFieldChange}
+              />
             </div>
             <button type="submit" className="btn btn-primary">
               Submit
