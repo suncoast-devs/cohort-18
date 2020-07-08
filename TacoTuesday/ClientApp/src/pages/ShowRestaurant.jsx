@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useParams } from 'react-router'
 
 export function ShowRestaurant() {
+  const params = useParams()
+  // If we were using Class components, we would have to
+  // use this code:  this.props.match.params.id
+  const id = params.id
+
+  const [restaurant, setRestaurant] = useState({
+    name: '',
+    description: '',
+    address: '',
+    telephone: '',
+  })
+
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      const response = await fetch(`/api/Restaurants/${id}`)
+      const apiData = await response.json()
+
+      setRestaurant(apiData)
+    }
+
+    fetchRestaurant()
+  }, [])
+
   return (
     <div className="taco-listing">
       <div className="media mb-5">
@@ -9,17 +33,12 @@ export function ShowRestaurant() {
           🌮
         </span>
         <div className="media-body">
-          <h1 className="mt-0">Grump Gringo</h1>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-          scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-          vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-          vulputate fringilla. Donec lacinia congue felis in faucibus.
+          <h1 className="mt-0">{restaurant.name}</h1>
+          {restaurant.description}
           <address className="mt-3">
-            <Link to="maps.google.com">
-              1355 Market St, Suite 900 San Francisco, CA 94103
-            </Link>
+            <Link to="maps.google.com">{restaurant.address}</Link>
           </address>
-          <Link to="tel:867-5309">867-5309</Link>
+          <a href={`tel:${restaurant.telephone}`}>{restaurant.telephone}</a>
         </div>
       </div>
 

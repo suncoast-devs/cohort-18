@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function SingleRestaurantForList(props) {
   return (
     <Link
-      to="/restaurants/42"
+      to={`/restaurants/${props.restaurant.id}`}
       className="list-group-item list-group-item-action"
     >
       <div className="d-flex w-100 justify-content-between">
