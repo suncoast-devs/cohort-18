@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router'
+import format from 'date-fns/format'
+
+// Example: "Monday, July 6th, 2020 at 10:50 PM"
+const dateFormat = `EEEE, MMMM do, yyyy 'at' h:mm aaa`
 
 export function ShowRestaurant() {
   const params = useParams()
@@ -80,7 +84,9 @@ export function ShowRestaurant() {
                 <li key={review.id}>
                   <p className="mb-2">
                     {review.summary}
-                    <span className="float-right">{review.createdAt}</span>
+                    <span className="float-right">
+                      {format(new Date(review.createdAt), dateFormat)}
+                    </span>
                   </p>
                   <p>{review.body}</p>
                 </li>
