@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Route } from 'react-router'
 import { Link } from 'react-router-dom'
+import { isLoggedIn, logout } from '../auth'
 
 export function NavBar(props) {
   const [filterText, setFilterText] = useState('')
@@ -10,6 +11,14 @@ export function NavBar(props) {
 
     // Set the parent's activeFilter state to whatever our current filterText is
     props.setActiveFilter(filterText)
+  }
+
+  const handleLogout = () => {
+    // Forget the auth key
+    logout()
+
+    // Force reload the home page
+    window.location = '/'
   }
 
   return (
@@ -40,11 +49,21 @@ export function NavBar(props) {
             </Link>
           </li>
         </ul>
-        <Link className="btn btn-success mr-2" to="/signup">
-          Signup
-        </Link>
+
+        {isLoggedIn() || (
+          <Link className="btn btn-success mr-2" to="/signin">
+            Signin
+          </Link>
+        )}
+
+        {isLoggedIn() || (
+          <Link className="btn btn-success mr-2" to="/signup">
+            Signup
+          </Link>
+        )}
+
         <Route exact path="/">
-          <form className="form-inline my-2 my-lg-0">
+          <form className="form-inline mr-2 my-2 my-lg-0">
             <Link className="btn btn-success mr-2" to="/restaurants/add">
               + Add
             </Link>
@@ -64,6 +83,12 @@ export function NavBar(props) {
             </span>
           </form>
         </Route>
+
+        {isLoggedIn() && (
+          <span className="btn btn-success" onClick={handleLogout}>
+            Sign out
+          </span>
+        )}
       </div>
     </nav>
   )
