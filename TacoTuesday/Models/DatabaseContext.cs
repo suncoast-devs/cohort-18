@@ -19,6 +19,8 @@ namespace TacoTuesday.Models
         // Tell the context about the Review collection/table
         public DbSet<Review> Reviews { get; set; }
 
+        // Tell the context about the User collection/table
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
