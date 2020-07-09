@@ -8,6 +8,7 @@ import { Header } from './components/Header'
 import { AddRestaurant } from './pages/AddRestaurant'
 import { ShowRestaurant } from './pages/ShowRestaurant'
 import { NavBar } from './components/NavBar'
+import { SignUp } from './pages/Signup'
 
 export function App() {
   const [activeFilter, setActiveFilter] = useState('')
@@ -20,6 +21,9 @@ export function App() {
         <Switch>
           <Route exact path="/">
             <Restaurants activeFilter={activeFilter} />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
           </Route>
           <Route path="/restaurants/add">
             <AddRestaurant />
