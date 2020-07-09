@@ -17,6 +17,8 @@ namespace TacoTuesday.Models
 
         public string Telephone { get; set; }
 
+        public int UserId { get; set; }
+
         // Add a property that is the list of associated reviews
         public List<Review> Reviews { get; set; }
 

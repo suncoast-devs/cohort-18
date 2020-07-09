@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
+import { authHeader } from '../auth'
 
 export function AddRestaurant() {
   const history = useHistory()
@@ -35,19 +36,25 @@ export function AddRestaurant() {
     // Use fetch to POST a new restaurant
     fetch('/api/Restaurants', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(newRestaurant),
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 401) {
+          return { status: 401, errors: { login: 'Not Authorized ' } }
+        } else {
+          return response.json()
+        }
+      })
       .then(apiData => {
         console.log(apiData)
 
-        if (apiData.status === 400) {
-          const newMessage = Object.values(apiData.errors).join(' ')
-          setErrorMessage(newMessage)
-        } else {
+        if (apiData.status === 201) {
           // Go back to the home page
           history.push('/')
+        } else {
+          const newMessage = Object.values(apiData.errors).join(' ')
+          setErrorMessage(newMessage)
         }
       })
   }

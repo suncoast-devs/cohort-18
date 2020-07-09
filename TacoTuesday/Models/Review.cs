@@ -9,6 +9,8 @@ namespace TacoTuesday.Models
         public string Body { get; set; }
         public DateTime CreatedAt { get; private set; } = DateTime.Now;
 
+        public int UserId { get; set; }
+
         // A review BELONGS TO a restaurant, so we have to define the RestaurantId (foreign key)
         // that says what restaurant this is for
         public int RestaurantId { get; set; }
