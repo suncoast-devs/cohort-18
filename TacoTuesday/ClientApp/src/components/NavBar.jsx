@@ -64,9 +64,11 @@ export function NavBar(props) {
 
         <Route exact path="/">
           <form className="form-inline mr-2 my-2 my-lg-0">
-            <Link className="btn btn-success mr-2" to="/restaurants/add">
-              + Add
-            </Link>
+            {isLoggedIn() && (
+              <Link className="btn btn-success mr-2" to="/restaurants/add">
+                + Add
+              </Link>
+            )}
             <input
               className="form-control mr-sm-2"
               type="search"

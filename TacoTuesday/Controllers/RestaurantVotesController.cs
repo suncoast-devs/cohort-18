@@ -1,4 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TacoTuesday.Models;
@@ -27,8 +30,26 @@ namespace TacoTuesday.Controllers
         // Examples:   /api/RestaurantVotes/42/upvote
         // Examples:   /api/RestaurantVotes/100/downvote
         [HttpPost("{id}/{upOrDown}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PostRestaurantVote(int id, string upOrDown)
         {
+            // If there is already an existing vote, return a bad request
+            var existingVote = await _context.RestaurantVotes.AnyAsync(restaurantVote => restaurantVote.UserId == GetCurrentUserId() && restaurantVote.RestaurantId == id);
+            if (existingVote)
+            {
+                return BadRequest();
+            }
+
+            // Add the restaurant vote to the table
+            var restaurantVote = new RestaurantVote
+            {
+                RestaurantId = id,
+                UserId = GetCurrentUserId(),
+                UpOrDown = upOrDown
+            };
+            await _context.RestaurantVotes.AddAsync(restaurantVote);
+
+
             // Find the restaurant in the database using `FindAsync` to look it up by id
             var restaurant = await _context.Restaurants.FindAsync(id);
 
@@ -60,6 +81,13 @@ namespace TacoTuesday.Controllers
 
             // return NoContent to indicate the update was done.
             return NoContent();
+        }
+
+        // Private helper method to get the JWT claim related to the user ID
+        private int GetCurrentUserId()
+        {
+            // Get the User Id from the claim and then parse it as an integer.
+            return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);
         }
     }
 }

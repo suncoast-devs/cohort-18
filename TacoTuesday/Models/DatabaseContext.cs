@@ -22,6 +22,9 @@ namespace TacoTuesday.Models
         // Tell the context about the User collection/table
         public DbSet<User> Users { get; set; }
 
+        // Tell the context about the RestaurantVotes collection/table
+        public DbSet<RestaurantVote> RestaurantVotes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (LOG_SQL_STATEMENTS_IN_DEVELOPMENT && Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
