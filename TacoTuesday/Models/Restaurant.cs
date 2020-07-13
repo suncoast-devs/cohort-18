@@ -19,6 +19,10 @@ namespace TacoTuesday.Models
 
         public int UserId { get; set; }
 
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
+
         // Add a property that is the list of associated reviews
         public List<Review> Reviews { get; set; }
 

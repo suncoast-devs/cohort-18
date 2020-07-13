@@ -49,12 +49,12 @@ export function AddRestaurant() {
       .then(apiData => {
         console.log(apiData)
 
-        if (apiData.status === 201) {
-          // Go back to the home page
-          history.push('/')
-        } else {
+        if (apiData.errors) {
           const newMessage = Object.values(apiData.errors).join(' ')
           setErrorMessage(newMessage)
+        } else {
+          // Go back to the home page
+          history.push('/')
         }
       })
   }

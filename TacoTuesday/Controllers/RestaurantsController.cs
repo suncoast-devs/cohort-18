@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Geocoding.Microsoft;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TacoTuesday.Models;
 
 namespace TacoTuesday.Controllers
@@ -21,11 +23,15 @@ namespace TacoTuesday.Controllers
         // This is the variable you use to have access to your database
         private readonly DatabaseContext _context;
 
+        // Bing API key for doing geocoding
+        private readonly string BING_MAPS_KEY;
+
         // Constructor that recives a reference to your database context
         // and stores it in _context for you to use in your API methods
-        public RestaurantsController(DatabaseContext context)
+        public RestaurantsController(DatabaseContext context, IConfiguration config)
         {
             _context = context;
+            BING_MAPS_KEY = config["BING_MAPS_KEY"];
         }
 
         // GET: api/Restaurants?filter=Best
@@ -147,6 +153,22 @@ namespace TacoTuesday.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<Restaurant>> PostRestaurant(Restaurant restaurant)
         {
+            // Create a new geocoder
+            var geocoder = new BingMapsGeocoder(BING_MAPS_KEY);
+
+            // Request this address to be geocoded.
+            var geocodedAddresses = await geocoder.GeocodeAsync(restaurant.Address);
+
+            // ... and pick out the best address sorted by the confidence level
+            var bestGeocodedAddress = geocodedAddresses.OrderBy(address => address.Confidence).LastOrDefault();
+
+            // If we have a best geocoded address, use the latitude and longitude from that result
+            if (bestGeocodedAddress != null)
+            {
+                restaurant.Latitude = bestGeocodedAddress.Coordinates.Latitude;
+                restaurant.Longitude = bestGeocodedAddress.Coordinates.Longitude;
+            }
+
             // Set the UserID to the current user id, this overrides anything the user specifies.
             restaurant.UserId = GetCurrentUserId();
 

@@ -10,6 +10,8 @@
     <UserSecretsId>e0625f35-963d-4b20-af8d-dfa37114ad03</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Geocoding.Core" Version="4.0.1" />
+    <PackageReference Include="Geocoding.Microsoft" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
