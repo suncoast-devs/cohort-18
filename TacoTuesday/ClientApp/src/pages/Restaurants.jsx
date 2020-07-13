@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ReactMapGL, { Popup, Marker } from 'react-map-gl'
 import { Link } from 'react-router-dom'
 import { authHeader, isLoggedIn } from '../auth'
 
@@ -52,6 +53,20 @@ function SingleRestaurantForList(props) {
 export function Restaurants(props) {
   const [restaurants, setRestaurants] = useState([])
 
+  const [viewport, setViewport] = useState({
+    width: 500,
+    height: 500,
+    latitude: 27.77101804911986,
+    longitude: -82.66090611749074,
+    zoom: 3,
+  })
+
+  // null if we have no selected restaurant
+  //
+  // or a restaurant object representing which taco restaurant we want to show
+  //
+  const [selectedMapRestaurant, setSelectedMapRestaurant] = useState(null)
+
   console.log(props)
 
   function loadRestaurants() {
@@ -102,6 +117,59 @@ export function Restaurants(props) {
           </li>
         </ol>
       </nav>
+
+      <div className="my-3 d-flex justify-content-center">
+        <ReactMapGL
+          {...viewport}
+          // onViewportChange={newViewport => setViewport(newViewport)}
+          onViewportChange={setViewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        >
+          {selectedMapRestaurant && (
+            <Popup
+              latitude={selectedMapRestaurant.latitude}
+              longitude={selectedMapRestaurant.longitude}
+              closeButton={true}
+              closeOnClick={false}
+              onClose={() => setSelectedMapRestaurant(null)}
+              offsetTop={-5}
+            >
+              <div className="card my-3">
+                <div className="card-header">
+                  <Link to={`/restaurants/${selectedMapRestaurant.id}`}>
+                    {selectedMapRestaurant.name}
+                  </Link>
+                </div>
+                <div className="card-body">
+                  {selectedMapRestaurant.description}
+                </div>
+              </div>
+            </Popup>
+          )}
+
+          {restaurants
+            .filter(
+              restaurant =>
+                restaurant.latitude != 0.0 && restaurant.longitude != 0.0
+            )
+            .map(restaurant => (
+              <Marker
+                key={restaurant.id}
+                latitude={restaurant.latitude}
+                longitude={restaurant.longitude}
+              >
+                <span
+                  role="img"
+                  aria-label="taco"
+                  onClick={() => setSelectedMapRestaurant(restaurant)}
+                >
+                  🌮
+                </span>
+              </Marker>
+            ))}
+        </ReactMapGL>
+      </div>
+
       <div className="list-group">
         {restaurants.map(restaurant => (
           <SingleRestaurantForList
