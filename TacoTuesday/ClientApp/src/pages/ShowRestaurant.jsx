@@ -62,9 +62,18 @@ export function ShowRestaurant() {
   return (
     <div className="taco-listing">
       <div className="media mb-5">
-        <span className="pr-3 display-2" role="img" aria-label="taco">
-          🌮
-        </span>
+        {restaurant.photoURL ? (
+          <img
+            alt="Restaurant Photo"
+            width={200}
+            className="pr-3"
+            src={restaurant.photoURL}
+          />
+        ) : (
+          <span className="pr-3 display-2" role="img" aria-label="taco">
+            🌮
+          </span>
+        )}
         <div className="media-body">
           <h1 className="mt-0">{restaurant.name}</h1>
           {restaurant.description}

@@ -23,6 +23,8 @@ namespace TacoTuesday.Models
 
         public double Longitude { get; set; }
 
+        public string PhotoURL { get; set; }
+
         // Add a property that is the list of associated reviews
         public List<Review> Reviews { get; set; }
 
