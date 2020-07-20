@@ -102,9 +102,17 @@ export function ShowRestaurant() {
           </address>
           <a href={`tel:${restaurant.telephone}`}>{restaurant.telephone}</a>
           {currentUserId === restaurant.userId && (
-            <button className="btn btn-danger btn-sm" onClick={handleDelete}>
-              Delete
-            </button>
+            <>
+              <button className="btn btn-danger btn-sm" onClick={handleDelete}>
+                Delete
+              </button>
+              <Link
+                to={`/restaurants/${id}/edit`}
+                className="btn btn-primary btn-sm ml-2"
+              >
+                Edit
+              </Link>
+            </>
           )}
         </div>
       </div>

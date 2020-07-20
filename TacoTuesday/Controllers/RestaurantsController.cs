@@ -105,6 +105,22 @@ namespace TacoTuesday.Controllers
                 return BadRequest();
             }
 
+            // Create a new geocoder
+            var geocoder = new BingMapsGeocoder(BING_MAPS_KEY);
+
+            // Request this address to be geocoded.
+            var geocodedAddresses = await geocoder.GeocodeAsync(restaurant.Address);
+
+            // ... and pick out the best address sorted by the confidence level
+            var bestGeocodedAddress = geocodedAddresses.OrderBy(address => address.Confidence).LastOrDefault();
+
+            // If we have a best geocoded address, use the latitude and longitude from that result
+            if (bestGeocodedAddress != null)
+            {
+                restaurant.Latitude = bestGeocodedAddress.Coordinates.Latitude;
+                restaurant.Longitude = bestGeocodedAddress.Coordinates.Longitude;
+            }
+
             // Tell the database to consider everything in restaurant to be _updated_ values. When
             // the save happens the database will _replace_ the values in the database with the ones from restaurant
             _context.Entry(restaurant).State = EntityState.Modified;
@@ -135,9 +151,7 @@ namespace TacoTuesday.Controllers
             // return NoContent to indicate the update was done. Alternatively you can use the
             // following to send back a copy of the updated data.
             //
-            // return Ok(restaurant)
-            //
-            return NoContent();
+            return Ok(restaurant);
         }
 
         // POST: api/Restaurants
@@ -191,17 +205,13 @@ namespace TacoTuesday.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteRestaurant(int id)
         {
-            // Find this restaurant by looking for the specific id
-            var restaurant = await _context.Restaurants.FindAsync(id);
+            // Find this restaurant by looking for the specific id *AND* check the UserID against the current logged in user
+            var restaurant = await _context.Restaurants.
+              Where(restaurant => restaurant.Id == id &&
+                                  restaurant.UserId == GetCurrentUserId()).FirstOrDefaultAsync();
             if (restaurant == null)
             {
                 // There wasn't a restaurant with that id so return a `404` not found
-                return NotFound();
-            }
-
-            if (restaurant.UserId != GetCurrentUserId())
-            {
-                // This user can't delete this restaurant
                 return NotFound();
             }
 
