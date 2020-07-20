@@ -105,6 +105,14 @@ namespace TacoTuesday.Controllers
                 return BadRequest();
             }
 
+            // Find this restaurant by looking for the specific id *AND* check the UserID against the current logged in user
+            var restaurantInDatabase = await _context.Restaurants.Where(restaurant => restaurant.Id == id && restaurant.UserId == GetCurrentUserId()).FirstOrDefaultAsync();
+            if (restaurantInDatabase == null)
+            {
+                // There wasn't a restaurant with that id so return a `404` not found
+                return NotFound();
+            }
+
             // Create a new geocoder
             var geocoder = new BingMapsGeocoder(BING_MAPS_KEY);
 
