@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import format from 'date-fns/format'
+import { getUserId, authHeader } from '../auth'
 
 // Example: "Monday, July 6th, 2020 at 10:50 PM"
 const dateFormat = `EEEE, MMMM do, yyyy 'at' h:mm aaa`
 
 export function ShowRestaurant() {
+  const history = useHistory()
+
   const params = useParams()
   // If we were using Class components, we would have to
   // use this code:  this.props.match.params.id
   const id = parseInt(params.id)
+
+  // User ID of the currently logged in user
+  const currentUserId = getUserId()
 
   const [newReview, setNewReview] = useState({
     body: '',
@@ -59,6 +65,20 @@ export function ShowRestaurant() {
       })
   }
 
+  const handleDelete = event => {
+    event.preventDefault()
+
+    fetch(`/api/Restaurants/${id}`, {
+      method: 'DELETE',
+      // headers: authHeader(),
+      headers: { ...authHeader() },
+    }).then(response => {
+      if (response.status === 204) {
+        history.push('/')
+      }
+    })
+  }
+
   return (
     <div className="taco-listing">
       <div className="media mb-5">
@@ -81,6 +101,11 @@ export function ShowRestaurant() {
             <Link to="maps.google.com">{restaurant.address}</Link>
           </address>
           <a href={`tel:${restaurant.telephone}`}>{restaurant.telephone}</a>
+          {currentUserId === restaurant.userId && (
+            <button className="btn btn-danger btn-sm" onClick={handleDelete}>
+              Delete
+            </button>
+          )}
         </div>
       </div>
 

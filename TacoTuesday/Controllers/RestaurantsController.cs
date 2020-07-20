@@ -188,6 +188,7 @@ namespace TacoTuesday.Controllers
         // to grab the id from the URL. It is then made available to us as the `id` argument to the method.
         //
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteRestaurant(int id)
         {
             // Find this restaurant by looking for the specific id
@@ -195,6 +196,12 @@ namespace TacoTuesday.Controllers
             if (restaurant == null)
             {
                 // There wasn't a restaurant with that id so return a `404` not found
+                return NotFound();
+            }
+
+            if (restaurant.UserId != GetCurrentUserId())
+            {
+                // This user can't delete this restaurant
                 return NotFound();
             }
 
