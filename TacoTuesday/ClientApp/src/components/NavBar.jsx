@@ -2,15 +2,19 @@ import React, { useState } from 'react'
 import { Route } from 'react-router'
 import { Link } from 'react-router-dom'
 import { isLoggedIn, logout } from '../auth'
+import { useRecoilState } from 'recoil'
+import { activeFilterAtom } from '../atoms/activeFilter'
 
-export function NavBar(props) {
+export function NavBar() {
+  // This like const [activeFilter, setActiveFilter] = useState('')
+  const [activeFilter, setActiveFilter] = useRecoilState(activeFilterAtom)
+
   const [filterText, setFilterText] = useState('')
 
   const handleClickSearch = event => {
     console.log(`We clicked the search! Searching for ${filterText}`)
 
-    // Set the parent's activeFilter state to whatever our current filterText is
-    props.setActiveFilter(filterText)
+    setActiveFilter(filterText)
   }
 
   const handleLogout = () => {

@@ -13,16 +13,14 @@ import { SignIn } from './pages/Signin'
 import { EditRestaurant } from './pages/EditRestaurant'
 
 export function App() {
-  const [activeFilter, setActiveFilter] = useState('')
-
   return (
     <>
-      <NavBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+      <NavBar />
       <main className="container-fluid p-4">
         <Header />
         <Switch>
           <Route exact path="/">
-            <Restaurants activeFilter={activeFilter} />
+            <Restaurants />
           </Route>
           <Route path="/signup">
             <SignUp />

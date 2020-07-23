@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import ReactMapGL, { Popup, Marker } from 'react-map-gl'
 import { Link } from 'react-router-dom'
 import { authHeader, isLoggedIn } from '../auth'
+import { useRecoilValue } from 'recoil'
+import { activeFilterAtom } from '../atoms/activeFilter'
 
 function SingleRestaurantForList(props) {
   return (
@@ -50,7 +52,8 @@ function SingleRestaurantForList(props) {
   )
 }
 
-export function Restaurants(props) {
+export function Restaurants() {
+  const activeFilter = useRecoilValue(activeFilterAtom)
   const [restaurants, setRestaurants] = useState([])
 
   const [viewport, setViewport] = useState({
@@ -67,13 +70,11 @@ export function Restaurants(props) {
   //
   const [selectedMapRestaurant, setSelectedMapRestaurant] = useState(null)
 
-  console.log(props)
-
   function loadRestaurants() {
     const url =
-      props.activeFilter.length === 0
+      activeFilter.length === 0
         ? `/api/Restaurants`
-        : `/api/Restaurants?filter=${props.activeFilter}`
+        : `/api/Restaurants?filter=${activeFilter}`
 
     console.log(`The URL for fetching restaurants is ${url}`)
 
@@ -103,7 +104,7 @@ export function Restaurants(props) {
 
   useEffect(() => {
     loadRestaurants()
-  }, [props.activeFilter]) // <== [props.activeFilter] is the list of dependencies, so this runs when the component is first used **AND** when props.activeFilter _changes_
+  }, [activeFilter]) // <== [activeFilter] is the list of dependencies, so this runs when the component is first used **AND** when activeFilter _changes_
 
   return (
     <>
