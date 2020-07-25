@@ -97,6 +97,7 @@ namespace TacoTuesday.Controllers
         // new values for the record.
         //
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> PutRestaurant(int id, Restaurant restaurant)
         {
             // If the ID in the URL does not match the ID in the supplied request body, return a bad request
@@ -106,8 +107,8 @@ namespace TacoTuesday.Controllers
             }
 
             // Find this restaurant by looking for the specific id *AND* check the UserID against the current logged in user
-            var restaurantInDatabase = await _context.Restaurants.Where(restaurant => restaurant.Id == id && restaurant.UserId == GetCurrentUserId()).FirstOrDefaultAsync();
-            if (restaurantInDatabase == null)
+            var restaurantExists = await _context.Restaurants.Where(restaurant => restaurant.Id == id && restaurant.UserId == GetCurrentUserId()).AnyAsync();
+            if (!restaurantExists)
             {
                 // There wasn't a restaurant with that id so return a `404` not found
                 return NotFound();
